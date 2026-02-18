@@ -4,8 +4,8 @@ using System.Text;
 
 namespace LibraryEmoji
 {
-    internal class SmileEmoji : Emoji
+    internal class SmilingEmoji : Emoji
     {
-
+        
     }
 }
