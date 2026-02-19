@@ -4,7 +4,7 @@ using System.Reflection.PortableExecutable;
 
 namespace LibraryEmoji
 {
-    internal class FaceEmoji : Emoji
+    internal class FaceEmoji :Emoji
     {
         static readonly string[] faces =
         [
@@ -12,7 +12,7 @@ namespace LibraryEmoji
             "://", ";(", "?:", ":-(", ":-)", "(~` _ ~`(",
             "- _ -", "'_'"
         ];
-
+        
         string face;
         /// <summary>
         /// Лицо эмодзи
@@ -22,11 +22,33 @@ namespace LibraryEmoji
             get => face;
             set
             {
-                
+                if (!CheckFace(face))
+                    throw new ArgumentException("Введённый набор символов не является допустимой комбинацией");
+                face = value;
             }
         }
-        
-        private ushort strength;
+
+        /// <summary>
+        /// Проверяет введённый набор символов на совпадение с допустимым лицом
+        /// </summary>
+        /// <param name="newFace">Проверяемый набор символов</param>
+        /// <returns>true если символы совпали</returns>
+        bool CheckFace(string newFace)
+        {
+            var isCorrectFace = false;
+
+            foreach (string p in faces)
+            {
+                if (p == newFace)
+                {
+                    isCorrectFace = true;
+                    break;
+                }
+            }
+            return isCorrectFace;
+        }
+
+        ushort strength;
         /// <summary>
         /// Сила эмодзи
         /// </summary>
