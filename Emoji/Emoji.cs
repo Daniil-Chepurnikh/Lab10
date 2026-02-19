@@ -67,7 +67,7 @@
         /// <param name="source">Копируемый эмодзи</param>
         public Emoji(Emoji source)
         {
-            ArgumentNullException.ThrowIfNull(source); // TODO: узнать в чём разница между этим вариантом и отвёрткой
+            ArgumentNullException.ThrowIfNull(source, "Невозможно скопировать эмодзи по null");
             
             Name = source.Name;
             Tag = source.Tag;
