@@ -40,6 +40,7 @@
 
         // TODO: Добавить проверку на знаки препинания без нормальных слов
 
+        #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
@@ -71,6 +72,7 @@
             Name = source.Name;
             Tag = source.Tag;
         }
+        #endregion
 
         /// <summary>
         /// Сранивает объекты
@@ -79,9 +81,9 @@
         /// <returns>true если равны</returns>
         public override bool Equals(object? obj)
         {
-            return  obj is Emoji emoji 
-                    && Name == emoji.Name
-                    && Tag == emoji.Tag;
+            return obj is Emoji emoji 
+                   && Name == emoji.Name
+                   && Tag == emoji.Tag;
         }
 
         /// <summary>

@@ -6,7 +6,6 @@ namespace LibraryEmoji
     internal class AnimalEmoji :Emoji
     {
         string animalPart;
-
         /// <summary>
         /// Часть тела животного в эмодзи
         /// </summary>
@@ -20,6 +19,7 @@ namespace LibraryEmoji
             }
         }
 
+        #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
@@ -44,6 +44,7 @@ namespace LibraryEmoji
 
             AnimalPart = source.AnimalPart;
         }
+        #endregion
 
         /// <summary>
         /// Сранивает объекты
@@ -52,9 +53,9 @@ namespace LibraryEmoji
         /// <returns>true если равны</returns>
         public override bool Equals(object? obj)
         {
-            return  obj is AnimalEmoji animal 
-                    && base.Equals(obj) 
-                    && animal.AnimalPart == animal.AnimalPart;
+            return obj is AnimalEmoji animal 
+                   && animal.AnimalPart == AnimalPart
+                   && base.Equals(obj);
         }
 
         // TODO: доопределить VirtualShow
