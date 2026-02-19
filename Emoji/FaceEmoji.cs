@@ -6,25 +6,25 @@ namespace LibraryEmoji
 {
     internal class FaceEmoji :Emoji
     {
-        static readonly string[] faces =
+        static readonly string[] expressions =
         [
             ":(", ":)", "^|0_0|^", "(0 + 0(", 
             "://", ";(", "?:", ":-(", ":-)", "(~` _ ~`(",
             "- _ -", "'_'"
         ];
         
-        string face;
+        string expression;
         /// <summary>
         /// Лицо эмодзи
         /// </summary>
-        public string Face
+        public string Expression
         {
-            get => face;
+            get => expression;
             set
             {
-                if (!CheckFace(face))
+                if (!CheckExpression(expression))
                     throw new ArgumentException("Введённый набор символов не является допустимой комбинацией");
-                face = value;
+                expression = value;
             }
         }
 
@@ -33,13 +33,13 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="newFace">Проверяемый набор символов</param>
         /// <returns>true если символы совпали</returns>
-        bool CheckFace(string newFace)
+        bool CheckExpression(string newExpression)
         {
             var isCorrectFace = false;
 
-            foreach (string p in faces)
+            foreach (string p in expressions)
             {
-                if (p == newFace)
+                if (p == newExpression)
                 {
                     isCorrectFace = true;
                     break;
@@ -64,5 +64,21 @@ namespace LibraryEmoji
                 strength = value;
             }
         }
+
+        /// <summary>
+        /// Конструктор без параметров
+        /// </summary>
+        public FaceEmoji() :base() => Expression = "Нет выражения лица";
+
+        /// <summary>
+        /// Конструктор с параметрами
+        /// </summary>
+        /// <param name="name">Название эмодзи</param>
+        /// <param name="tag">Тег эмодзи</param>
+        /// <param name="expression">Выражение лица эмодзи</param>
+        public FaceEmoji(string name, string tag, string expression) :base(name, tag) => Expression = expression;
+
+        
+
     }
 }
