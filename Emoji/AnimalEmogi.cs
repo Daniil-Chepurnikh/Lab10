@@ -3,7 +3,7 @@ using System.Runtime.InteropServices.JavaScript;
 
 namespace LibraryEmoji
 {
-    internal class AnimalEmogi : Emoji
+    internal class AnimalEmogi :Emoji
     {
         string animalPart;
 
@@ -23,10 +23,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public AnimalEmogi(): base() 
-        {
-            AnimalPart = "Неопределённая часть тела";
-        }
+        public AnimalEmogi() :base() => AnimalPart = "Неопределённая часть тела";
 
         /// <summary>
         /// Конструктор с параметрами
@@ -34,19 +31,17 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="animalPart">Часть тела животного в эмодзи</param>
-        public AnimalEmogi(string name, string tag, string animalPart) : base(name, tag)
-        {
-            AnimalPart = animalPart;
-        }
+        public AnimalEmogi(string name, string tag, string animalPart) :base(name, tag) => AnimalPart = animalPart;
 
         /// <summary>
         /// Конструктор копирования
         /// </summary>
         /// <param name="source">Копируемый эмодзи</param>
-        public AnimalEmogi(AnimalEmogi source) : base(source)
-        {            
-            
-            
+        public AnimalEmogi(AnimalEmogi source) :base(source)
+        {
+            if (source is not AnimalEmogi)
+                throw new ArgumentException("Несоответствие типов");
+
             AnimalPart = source.AnimalPart;
         }
     }
