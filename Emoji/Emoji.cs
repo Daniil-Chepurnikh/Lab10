@@ -69,6 +69,18 @@
             Name = source.Name;
             Tag = source.Tag;
         }
-        
+
+        /// <summary>
+        /// Сранивает объекты
+        /// </summary>
+        /// <param name="obj">Сравниваемый объект</param>
+        /// <returns>true если равны</returns>
+        public override bool Equals(object? obj)
+        {
+            return  obj is Emoji emoji 
+                    && Name == emoji.Name
+                    && Tag == emoji.Tag;
+        }
+
     }
 }
