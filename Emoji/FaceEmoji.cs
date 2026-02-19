@@ -78,7 +78,9 @@ namespace LibraryEmoji
         /// <param name="expression">Выражение лица эмодзи</param>
         public FaceEmoji(string name, string tag, string expression) :base(name, tag) => Expression = expression;
 
-        
+        // TODO: доопределить VirtualShow
+
+        // TODO: написать Equals
 
     }
 }

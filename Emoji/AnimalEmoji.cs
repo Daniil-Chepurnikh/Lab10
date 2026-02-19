@@ -57,6 +57,6 @@ namespace LibraryEmoji
                     && animal.AnimalPart == animal.AnimalPart;
         }
 
-
+        // TODO: доопределить VirtualShow
     }
 }
