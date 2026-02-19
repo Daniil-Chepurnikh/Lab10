@@ -1,11 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace LibraryEmoji
 {
     internal class SmilingEmoji : Emoji
     {
-        
+        string smileReason;
+
+        public string SmileReason
+        {
+            get => smileReason;
+            set
+            {
+
+            }
+        }
     }
 }
