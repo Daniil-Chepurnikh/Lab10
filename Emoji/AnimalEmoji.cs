@@ -37,13 +37,7 @@ namespace LibraryEmoji
         /// Конструктор копирования
         /// </summary>
         /// <param name="source">Копируемый эмодзи</param>
-        public AnimalEmoji(AnimalEmoji source) :base(source)
-        {
-            if (source is not AnimalEmoji)
-                throw new ArgumentException("Несоответствие типов");
-
-            AnimalPart = source.AnimalPart;
-        }
+        public AnimalEmoji(AnimalEmoji source) :base(source) => AnimalPart = source.AnimalPart;
         #endregion
 
         /// <summary>
