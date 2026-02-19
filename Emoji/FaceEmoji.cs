@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Globalization;
-using System.Reflection.PortableExecutable;
 
 namespace LibraryEmoji
 {
@@ -65,6 +63,7 @@ namespace LibraryEmoji
             }
         }
 
+        #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
@@ -78,9 +77,29 @@ namespace LibraryEmoji
         /// <param name="expression">Выражение лица эмодзи</param>
         public FaceEmoji(string name, string tag, string expression) :base(name, tag) => Expression = expression;
 
+        /// <summary>
+        /// Конструктор копирования
+        /// </summary>
+        /// <param name="source">Копируемый эмодзи</param>
+        public FaceEmoji(FaceEmoji source) : base(source) => Expression = source.Expression;
+        #endregion
+        
         // TODO: доопределить VirtualShow
 
-        // TODO: написать Equals
+        /// <summary>
+        /// Сранивает объекты
+        /// </summary>
+        /// <param name="obj">Сравниваемый объект</param>
+        /// <returns>true если равны</returns>
+        public override bool Equals(object? obj)
+        {
+            return obj is FaceEmoji face
+                   && face.Strength == Strength
+                   && face.Expression == Expression
+                   && base.Equals(obj);
+        }
+
+
 
     }
 }
