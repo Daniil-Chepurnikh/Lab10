@@ -21,6 +21,7 @@ namespace LibraryEmoji
             }
         }
 
+        #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
@@ -39,7 +40,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="source">Копируемый эмодзи</param>
         public SmilingEmoji(SmilingEmoji source) : base(source) => SmileReason = source.SmileReason;
-
+        #endregion
 
     }
 }
