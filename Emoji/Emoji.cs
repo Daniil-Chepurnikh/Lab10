@@ -90,7 +90,9 @@
         /// Показывает данные эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public virtual string VirtualShow() => $"Имя эмодзи: {Name}, тег: {Tag}\n";
+        public virtual string VirtualShow() => $"Имя {Name}, тег: {Tag}\n";
+
+        public override int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode();
 
         // TODO: Добавить метод рандомной инициализации эмодзи RandomInit
 

@@ -52,6 +52,10 @@ namespace LibraryEmoji
                    && base.Equals(obj);
         }
 
-        // TODO: доопределить VirtualShow
+        /// <summary>
+        /// Передаёт информацию об эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public override string VirtualShow() => $"Имя {Name}, тег: {Tag}, часть тела: {AnimalPart}\n";
     }
 }

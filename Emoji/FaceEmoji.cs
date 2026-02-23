@@ -83,8 +83,12 @@ namespace LibraryEmoji
         /// <param name="source">Копируемый эмодзи</param>
         public FaceEmoji(FaceEmoji source) : base(source) => Expression = source.Expression;
         #endregion
-        
-        // TODO: доопределить VirtualShow
+
+        /// <summary>
+        /// Передаёт информацию об эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public override string VirtualShow() => $"Имя {Name}, тег: {Tag}, выражение: {Expression}, сила: {Strength}\n";
 
         /// <summary>
         /// Сранивает объекты

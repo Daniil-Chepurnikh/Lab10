@@ -42,5 +42,12 @@ namespace LibraryEmoji
         public SmilingEmoji(SmilingEmoji source) : base(source) => SmileReason = source.SmileReason;
         #endregion
 
+        /// <summary>
+        /// Передаёт инфорацию об эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public override string VirtualShow() => $"Имя {Name}, тег: {Tag}, причина улыбки: {SmileReason}\n";
+
+
     }
 }
