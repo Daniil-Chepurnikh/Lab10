@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 
 namespace LibraryEmoji
 {
@@ -48,6 +49,16 @@ namespace LibraryEmoji
         /// <returns>Строка с информацией</returns>
         public override string VirtualShow() => $"Имя {Name}, тег: {Tag}, причина улыбки: {SmileReason}\n";
 
-
+        /// <summary>
+        /// Сравнивает объекты
+        /// </summary>
+        /// <param name="obj">Сравнивемый объект</param>
+        /// <returns>true если равны</returns>
+        public override bool Equals(object? obj)
+        {
+            return obj is SmilingEmoji smile
+                   && smile.SmileReason == SmileReason
+                   && base.Equals(obj);
+        }
     }
 }
