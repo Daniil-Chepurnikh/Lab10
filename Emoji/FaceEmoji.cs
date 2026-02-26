@@ -103,7 +103,7 @@ namespace LibraryEmoji
                    && base.Equals(obj);
         }
 
-
-
+        // TODO: доопределить Init
+        // TODO: доопределить RandomInit
     }
 }
