@@ -4,6 +4,8 @@ namespace LibraryEmoji
 {
     public class Emoji
     {
+        // TODO: придумать массивчик возможных имён
+        
         string? name;
         /// <summary>
         /// Название эмодзи
@@ -21,6 +23,8 @@ namespace LibraryEmoji
                 name = value;
             }
         }
+
+        // TODO: придумать массивчик возможных тегов
 
         string? tag;
         /// <summary>

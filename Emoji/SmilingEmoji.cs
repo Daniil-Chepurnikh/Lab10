@@ -6,6 +6,9 @@ namespace LibraryEmoji
 {
     internal class SmilingEmoji :Emoji
     {
+        // TODO: придумать массивчик возможных причин улыбки
+
+
         string? smileReason;
         /// <summary>
         /// Причина улыбки

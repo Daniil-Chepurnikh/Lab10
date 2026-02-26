@@ -5,6 +5,9 @@ namespace LibraryEmoji
 {
     internal class AnimalEmoji :Emoji
     {
+        // TODO: придумать массивчик возможных частей тел
+
+
         string? animalPart;
         /// <summary>
         /// Часть тела животного в эмодзи
