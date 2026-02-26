@@ -1,15 +1,16 @@
-﻿using System;
+﻿using MyDCInputOutputConsole;
+using System;
 using System.Linq.Expressions;
 
 namespace LibraryEmoji
 {
     internal class SmilingEmoji :Emoji
     {
-        string smileReason;
+        string? smileReason;
         /// <summary>
         /// Причина улыбки
         /// </summary>
-        public string SmileReason
+        public string? SmileReason
         {
             get => smileReason;
             set
@@ -60,5 +61,22 @@ namespace LibraryEmoji
                    && smile.SmileReason == SmileReason
                    && base.Equals(obj);
         }
+
+        /// <summary>
+        /// Получает хеш-код
+        /// </summary>
+        /// <returns>Значение хеш-кода</returns>
+        public override int GetHashCode() => base.GetHashCode() + SmileReason.GetHashCode();
+
+        /// <summary>
+        /// Инициализирует атрибуты
+        /// </summary>
+        public override void Init()
+        {
+            base.Init();
+            Output.Message("Введите причину улыбки эмодзи", ConsoleColor.White);
+            SmileReason = Input.Data();
+        }
+
     }
 }

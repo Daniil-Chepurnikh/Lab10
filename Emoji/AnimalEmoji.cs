@@ -1,15 +1,15 @@
-﻿using System;
-using System.Runtime.InteropServices.JavaScript;
+﻿using MyDCInputOutputConsole;
+using System;
 
 namespace LibraryEmoji
 {
     internal class AnimalEmoji :Emoji
     {
-        string animalPart;
+        string? animalPart;
         /// <summary>
         /// Часть тела животного в эмодзи
         /// </summary>
-        public string AnimalPart 
+        public string? AnimalPart 
         { 
             get => animalPart; 
             set
@@ -57,5 +57,18 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Строка с информацией</returns>
         public override string VirtualShow() => $"Имя {Name}, тег: {Tag}, часть тела: {AnimalPart}\n";
+
+        /// <summary>
+        /// Инициализирует атрибуты
+        /// </summary>
+        public override void Init()
+        {
+            base.Init();
+
+            Output.Message("Введите часть тела животного в эмодзи", ConsoleColor.White);
+            AnimalPart = Input.Data();  
+        }
+
+        public override int GetHashCode() => base.GetHashCode() + AnimalPart.GetHashCode();
     }
 }

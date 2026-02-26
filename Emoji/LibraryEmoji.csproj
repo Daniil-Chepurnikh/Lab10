@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Library">
+      <HintPath>..\..\Lab5-6\Library\bin\Debug\net9.0\Library.dll</HintPath>
+    </Reference>
+    <Reference Include="MyDCInputOutputConsole">
+      <HintPath>..\..\MyDCInputOutput\MyDCInputOutput\obj\Debug\net10.0\MyDCInputOutputConsole.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

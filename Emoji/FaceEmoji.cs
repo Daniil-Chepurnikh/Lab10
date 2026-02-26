@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyDCInputOutputConsole;
+using System;
 
 namespace LibraryEmoji
 {
@@ -11,11 +12,11 @@ namespace LibraryEmoji
             "- _ -", "'_'"
         ];
         
-        string expression;
+        string? expression;
         /// <summary>
         /// Лицо эмодзи
         /// </summary>
-        public string Expression
+        public string? Expression
         {
             get => expression;
             set
@@ -103,7 +104,25 @@ namespace LibraryEmoji
                    && base.Equals(obj);
         }
 
-        // TODO: доопределить Init
+        /// <summary>
+        /// Инициализирует атрибуты
+        /// </summary>
+        public override void Init()
+        {
+            base.Init();
+            Output.Message("Введите выражение лица эмодзи", ConsoleColor.White);
+            Expression = Input.Data();
+
+            Strength = (ushort)Input.IntNumber("Введите силу эмодзи", "Вы не ввели целое число в разрешённом диапазоне");
+        }
+
+        /// <summary>
+        /// Получает хеш-код
+        /// </summary>
+        /// <returns>Значение хеш-кода</returns>
+        public override int GetHashCode() => base.GetHashCode() + Strength.GetHashCode() +
+                                             Expression.GetHashCode();
+
         // TODO: доопределить RandomInit
     }
 }

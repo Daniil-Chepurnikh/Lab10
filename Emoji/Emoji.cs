@@ -1,12 +1,14 @@
-﻿namespace LibraryEmoji
+﻿using MyDCInputOutputConsole;
+
+namespace LibraryEmoji
 {
     public class Emoji
     {
-        string name;
+        string? name;
         /// <summary>
         /// Название эмодзи
         /// </summary>
-        public string Name 
+        public string? Name 
         {
             get => name; 
             set
@@ -20,11 +22,11 @@
             }
         }
 
-        string tag;
+        string? tag;
         /// <summary>
         /// Тег эмодзи
         /// </summary>
-        public string Tag 
+        public string? Tag 
         { 
             get => tag;
             set
@@ -92,10 +94,27 @@
         /// <returns>Строка с информацией</returns>
         public virtual string VirtualShow() => $"Имя {Name}, тег: {Tag}\n";
 
+        /// <summary>
+        /// Получает хеш-код
+        /// </summary>
+        /// <returns>Значение хеш-кода</returns>
         public override int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode();
 
         // TODO: Добавить метод рандомной инициализации эмодзи RandomInit
 
-        // TODO: Добавить метод самостоятельной инициализации эмодзи Init
+        /// <summary>
+        /// Инициализирует атрибуты
+        /// </summary>
+        public virtual void Init()
+        {
+            Output.Message("Введите название эмодзи", ConsoleColor.White);
+            Name = Input.Data();
+
+            Output.Message("Введите тег эмодзи", ConsoleColor.White);
+            Tag = Input.Data();
+        }
+
+
+
     }
 }
