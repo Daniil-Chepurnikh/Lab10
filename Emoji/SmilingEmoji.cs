@@ -6,7 +6,14 @@ namespace LibraryEmoji
 {
     internal class SmilingEmoji :Emoji
     {
-        // TODO: придумать массивчик возможных причин улыбки
+        /// <summary>
+        /// возможные причины улыбок для случайного выбора
+        /// </summary>
+        static readonly string[] smileReasons =
+        [
+            "хорошая погода", "победа команды", "хорошее настроение",
+            "вкусная еда", "весёлое видео", "выходные"
+        ];
 
 
         string? smileReason;
@@ -51,7 +58,7 @@ namespace LibraryEmoji
         /// Передаёт инфорацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => $"Имя {Name}, тег: {Tag}, причина улыбки: {SmileReason}\n";
+        public override string VirtualShow() => $"Причина улыбки: {SmileReason}. {base.ToString()}";
 
         /// <summary>
         /// Сравнивает объекты
@@ -74,7 +81,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        public override void Init()
+        protected override void Init()
         {
             base.Init();
             Output.Message("Введите причину улыбки эмодзи", ConsoleColor.White);
