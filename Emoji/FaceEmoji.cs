@@ -107,7 +107,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        internal override void Init()
+        protected override void Init()
         {
             base.Init();
             Output.Message("Введите выражение лица эмодзи", ConsoleColor.White);
