@@ -91,5 +91,7 @@ namespace LibraryEmoji
             SmileReason = Input.Data();
         }
 
+        // TODO: доопределить RandomInit
+
     }
 }

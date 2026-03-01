@@ -85,5 +85,8 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
         public override int GetHashCode() => base.GetHashCode() + AnimalPart.GetHashCode();
+
+        // TODO: доопределить RandomInit
+
     }
 }
