@@ -4,7 +4,14 @@ namespace LibraryEmoji
 {
     public class Emoji
     {
-        // TODO: придумать массивчик возможных имён
+        /// <summary>
+        /// возможные названия для случайного выбора
+        /// </summary>
+        static readonly string[] names =
+        [
+            "радость", "злость", "печаль", "гнев", "страх",
+            "ненависть", "любовь", "спокойствие"
+        ];
         
         string? name;
         /// <summary>
@@ -24,7 +31,14 @@ namespace LibraryEmoji
             }
         }
 
-        // TODO: придумать массивчик возможных тегов
+        /// <summary>
+        /// возможные теги для случайного выбора
+        /// </summary>
+        static readonly string[] tags =
+        [
+            "улыбка", "слёзы", "мат", "поцелуй", "салют",
+            "цветок", "деньги"
+        ];
 
         string? tag;
         /// <summary>
