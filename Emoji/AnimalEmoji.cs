@@ -5,8 +5,14 @@ namespace LibraryEmoji
 {
     public class AnimalEmoji :Emoji
     {
-        // TODO: придумать массивчик возможных частей тел
-
+        /// <summary>
+        /// возможные части тела животного для случайного выбора
+        /// </summary>
+        static readonly string[] animalParts =
+        [
+            "голова", "лапа", "хвост", "глаз", "ухо",
+            "нос", "зубы"
+        ];
 
         string? animalPart;
         /// <summary>
