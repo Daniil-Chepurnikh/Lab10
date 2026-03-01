@@ -5,6 +5,8 @@ namespace Tests;
 [TestClass]
 public class TestEquals
 {
+    // переименовать тесты
+    
     [TestMethod]
     public void TestEquals1()
     {
