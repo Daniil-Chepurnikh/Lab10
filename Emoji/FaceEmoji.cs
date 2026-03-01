@@ -3,7 +3,7 @@ using System;
 
 namespace LibraryEmoji
 {
-    internal class FaceEmoji :Emoji
+    public class FaceEmoji :Emoji
     {
         static readonly string[] expressions =
         [
