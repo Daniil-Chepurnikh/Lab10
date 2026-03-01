@@ -109,7 +109,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        internal virtual void Init()
+        protected virtual void Init()
         {
             Output.Message("Введите название эмодзи: ", ConsoleColor.White);
             Name = Input.Data();
@@ -122,7 +122,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        internal string ToString() => $"Название: {Name}, тег: {Tag}\n";
+        protected string ToString() => $"Название: {Name}, тег: {Tag}\n";
 
 
     }

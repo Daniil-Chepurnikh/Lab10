@@ -89,7 +89,7 @@ namespace LibraryEmoji
         /// Передаёт информацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => $"Имя {Name}, тег: {Tag}, выражение: {Expression}, сила: {Strength}\n";
+        public override string VirtualShow() => $"Выражение: {Expression}, сила: {Strength}, {base.ToString()}";
 
         /// <summary>
         /// Сранивает объекты
@@ -107,7 +107,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        public override void Init()
+        internal override void Init()
         {
             base.Init();
             Output.Message("Введите выражение лица эмодзи", ConsoleColor.White);
