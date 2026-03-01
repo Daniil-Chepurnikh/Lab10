@@ -6,8 +6,8 @@ namespace Tests;
 public class TestSmilingEmoji
 {
     // TODO: изменить тесты на причину улыбки, когда придумаю и добавлю в свойства ограничения
-    // TODO: проверить все тесты на логичность  
-    
+    // TODO: проверить все тесты на логичность
+
     [TestMethod]
     public void TestWithoutParameters()
     {
@@ -94,7 +94,22 @@ public class TestSmilingEmoji
         Assert.IsTrue(isPassed);
     }
 
-    // TODO: добавить тест на нал причину улыбки
+    [TestMethod]
+    public void TestNullSmileReason()
+    {
+        SmilingEmoji e;
+        var isPassed = false;
+        try
+        {
+            e = new("null", "ewd", null);
+        }
+        catch (ArgumentException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
 
     [TestMethod]
     public void TestEmptyTag()
@@ -130,7 +145,22 @@ public class TestSmilingEmoji
         Assert.IsTrue(isPassed);
     }
 
-    // TODO: добавить тест на empty причину улыбки
+    [TestMethod]
+    public void TestEmptySmileReason()
+    {
+        SmilingEmoji e;
+        var isPassed = false;
+        try
+        {
+            e = new("eeeee", "q", "");
+        }
+        catch (ArgumentException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
 
     [TestMethod]
     public void TestWhiteSpaceTag()
@@ -166,7 +196,22 @@ public class TestSmilingEmoji
         Assert.IsTrue(isPassed);
     }
 
-    // TODO: добавить тест на причину улыбки только из пробельных симвоволов
+    [TestMethod]
+    public void TestWhiteSpaceSmileRason()
+    {
+        SmilingEmoji e;
+        var isPassed = false;
+        try
+        {
+            e = new("          gghgh      ", "q", "                              ");
+        }
+        catch (ArgumentException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
 
     [TestMethod]
     public void TestWhiteStrangeNameTag()

@@ -91,7 +91,22 @@ public class TestAnimalEmoji
         Assert.IsTrue(isPassed);
     }
 
-    // TODO: добавить тест на нал часть тела
+    [TestMethod]
+    public void TestNullAnimalPart()
+    {
+        AnimalEmoji e;
+        var isPassed = false;
+        try
+        {
+            e = new("null", "null", null);
+        }
+        catch (ArgumentException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
 
     [TestMethod]
     public void TestEmptyTag()
@@ -127,7 +142,22 @@ public class TestAnimalEmoji
         Assert.IsTrue(isPassed);
     }
 
-    // TODO: добавить тест на empty часть тела
+    [TestMethod]
+    public void TestEmptyAnimalPart()
+    {
+        AnimalEmoji e;
+        var isPassed = false;
+        try
+        {
+            e = new("qqqq", "q", "");
+        }
+        catch (ArgumentException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
 
     [TestMethod]
     public void TestWhiteSpaceTag()
@@ -163,7 +193,22 @@ public class TestAnimalEmoji
         Assert.IsTrue(isPassed);
     }
 
-    // TODO: добавить тест на часть тела только из пробельных симвоволов
+    [TestMethod]
+    public void TestWhiteSpaceAnimalPart()
+    {
+        AnimalEmoji e;
+        var isPassed = false;
+        try
+        {
+            e = new("        q        ", "q", "                         ");
+        }
+        catch (ArgumentException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
 
     [TestMethod]
     public void TestWhiteStrangeNameTag()
