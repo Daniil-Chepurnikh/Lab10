@@ -4,6 +4,8 @@ namespace LibraryEmoji
 {
     public class Emoji
     {
+        static readonly Random random = new();
+        
         /// <summary>
         /// возможные названия для случайного выбора
         /// </summary>
@@ -118,7 +120,14 @@ namespace LibraryEmoji
         /// <returns>Значение хеш-кода</returns>
         public override int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode();
 
-        // TODO: Добавить метод рандомной инициализации эмодзи RandomInit
+        /// <summary>
+        /// Инициализирует атрибуты случайными значениями
+        /// </summary>
+        protected virtual void RandomInit()
+        {
+            Name = names[random.Next(0, names.Length)];
+            Tag = tags[random.Next(0, tags.Length)];
+        }
 
         /// <summary>
         /// Инициализирует атрибуты
