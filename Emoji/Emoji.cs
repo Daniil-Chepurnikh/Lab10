@@ -52,7 +52,7 @@ namespace LibraryEmoji
         /// </summary>
         public Emoji()
         {
-            Name = "Без имени";
+            Name = "Без названия";
             Tag = "Без тега";
         }
 
