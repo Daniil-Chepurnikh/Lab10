@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace LibraryEmoji
 {
-    internal class SmilingEmoji :Emoji
+    public class SmilingEmoji :Emoji
     {
         /// <summary>
         /// возможные причины улыбок для случайного выбора
