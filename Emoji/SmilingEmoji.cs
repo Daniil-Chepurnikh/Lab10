@@ -30,6 +30,9 @@ namespace LibraryEmoji
                 
                 //TODO: придумать ограничения и их проверку
 
+
+                smileReason = value;
+
             }
         }
 

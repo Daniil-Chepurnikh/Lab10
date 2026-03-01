@@ -19,6 +19,8 @@ namespace LibraryEmoji
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Часть тела животного не может быть пустой, состоять только из пробелов или нулевой");
+
+                animalPart = value;
             }
         }
 
@@ -26,7 +28,10 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public AnimalEmoji() :base() => AnimalPart = "Неопределённая часть тела";
+        public AnimalEmoji() :base()
+        {
+            AnimalPart = "Неопределённая часть тела";
+        }
 
         /// <summary>
         /// Конструктор с параметрами
