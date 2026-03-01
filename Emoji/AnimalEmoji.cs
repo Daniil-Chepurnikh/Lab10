@@ -28,10 +28,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public AnimalEmoji() :base()
-        {
-            AnimalPart = "Неопределённая часть тела";
-        }
+        public AnimalEmoji() :base() => AnimalPart = "Неопределённая часть тела";
 
         /// <summary>
         /// Конструктор с параметрами
