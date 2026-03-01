@@ -21,30 +21,9 @@ namespace LibraryEmoji
             get => expression;
             set
             {
-                if (!CheckExpression(expression))
-                    throw new ArgumentException("Введённый набор символов не является допустимой комбинацией");
+                // TODO: добавить адекватную проверку
                 expression = value;
             }
-        }
-
-        /// <summary>
-        /// Проверяет введённый набор символов на совпадение с допустимым лицом
-        /// </summary>
-        /// <param name="newFace">Проверяемый набор символов</param>
-        /// <returns>true если символы совпали</returns>
-        bool CheckExpression(string newExpression)
-        {
-            var isCorrectFace = false;
-
-            foreach (string p in expressions)
-            {
-                if (p == newExpression)
-                {
-                    isCorrectFace = true;
-                    break;
-                }
-            }
-            return isCorrectFace;
         }
 
         ushort strength;
@@ -98,10 +77,10 @@ namespace LibraryEmoji
         /// <returns>true если равны</returns>
         public override bool Equals(object? obj)
         {
-            return obj is FaceEmoji face
-                   && face.Strength == Strength
-                   && face.Expression == Expression
-                   && base.Equals(obj);
+            return obj is FaceEmoji face &&
+                   face.Strength == Strength &&
+                   face.Expression == Expression &&
+                   base.Equals(obj);
         }
 
         /// <summary>
