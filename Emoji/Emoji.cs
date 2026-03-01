@@ -145,7 +145,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        protected string ToString() => $"Название: {Name}, тег: {Tag}\n";
+        public override string ToString() => $"Название: {Name}, тег: {Tag}\n";
 
 
     }
