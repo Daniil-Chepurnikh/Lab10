@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace LibraryEmoji
 {
     public class Pokemon
@@ -302,5 +301,8 @@ namespace LibraryEmoji
                     && pokemon.Defense == Defense
                     && pokemon.Stamina == Stamina;
         }
+
+        // TODO: сделать ToString и/или GetHashCode при необходимости
+        
     }
 }
