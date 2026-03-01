@@ -3,7 +3,7 @@ using System;
 
 namespace LibraryEmoji
 {
-    internal class AnimalEmoji :Emoji
+    public class AnimalEmoji :Emoji
     {
         // TODO: придумать массивчик возможных частей тел
 
@@ -59,12 +59,12 @@ namespace LibraryEmoji
         /// Передаёт информацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => $"Имя {Name}, тег: {Tag}, часть тела: {AnimalPart}\n";
+        public override string VirtualShow() => $"Вид: {nameof(AnimalEmoji)}. Часть тела: {AnimalPart}. {base.ToString()}";
 
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        public override void Init()
+        internal override void Init()
         {
             base.Init();
 
@@ -72,6 +72,10 @@ namespace LibraryEmoji
             AnimalPart = Input.Data();  
         }
 
+        /// <summary>
+        /// Получает хеш-код объекта
+        /// </summary>
+        /// <returns>Значение хеш-кода</returns>
         public override int GetHashCode() => base.GetHashCode() + AnimalPart.GetHashCode();
     }
 }
