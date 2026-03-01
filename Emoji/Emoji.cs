@@ -96,7 +96,7 @@ namespace LibraryEmoji
         /// Показывает данные эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public virtual string VirtualShow() => $"Имя {Name}, тег: {Tag}\n";
+        public virtual string VirtualShow() => $"Вид: {nameof(Emoji)}. " + ToString();
 
         /// <summary>
         /// Получает хеш-код
@@ -111,13 +111,18 @@ namespace LibraryEmoji
         /// </summary>
         public virtual void Init()
         {
-            Output.Message("Введите название эмодзи", ConsoleColor.White);
+            Output.Message("Введите название эмодзи: ", ConsoleColor.White);
             Name = Input.Data();
 
-            Output.Message("Введите тег эмодзи", ConsoleColor.White);
+            Output.Message("Введите тег эмодзи: ", ConsoleColor.White);
             Tag = Input.Data();
         }
 
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        public string ToString() => $"Название: {Name}, тег: {Tag}\n";
 
 
     }
