@@ -103,9 +103,9 @@ namespace LibraryEmoji
         /// <returns>true если равны</returns>
         public override bool Equals(object? obj)
         {
-            return obj is Emoji emoji 
-                   && Name == emoji.Name
-                   && Tag == emoji.Tag;
+            return obj is Emoji emoji &&
+                   Name == emoji.Name &&
+                   Tag == emoji.Tag;
         }
 
         /// <summary>
