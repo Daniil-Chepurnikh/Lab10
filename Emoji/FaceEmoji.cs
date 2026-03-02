@@ -1,8 +1,9 @@
-﻿using System;
+﻿using MyDCInputOutputConsole;
+using System;
 
 namespace LibraryEmoji
 {
-    internal class FaceEmoji :Emoji
+    public class FaceEmoji :Emoji
     {
         static readonly string[] expressions =
         [
@@ -11,39 +12,18 @@ namespace LibraryEmoji
             "- _ -", "'_'"
         ];
         
-        string expression;
+        string? expression;
         /// <summary>
         /// Лицо эмодзи
         /// </summary>
-        public string Expression
+        public string? Expression
         {
             get => expression;
             set
             {
-                if (!CheckExpression(expression))
-                    throw new ArgumentException("Введённый набор символов не является допустимой комбинацией");
+                // TODO: добавить адекватную проверку
                 expression = value;
             }
-        }
-
-        /// <summary>
-        /// Проверяет введённый набор символов на совпадение с допустимым лицом
-        /// </summary>
-        /// <param name="newFace">Проверяемый набор символов</param>
-        /// <returns>true если символы совпали</returns>
-        bool CheckExpression(string newExpression)
-        {
-            var isCorrectFace = false;
-
-            foreach (string p in expressions)
-            {
-                if (p == newExpression)
-                {
-                    isCorrectFace = true;
-                    break;
-                }
-            }
-            return isCorrectFace;
         }
 
         ushort strength;
@@ -83,8 +63,12 @@ namespace LibraryEmoji
         /// <param name="source">Копируемый эмодзи</param>
         public FaceEmoji(FaceEmoji source) : base(source) => Expression = source.Expression;
         #endregion
-        
-        // TODO: доопределить VirtualShow
+
+        /// <summary>
+        /// Передаёт информацию об эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public override string VirtualShow() => $"Выражение: {Expression}. Сила: {Strength}. {base.ToString()}";
 
         /// <summary>
         /// Сранивает объекты
@@ -93,13 +77,31 @@ namespace LibraryEmoji
         /// <returns>true если равны</returns>
         public override bool Equals(object? obj)
         {
-            return obj is FaceEmoji face
-                   && face.Strength == Strength
-                   && face.Expression == Expression
-                   && base.Equals(obj);
+            return obj is FaceEmoji face &&
+                   face.Strength == Strength &&
+                   face.Expression == Expression &&
+                   base.Equals(obj);
         }
 
+        /// <summary>
+        /// Инициализирует атрибуты
+        /// </summary>
+        protected override void Init()
+        {
+            base.Init();
+            Output.Message("Введите выражение лица эмодзи", ConsoleColor.White);
+            Expression = Input.Data();
 
+            Strength = (ushort)Input.IntNumber("Введите силу эмодзи", "Вы не ввели целое число в разрешённом диапазоне");
+        }
 
+        /// <summary>
+        /// Получает хеш-код
+        /// </summary>
+        /// <returns>Значение хеш-кода</returns>
+        public override int GetHashCode() => base.GetHashCode() + Strength.GetHashCode() +
+                                             Expression.GetHashCode();
+
+        // TODO: доопределить RandomInit
     }
 }

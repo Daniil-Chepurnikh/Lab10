@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LibraryEmoji.Emoji">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAACgCAAEgAAAAAQAAAAEAIAAAARCAAAAAIA=</HashCode>
+      <FileName>Emoji.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryEmoji.AnimalEmoji">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAACAAAgAAAAAAAAAgQAIAAAAACAAAAAAA=</HashCode>
+      <FileName>AnimalEmoji.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryEmoji.FaceEmoji">
+    <Position X="2.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAgAAAAAAAADBAAIAQQAACAAAAAAI=</HashCode>
+      <FileName>FaceEmoji.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryEmoji.SmilingEmoji">
+    <Position X="4.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAgAAAAAAAAAAAAIAEAAACBAAAAAA=</HashCode>
+      <FileName>SmilingEmoji.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibraryEmoji.Pokemon">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAgAAABBAQAAQAiAKgBgSAAIAEAQKSAgCBAgAAAAY=</HashCode>
+      <FileName>Pokemon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="lab_10_v5_ClassLibrary.EmojiComparer">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>EmojiComparer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="lab_10_v5_ClassLibrary.IdNumber">
+    <Position X="9.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>IdNumber.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="lab_10_v5_ClassLibrary.IRandomInit">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IRandomInit.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

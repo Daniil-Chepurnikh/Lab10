@@ -1,21 +1,32 @@
-﻿using System;
-using System.Runtime.InteropServices.JavaScript;
+﻿using MyDCInputOutputConsole;
+using System;
 
 namespace LibraryEmoji
 {
-    internal class AnimalEmoji :Emoji
+    public class AnimalEmoji :Emoji
     {
-        string animalPart;
+        /// <summary>
+        /// возможные части тела животного для случайного выбора
+        /// </summary>
+        static readonly string[] animalParts =
+        [
+            "голова", "лапа", "хвост", "глаз", "ухо",
+            "нос", "зубы"
+        ];
+
+        string? animalPart;
         /// <summary>
         /// Часть тела животного в эмодзи
         /// </summary>
-        public string AnimalPart 
+        public string? AnimalPart 
         { 
             get => animalPart; 
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Часть тела животного не может быть пустой, состоять только из пробелов или нулевой");
+
+                animalPart = value;
             }
         }
 
@@ -52,6 +63,30 @@ namespace LibraryEmoji
                    && base.Equals(obj);
         }
 
-        // TODO: доопределить VirtualShow
+        /// <summary>
+        /// Передаёт информацию об эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public override string VirtualShow() => $"Вид: {nameof(AnimalEmoji)}. Часть тела: {AnimalPart}. {base.ToString()}";
+
+        /// <summary>
+        /// Инициализирует атрибуты
+        /// </summary>
+        protected override void Init()
+        {
+            base.Init();
+
+            Output.Message("Введите часть тела животного в эмодзи", ConsoleColor.White);
+            AnimalPart = Input.Data();  
+        }
+
+        /// <summary>
+        /// Получает хеш-код объекта
+        /// </summary>
+        /// <returns>Значение хеш-кода</returns>
+        public override int GetHashCode() => base.GetHashCode() + AnimalPart.GetHashCode();
+
+        // TODO: доопределить RandomInit
+
     }
 }

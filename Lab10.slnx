@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="Demo/Demo.csproj" Id="25cd36b9-790d-4fb3-b117-b558b23a104c" />
   <Project Path="Emoji/LibraryEmoji.csproj" />
+  <Project Path="Test/Tests.csproj" Id="16f10116-529e-4380-88c6-c3642c90abb2" />
 </Solution>
