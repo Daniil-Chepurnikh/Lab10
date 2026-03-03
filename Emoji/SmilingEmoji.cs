@@ -39,7 +39,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public SmilingEmoji() :base() => SmileReason = "Улыбается без причины, просто счастлив в жизни";
+        public SmilingEmoji() :base() => SmileReason = "Просто улыбается";
 
         /// <summary>
         /// Конструктор с параметрами
