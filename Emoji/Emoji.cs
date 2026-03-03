@@ -59,7 +59,7 @@ namespace LibraryEmoji
 
             //hasSpecialChar &&= words.Length > 2;  Спросить чё за жесть
 
-            return hasSpecialChar && words.Length > 2;
+            return !(hasSpecialChar && words.Length > 2);
         }
 
         /// <summary>
