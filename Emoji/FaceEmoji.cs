@@ -12,34 +12,30 @@ namespace LibraryEmoji
             "- _ -", "'_'"
         ];
         
-        string? expression;
+        string? _expression;
         /// <summary>
         /// Лицо эмодзи
         /// </summary>
         public string? Expression
         {
-            get => expression;
-            set
-            {
-                // TODO: добавить адекватную проверку
-                expression = value;
-            }
+            get => _expression;
+            set => _expression = value;
         }
 
-        ushort strength;
+        ushort _strength;
         /// <summary>
         /// Сила эмодзи
         /// </summary>
         public ushort Strength
         {
-            get => strength;
+            get => _strength;
             set
             {
                 ArgumentOutOfRangeException.ThrowIfLessThan(value, 0, "Сила лицевой эмодзи не может быть меньше 0");
 
                 ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 10, "Сила лицевой эмодзи не может быть больше 10");
 
-                strength = value;
+                _strength = value;
             }
         }
 
@@ -102,6 +98,13 @@ namespace LibraryEmoji
         public override int GetHashCode() => base.GetHashCode() + Strength.GetHashCode() +
                                              Expression.GetHashCode();
 
-        // TODO: доопределить RandomInit
+        /// <summary>
+        /// Инициализирует атрибуты случайными значениями
+        /// </summary>
+        protected override void RandomInit()
+        {
+            RandomInit();
+            Expression = expressions[random.Next(0, expressions.Length)];
+        }
     }
 }

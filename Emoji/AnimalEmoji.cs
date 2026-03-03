@@ -14,19 +14,19 @@ namespace LibraryEmoji
             "нос", "зубы"
         ];
 
-        string? animalPart;
+        string? _animalPart;
         /// <summary>
         /// Часть тела животного в эмодзи
         /// </summary>
         public string? AnimalPart 
         { 
-            get => animalPart; 
+            get => _animalPart; 
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Часть тела животного не может быть пустой, состоять только из пробелов или нулевой");
 
-                animalPart = value;
+                _animalPart = value;
             }
         }
 

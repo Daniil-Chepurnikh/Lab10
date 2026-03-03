@@ -1,10 +1,14 @@
 ﻿using MyDCInputOutputConsole;
+using System.Data;
+using System.Text.RegularExpressions;
 
 namespace LibraryEmoji
 {
     public class Emoji
     {
-        static readonly Random random = new();
+        protected const string ERROR_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";
+        
+        protected static readonly Random random = new();
         
         /// <summary>
         /// возможные названия для случайного выбора
@@ -15,22 +19,47 @@ namespace LibraryEmoji
             "ненависть", "любовь", "спокойствие"
         ];
         
-        string? name;
+        string? _name;
         /// <summary>
         /// Название эмодзи
         /// </summary>
         public string? Name 
         {
-            get => name; 
+            get => _name; 
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Название эмодзи не может быть пустым, состоять из пробелов или нулевым");
+                    throw new ArgumentException("Название не должно быть пустым или нулевым, состоять из пробелов");
 
-                // TODO: Добавить проверку на не содержательную строку(пробельные символы и знаки препинания без нормальных слов
+                if (!IsCorrectString(value))
+                    throw new ArgumentException(ERROR_STRING);
 
-                name = value;
+                _name = value;
             }
+        }
+
+        /// <summary>
+        /// Проверяет строку на МОИ требования
+        /// </summary>
+        /// <param name="checkString">проверяемая строка</param>
+        /// <returns>true если подходит</returns>
+        protected static bool IsCorrectString(string checkString)
+        {
+            bool hasSpecialChar = false;
+            foreach (char c in checkString)
+            {
+                if (!char.IsLetter(c))
+                {
+                    hasSpecialChar = true;
+                    break;
+                }
+            }
+
+            string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            //hasSpecialChar &&= words.Length > 2;  Спросить чё за жесть
+
+            return hasSpecialChar && words.Length > 2;
         }
 
         /// <summary>
@@ -42,25 +71,24 @@ namespace LibraryEmoji
             "цветок", "деньги"
         ];
 
-        string? tag;
+        string? _tag;
         /// <summary>
         /// Тег эмодзи
         /// </summary>
         public string? Tag 
         { 
-            get => tag;
+            get => _tag;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Тег эмодзи не может быть пустым, состоять только из пробелов или нулевым");
 
-                // TODO: Добавить проверку на знаки препинания без нормальных слов
+                if (!IsCorrectString(value))
+                    throw new ArgumentException(ERROR_STRING);
 
-                tag = value;
+                _tag = value;
             }
         }
-
-        // TODO: Добавить проверку на знаки препинания без нормальных слов
 
         #region Конструкторы
         /// <summary>
@@ -127,7 +155,7 @@ namespace LibraryEmoji
         {
             Name = names[random.Next(0, names.Length)];
             Tag = tags[random.Next(0, tags.Length)];
-        }
+        } // спросить куда и как это пристроить
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -145,8 +173,6 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => $"Название: {Name}, тег: {Tag}\n";
-
-
+        public override string ToString() => $"Название: {Name}, тег: {Tag}\n"; // спросить куда и как это пристроить
     }
 }

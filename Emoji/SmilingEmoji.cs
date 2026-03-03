@@ -16,23 +16,22 @@ namespace LibraryEmoji
         ];
 
 
-        string? smileReason;
+        string? _smileReason;
         /// <summary>
         /// Причина улыбки
         /// </summary>
         public string? SmileReason
         {
-            get => smileReason;
+            get => _smileReason;
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
                     throw new ArgumentException("Причина улыбки не может быть пустой, состоять только из пробелов или нулевой");
-                
-                //TODO: придумать ограничения и их проверку
 
+                if (!IsCorrectString(value))
+                    throw new ArgumentException(ERROR_STRING);
 
-                smileReason = value;
-
+                _smileReason = value;
             }
         }
 
@@ -91,7 +90,13 @@ namespace LibraryEmoji
             SmileReason = Input.Data();
         }
 
-        // TODO: доопределить RandomInit
-
+        /// <summary>
+        /// Инициализирует атрибуты случайными значениями
+        /// </summary>
+        protected override void RandomInit()
+        {
+            RandomInit();
+            SmileReason = smileReasons[random.Next(0, smileReasons.Length)];
+        }
     }
 }
