@@ -5,9 +5,6 @@ namespace Tests;
 [TestClass]
 public class TestSmilingEmoji
 {
-    // TODO: изменить тесты на причину улыбки, когда придумаю и добавлю в свойства ограничения
-    // TODO: проверить все тесты на логичность
-
     [TestMethod]
     public void TestWithoutParameters()
     {
