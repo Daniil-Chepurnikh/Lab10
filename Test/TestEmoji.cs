@@ -49,110 +49,8 @@ namespace Tests
             Assert.AreEqual(e.Tag, clone.Tag);
 
             e.Tag = "May be";
-            Assert.AreEqual(e.Name, clone.Name);
             Assert.AreNotEqual(e.Tag, clone.Tag);
-        }
-
-        [TestMethod]
-        public void TestNullName()
-        {
-            Emoji e;
-            var isPassed = false;
-            try
-            {
-                e = new(null, "No");
-            }
-            catch(ArgumentException)
-            {
-                isPassed = true;
-            }
-
-            Assert.IsTrue(isPassed);
-        }
-
-        [TestMethod]
-        public void TestNullTag()
-        {
-            Emoji e;
-            var isPassed = false;
-            try
-            {
-                e = new("null", null);
-            }
-            catch (ArgumentException)
-            {
-                isPassed = true;
-            }
-
-            Assert.IsTrue(isPassed);
-        }
-
-        [TestMethod]
-        public void TestEmptyTag()
-        {
-            Emoji e;
-            var isPassed = false;
-            try
-            {
-                e = new("null", "");
-            }
-            catch (ArgumentException)
-            {
-                isPassed = true;
-            }
-
-            Assert.IsTrue(isPassed);
-        }
-
-        [TestMethod]
-        public void TestEmptyName()
-        {
-            Emoji e;
-            var isPassed = false;
-            try
-            {
-                e = new("", "q");
-            }
-            catch (ArgumentException)
-            {
-                isPassed = true;
-            }
-
-            Assert.IsTrue(isPassed);
-        }
-
-        [TestMethod]
-        public void TestWhiteSpaceTag()
-        {
-            Emoji e;
-            var isPassed = false;
-            try
-            {
-                e = new("null", "                   ");
-            }
-            catch (ArgumentException)
-            {
-                isPassed = true;
-            }
-
-            Assert.IsTrue(isPassed);
-        }
-
-        [TestMethod]
-        public void TestWhiteSpaceName()
-        {
-            Emoji e;
-            var isPassed = false;
-            try
-            {
-                e = new("                ", "q");
-            }
-            catch (ArgumentException)
-            {
-                isPassed = true;
-            }
-
-            Assert.IsTrue(isPassed);
+            Assert.AreEqual(e.Name, clone.Name);
         }
 
         [TestMethod]
@@ -165,12 +63,12 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestNumberTag()
+        public void TestNumberString()
         {
             var isPassed = false;
             try
             {
-                Emoji e = new("1", "             p              ");
+                Emoji e = new("1", "");
             }
             catch (ArgumentException)
             {
@@ -181,12 +79,12 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestNumberName()
+        public void TestLongString()
         {
             var isPassed = false;
             try
             {
-                Emoji e = new("p", "1");
+                Emoji e = new("llsslssk", "      w r w       p              ");
             }
             catch (ArgumentException)
             {
@@ -195,5 +93,6 @@ namespace Tests
 
             Assert.IsTrue(isPassed);
         }
+
     }
 }

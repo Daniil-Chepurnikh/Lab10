@@ -4,9 +4,7 @@ namespace Tests;
 
 [TestClass]
 public class TestEquals
-{
-    // переименовать тесты
-    
+{    
     [TestMethod]
     public void TestEquals1()
     {
@@ -41,7 +39,7 @@ public class TestEquals
     }
 
     [TestMethod]
-    public void TestEquals4()
+    public void TestEquals4() // null
     {
         Emoji e1 = new("Роза", "Цветок");
 
@@ -50,12 +48,13 @@ public class TestEquals
         Assert.IsFalse(res);
     }
 
+    #region Разные типы
     [TestMethod]
     public void TestEquals5()
     {
         Emoji e1 = new("Роза", "Цветок");
-        AnimalEmoji e = new();
-        var res = e1.Equals(e);
+        object obj = '_';
+        var res = e1.Equals(obj);
 
         Assert.IsFalse(res);
     }
@@ -63,11 +62,31 @@ public class TestEquals
     [TestMethod]
     public void TestEquals6()
     {
-        Emoji e1 = new("Роза", "Цветок");
-        FaceEmoji e2 = new();
-
-        var res = e1.Equals(e2);
+        FaceEmoji e1 = new();
+        object obj = '_';
+        var res = e1.Equals(obj);
 
         Assert.IsFalse(res);
     }
+
+    [TestMethod]
+    public void TestEquals7()
+    {
+        AnimalEmoji e1 = new();
+        object obj = '_';
+        var res = e1.Equals(obj);
+
+        Assert.IsFalse(res);
+    }
+
+    [TestMethod]
+    public void TestEquals8()
+    {
+        SmilingEmoji e1 = new();
+        object obj = '_';
+        var res = e1.Equals(obj);
+
+        Assert.IsFalse(res);
+    }
+    #endregion
 }

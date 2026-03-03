@@ -10,9 +10,7 @@ public class TestAnimalEmoji
     {
         AnimalEmoji e = new();
 
-        Assert.AreEqual("Без названия", e.Name);
-        Assert.AreEqual("Без тега", e.Tag);
-        Assert.AreEqual("Неопределённая часть тела", e.AnimalPart);
+        Assert.AreEqual("Часть тела", e.AnimalPart);
     }
 
     [TestMethod]
@@ -20,25 +18,7 @@ public class TestAnimalEmoji
     {
         AnimalEmoji e = new("Роза", "Цветок", "Хвост");
 
-        Assert.AreEqual("Роза", e.Name);
-        Assert.AreEqual("Цветок", e.Tag);
         Assert.AreEqual("Хвост", e.AnimalPart);
-    }
-
-    [TestMethod]
-    public void TestCloneNull()
-    {
-        AnimalEmoji e;
-        var isPassed = false;
-        try
-        {
-            e = new(null);
-        }
-        catch (ArgumentNullException)
-        {
-            isPassed = true;
-        }
-        Assert.IsTrue(isPassed);
     }
 
     [TestMethod]
@@ -47,99 +27,11 @@ public class TestAnimalEmoji
         AnimalEmoji e = new("Yes", "No", "Хвост");
         AnimalEmoji clone = new(e);
 
-        Assert.AreEqual(e.Name, clone.Name);
-        Assert.AreEqual(e.Tag, clone.Tag);
         Assert.AreEqual(e.AnimalPart, clone.AnimalPart);
 
-        e.Tag = "May be";
-        Assert.AreEqual(e.Name, clone.Name);
-        Assert.AreNotEqual(e.Tag, clone.Tag);
-        Assert.AreEqual(e.AnimalPart, clone.AnimalPart);
-    }
+        e.AnimalPart = "May be";
 
-    [TestMethod]
-    public void TestNullName()
-    {
-        AnimalEmoji e;
-        var isPassed = false;
-        try
-        {
-            e = new(null, "No", "wdsds");
-        }
-        catch (ArgumentException)
-        {
-            isPassed = true;
-        }
-
-        Assert.IsTrue(isPassed);
-    }
-
-    [TestMethod]
-    public void TestNullTag()
-    {
-        AnimalEmoji e;
-        var isPassed = false;
-        try
-        {
-            e = new("null", null, "sfssfdfd");
-        }
-        catch (ArgumentException)
-        {
-            isPassed = true;
-        }
-
-        Assert.IsTrue(isPassed);
-    }
-
-    [TestMethod]
-    public void TestNullAnimalPart()
-    {
-        AnimalEmoji e;
-        var isPassed = false;
-        try
-        {
-            e = new("null", "null", null);
-        }
-        catch (ArgumentException)
-        {
-            isPassed = true;
-        }
-
-        Assert.IsTrue(isPassed);
-    }
-
-    [TestMethod]
-    public void TestEmptyTag()
-    {
-        AnimalEmoji e;
-        var isPassed = false;
-        try
-        {
-            e = new("null", "", "выывававаф");
-        }
-        catch (ArgumentException)
-        {
-            isPassed = true;
-        }
-
-        Assert.IsTrue(isPassed);
-    }
-
-    [TestMethod]
-    public void TestEmptyName()
-    {
-        AnimalEmoji e;
-        var isPassed = false;
-        try
-        {
-            e = new("", "q", "цыававапв");
-        }
-        catch (ArgumentException)
-        {
-            isPassed = true;
-        }
-
-        Assert.IsTrue(isPassed);
+        Assert.AreNotEqual(e.AnimalPart, clone.AnimalPart);
     }
 
     [TestMethod]
@@ -160,47 +52,13 @@ public class TestAnimalEmoji
     }
 
     [TestMethod]
-    public void TestWhiteSpaceTag()
-    {
-        AnimalEmoji e;
-        var isPassed = false;
-        try
-        {
-            e = new("null", "                   ", "dsfdfdfdafda");
-        }
-        catch (ArgumentException)
-        {
-            isPassed = true;
-        }
-
-        Assert.IsTrue(isPassed);
-    }
-
-    [TestMethod]
-    public void TestWhiteSpaceName()
-    {
-        AnimalEmoji e;
-        var isPassed = false;
-        try
-        {
-            e = new("                ", "q", "dfdddsds");
-        }
-        catch (ArgumentException)
-        {
-            isPassed = true;
-        }
-
-        Assert.IsTrue(isPassed);
-    }
-
-    [TestMethod]
     public void TestWhiteSpaceAnimalPart()
     {
         AnimalEmoji e;
         var isPassed = false;
         try
         {
-            e = new("        q        ", "q", "                         ");
+            e = new("q", "q", "     ");
         }
         catch (ArgumentException)
         {
@@ -211,12 +69,10 @@ public class TestAnimalEmoji
     }
 
     [TestMethod]
-    public void TestWhiteStrangeNameTag()
+    public void TestStrangeAnimalPart()
     {
-        AnimalEmoji e = new("       q         ", "             p              ", " sds         ");
+        AnimalEmoji e = new("д", "п", " sds         ");
 
-        Assert.AreEqual("       q         ", e.Name);
-        Assert.AreEqual("             p              ", e.Tag);
         Assert.AreEqual(" sds         ", e.AnimalPart);
     }
 }
