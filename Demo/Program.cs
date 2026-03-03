@@ -13,7 +13,11 @@ namespace Demo
 
             AnimalEmoji an = new();
             Output.Message(an.VirtualShow(), ConsoleColor.White);
-             // TODO: доплнить демонстрационную программу
+            // TODO: доплнить демонстрационную программу
+
+            FaceEmoji e = new("n", "n", "null");
+            Output.Message(e.VirtualShow(), ConsoleColor.White);
+
         }
     }
 }
