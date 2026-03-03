@@ -6,8 +6,9 @@ namespace LibraryEmoji
 {
     public class Emoji
     {
-        protected const string ERROR_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";
-        
+        protected const string ERROR_SPECIALSYMBOL_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";
+        protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
+
         protected static readonly Random random = new();
         
         /// <summary>
@@ -29,10 +30,10 @@ namespace LibraryEmoji
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Название не должно быть пустым или нулевым, состоять из пробелов");
+                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
 
                 if (!IsCorrectString(value))
-                    throw new ArgumentException(ERROR_STRING);
+                    throw new ArgumentException(ERROR_SPECIALSYMBOL_DIGIT_LONG_STRING);
 
                 _name = value;
             }
@@ -71,10 +72,10 @@ namespace LibraryEmoji
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Тег эмодзи не может быть пустым, состоять только из пробелов или нулевым");
+                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
 
                 if (!IsCorrectString(value))
-                    throw new ArgumentException(ERROR_STRING);
+                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
 
                 _tag = value;
             }
@@ -114,6 +115,9 @@ namespace LibraryEmoji
         }
         #endregion
 
+        
+        // TODO: переписать все икуалсы
+        
         /// <summary>
         /// Сранивает объекты
         /// </summary>

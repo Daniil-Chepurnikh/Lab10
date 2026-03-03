@@ -15,7 +15,6 @@ namespace LibraryEmoji
             "вкусная еда", "весёлое видео", "выходные"
         ];
 
-
         string? _smileReason;
         /// <summary>
         /// Причина улыбки
@@ -26,10 +25,10 @@ namespace LibraryEmoji
             set
             {
                 if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Причина улыбки не может быть пустой, состоять только из пробелов или нулевой");
+                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
 
                 if (!IsCorrectString(value))
-                    throw new ArgumentException(ERROR_STRING);
+                    throw new ArgumentException(ERROR_SPECIALSYMBOL_DIGIT_LONG_STRING);
 
                 _smileReason = value;
             }
