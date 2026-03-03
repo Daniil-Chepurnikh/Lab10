@@ -156,12 +156,44 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestWhiteStrangeNameTag()
+        public void TestStrangeNameTag()
         {
             Emoji e = new("       q         ", "             p              ");
 
             Assert.AreEqual("       q         ", e.Name);
             Assert.AreEqual("             p              ", e.Tag);
+        }
+
+        [TestMethod]
+        public void TestNumberTag()
+        {
+            var isPassed = false;
+            try
+            {
+                Emoji e = new("1", "             p              ");
+            }
+            catch (ArgumentException)
+            {
+                isPassed = true; 
+            }
+
+            Assert.IsTrue(isPassed);
+        }
+
+        [TestMethod]
+        public void TestNumberName()
+        {
+            var isPassed = false;
+            try
+            {
+                Emoji e = new("p", "1");
+            }
+            catch (ArgumentException)
+            {
+                isPassed = true;
+            }
+
+            Assert.IsTrue(isPassed);
         }
     }
 }
