@@ -19,7 +19,12 @@ namespace LibraryEmoji
         public string? Expression
         {
             get => _expression;
-            set => _expression = value;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
+                _expression = value;
+            }
         }
 
         ushort _strength;
@@ -43,7 +48,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public FaceEmoji() :base() => Expression = "Нет выражения лица";
+        public FaceEmoji() :base() => Expression = "Нет выражения";
 
         /// <summary>
         /// Конструктор с параметрами
