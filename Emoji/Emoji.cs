@@ -45,21 +45,11 @@ namespace LibraryEmoji
         /// <returns>true если подходит</returns>
         protected static bool IsCorrectString(string checkString)
         {
-            bool hasSpecialChar = false;
-            foreach (char c in checkString)
-            {
-                if (!char.IsLetter(c))
-                {
-                    hasSpecialChar = true;
-                    break;
-                }
-            }
-
             string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             //hasSpecialChar &&= words.Length > 2;  Спросить чё за жесть
 
-            return !(hasSpecialChar && words.Length > 2);
+            return !Regex.IsMatch(checkString, @"\d") && words.Length <= 2;
         }
 
         /// <summary>
