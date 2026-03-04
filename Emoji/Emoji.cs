@@ -156,5 +156,12 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Строка с данными</returns>
         public override string ToString() => $"Название: {Name}, тег: {Tag}\n"; // спросить куда и как это пристроить
+
+
+        /// <summary>
+        /// Показывает данные эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public string Show() => $"Вид: {nameof(Emoji)}. " + ToString();
     }
 }

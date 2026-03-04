@@ -88,5 +88,18 @@ namespace LibraryEmoji
             RandomInit();
             AnimalPart = animalParts[random.Next(0, animalParts.Length)];
         }
+
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        public override string ToString() => base.ToString() + $"Часть тела: {AnimalPart}"; // спросить куда и как это пристроить
+
+        /// <summary>
+        /// Показывает данные эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public string Show() => $"Вид: {nameof(AnimalEmoji)}. " + ToString() ;
+
     }
 }

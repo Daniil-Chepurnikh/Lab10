@@ -116,5 +116,17 @@ namespace LibraryEmoji
             RandomInit();
             Expression = expressions[random.Next(0, expressions.Length)];
         }
+
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        public override string ToString() => base.ToString() + $"Вид {nameof(FaceEmoji)}, сила: {Strength}, выражение: {Expression}\n"; // спросить куда и как это пристроить
+
+        /// <summary>
+        /// Возвращает данные объекта
+        /// </summary>
+        /// <returns></returns>
+        public string Show() => ToString();
     }
 }

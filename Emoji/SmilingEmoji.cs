@@ -88,5 +88,13 @@ namespace LibraryEmoji
             RandomInit();
             SmileReason = smileReasons[random.Next(0, smileReasons.Length)];
         }
+
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        public override string ToString() => base.ToString + $"{nameof(SmilingEmoji)}, причина улыбки: {SmileReason}\n"; // спросить куда и как это пристроить
+
+        public string Show() => ToString();
     }
 }
