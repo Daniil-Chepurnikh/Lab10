@@ -163,7 +163,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => $"Вид: {nameof(Emoji)}. Название: {Name}, тег: {Tag}\n"; // спросить куда и как это пристроить
+        public override string ToString() => $"Вид: {nameof(Emoji)}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
 
         /// <summary>
         /// Показывает данные эмодзи
