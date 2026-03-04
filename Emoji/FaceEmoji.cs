@@ -64,6 +64,12 @@ namespace LibraryEmoji
             Init();
             _number = new(num);
         }
+
+        /// <summary>
+        /// Конструктор со случайнми значениями
+        /// </summary>
+        /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
+        public FaceEmoji(Random rnd) => RandomInit();
         #endregion
 
         /// <summary>
@@ -111,7 +117,7 @@ namespace LibraryEmoji
         /// </summary>
         protected override void RandomInit()
         {
-            RandomInit();
+            base.RandomInit();
             Expression = expressions[random.Next(0, expressions.Length)];
         }
 

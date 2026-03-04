@@ -94,7 +94,7 @@ namespace LibraryEmoji
         /// </summary>
         protected virtual void RandomInit()
         {
-            RandomInit();
+            base.RandomInit();
             AnimalPart = animalParts[random.Next(0, animalParts.Length)];
         }
 
