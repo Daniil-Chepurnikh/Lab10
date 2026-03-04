@@ -6,7 +6,7 @@ namespace Tests;
 public class TestEquals
 {
     [TestMethod]
-    public void TestEquals6()
+    public void TestEquals1()
     {
         FaceEmoji e1 = new();
         object obj = '_';
@@ -16,7 +16,7 @@ public class TestEquals
     }
 
     [TestMethod]
-    public void TestEquals7()
+    public void TestEquals2()
     {
         AnimalEmoji e1 = new();
         object obj = '_';
@@ -26,7 +26,7 @@ public class TestEquals
     }
 
     [TestMethod]
-    public void TestEquals8()
+    public void TestEquals3()
     {
         SmilingEmoji e1 = new();
         object obj = '_';
