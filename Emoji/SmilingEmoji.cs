@@ -59,7 +59,7 @@ namespace LibraryEmoji
         /// Передаёт инфорацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => $"Причина улыбки: {SmileReason}. {base.ToString()}";
+        public override string VirtualShow() => ToString();
 
         /// <summary>
         /// Сравнивает объекты
@@ -104,8 +104,8 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => base.ToString + $"{nameof(SmilingEmoji)}, причина улыбки: {SmileReason}\n"; // спросить куда и как это пристроить
+        public override string ToString() => $"Вид: {nameof(SmilingEmoji)}. Причина улыбки: {SmileReason}. Название: {Name}, тег: {Tag}."; // спросить куда и как это пристроить
 
-        public string Show() => ToString();
+        public new string Show() => ToString();
     }
 }

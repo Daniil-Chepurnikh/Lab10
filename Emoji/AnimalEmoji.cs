@@ -71,7 +71,7 @@ namespace LibraryEmoji
         /// Передаёт информацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => $"Вид: {nameof(AnimalEmoji)}. Часть тела: {AnimalPart}. {base.ToString()}";
+        public override string VirtualShow() => ToString();
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -102,13 +102,13 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => base.ToString() + $"Часть тела: {AnimalPart}"; // спросить куда и как это пристроить
+        public override string ToString() => $"Вид: {nameof(AnimalEmoji)}. Часть тела: {AnimalPart}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
 
         /// <summary>
         /// Показывает данные эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public string Show() => $"Вид: {nameof(AnimalEmoji)}. " + ToString() ;
+        public new string Show() => ToString();
 
     }
 }

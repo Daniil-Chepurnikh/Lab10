@@ -76,7 +76,7 @@ namespace LibraryEmoji
         /// Передаёт информацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => $"Выражение: {Expression}. Сила: {Strength}. {base.ToString()}";
+        public override string VirtualShow() => ToString();
 
         /// <summary>
         /// Сранивает объекты
@@ -125,12 +125,12 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => base.ToString() + $"Вид {nameof(FaceEmoji)}, сила: {Strength}, выражение: {Expression}\n"; // спросить куда и как это пристроить
+        public override string ToString() => $"Вид: {nameof(FaceEmoji)}. Выражение: {Expression}. Сила: {Strength}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
 
         /// <summary>
         /// Возвращает данные объекта
         /// </summary>
         /// <returns></returns>
-        public string Show() => ToString();
+        public new string Show() => ToString();
     }
 }
