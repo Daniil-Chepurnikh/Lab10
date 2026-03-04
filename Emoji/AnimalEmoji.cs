@@ -50,9 +50,11 @@ namespace LibraryEmoji
         /// <returns>true если равны</returns>
         public override bool Equals(object? obj)
         {
-            return obj is AnimalEmoji animal 
-                   && animal.AnimalPart == AnimalPart
-                   && base.Equals(obj);
+            return obj is AnimalEmoji animal
+                   && animal.AnimalPart == AnimalPart &&
+                   animal.Name == Name &&
+                   animal.Tag == Tag &&
+                   animal._number.Equals(_number);          
         }
 
         /// <summary>

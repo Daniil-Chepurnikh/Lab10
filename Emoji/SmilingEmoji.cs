@@ -58,8 +58,10 @@ namespace LibraryEmoji
         public override bool Equals(object? obj)
         {
             return obj is SmilingEmoji smile
-                   && smile.SmileReason == SmileReason
-                   && base.Equals(obj);
+                   && smile.SmileReason == SmileReason &&
+                   smile.Name == Name &&
+                   smile.Tag == Tag &&
+                   smile._number.Equals(_number);
         }
 
         /// <summary>

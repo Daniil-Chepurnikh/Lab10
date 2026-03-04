@@ -84,7 +84,9 @@ namespace LibraryEmoji
             return obj is FaceEmoji face &&
                    face.Strength == Strength &&
                    face.Expression == Expression &&
-                   base.Equals(obj);
+                   face.Name == Name &&
+                   face.Tag == Tag &&
+                   face._number.Equals(_number);
         }
 
         /// <summary>

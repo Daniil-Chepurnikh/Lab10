@@ -20,8 +20,7 @@ namespace LibraryEmoji
             "ненависть", "любовь", "спокойствие"
         ];
 
-        IdNumber _number;
-        
+        protected IdNumber _number;
         
         string? _name;
         /// <summary>
@@ -105,9 +104,6 @@ namespace LibraryEmoji
             _number = new IdNumber(num);
         }
         #endregion
-
-        
-        // TODO: переписать все икуалсы
         
         /// <summary>
         /// Сранивает объекты
@@ -118,7 +114,8 @@ namespace LibraryEmoji
         {
             return obj is Emoji emoji &&
                    Name == emoji.Name &&
-                   Tag == emoji.Tag;
+                   Tag == emoji.Tag &&
+                   _number.Equals(emoji._number);
         }
 
         /// <summary>
@@ -131,7 +128,7 @@ namespace LibraryEmoji
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode();
+        public override int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode() + _number.GetHashCode();
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
