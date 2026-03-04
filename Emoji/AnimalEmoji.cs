@@ -45,6 +45,12 @@ namespace LibraryEmoji
             Init();
             _number = new(num);
         }
+
+        /// <summary>
+        /// Конструктор со случайными значениями
+        /// </summary>
+        /// <param name="rnd">Просто в виде маркера того, что нужны случайные значения</param>
+        public AnimalEmoji(Random rnd) => RandomInit();
         #endregion
 
         /// <summary>

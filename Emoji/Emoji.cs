@@ -43,11 +43,13 @@ namespace LibraryEmoji
         /// <returns>true если строка подходит</returns>
         /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
         /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
-        protected static bool IsCorrectString(string checkString)
+        protected static bool IsCorrectString(string str)
         {
-            if (string.IsNullOrWhiteSpace(checkString))
+            if (string.IsNullOrWhiteSpace(str))
                 throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
-
+            
+            string checkString = str.Replace("\t", " ");
+            
             string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             //hasSpecialChar &&= words.Length > 2;  спросить чё за жесть
@@ -102,8 +104,14 @@ namespace LibraryEmoji
             Init();
             _number = new(num);
         }
+
+        /// <summary>
+        /// Конструктор со случайнми значениями
+        /// </summary>
+        /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
+        public Emoji(Random rnd) => RandomInit();
         #endregion
-        
+
         /// <summary>
         /// Сранивает объекты
         /// </summary>
@@ -121,7 +129,7 @@ namespace LibraryEmoji
         /// Показывает данные эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public virtual string VirtualShow() => $"Вид: {nameof(Emoji)}. " + ToString();
+        public virtual string VirtualShow() => ToString();
 
         /// <summary>
         /// Получает хеш-код
@@ -136,6 +144,7 @@ namespace LibraryEmoji
         {
             Name = names[random.Next(0, names.Length)];
             Tag = tags[random.Next(0, tags.Length)];
+            _number = new(random.Next(0, 111));
         } // спросить куда и как это пристроить
 
         /// <summary>
@@ -154,12 +163,12 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => $"Название: {Name}, тег: {Tag}\n"; // спросить куда и как это пристроить
+        public override string ToString() => $"Вид: {nameof(Emoji)}. Название: {Name}, тег: {Tag}\n"; // спросить куда и как это пристроить
 
         /// <summary>
         /// Показывает данные эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public string Show() => $"Вид: {nameof(Emoji)}. " + ToString();
+        public string Show() => ToString();
     }
 }
