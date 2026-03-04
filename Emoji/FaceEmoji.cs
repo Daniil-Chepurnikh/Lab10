@@ -48,7 +48,11 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public FaceEmoji() :base() => Expression = "Нет выражения";
+        public FaceEmoji() :base()
+        {
+             Expression = "Нет выражения";
+             Strength = 0;
+        }
 
         /// <summary>
         /// Конструктор с параметрами
@@ -56,7 +60,12 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="expression">Выражение лица эмодзи</param>
-        public FaceEmoji(string name, string tag, int num, string expression) :base(name, tag, num) => Expression = expression;
+        public FaceEmoji(string name, string tag, int num, string expression, ushort strength) :base(name, tag, num)
+        {
+            Expression = expression;
+            Strength = strength;
+
+        }
         #endregion
 
         /// <summary>
