@@ -34,4 +34,15 @@ public class TestEquals
 
         Assert.IsFalse(res);
     }
+
+    [TestMethod]
+    public void TestEquals4()
+    {
+        Emoji e1 = new();
+        object obj = '_';
+        var res = e1.Equals(obj);
+
+        Assert.IsFalse(res);
+    }
+
 }

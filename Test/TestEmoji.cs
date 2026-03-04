@@ -12,7 +12,7 @@ namespace Tests
 
             Assert.AreEqual("Без названия", e.Name);
             Assert.AreEqual("Без тега", e.Tag);
-        }
+        } 
 
     }
 

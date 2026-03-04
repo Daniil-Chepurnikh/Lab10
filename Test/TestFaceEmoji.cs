@@ -13,6 +13,5 @@ namespace Tests
             Assert.AreEqual("Нет выражения", e.Expression);
             Assert.AreEqual(0, e.Strength);
         }
-
     }
 }
