@@ -1,4 +1,5 @@
-﻿using MyDCInputOutputConsole;
+﻿using lab_10_v5_ClassLibrary;
+using MyDCInputOutputConsole;
 using System;
 using System.Linq.Expressions;
 
@@ -41,7 +42,11 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="smileReason">Причина улыбки</param>
-        public SmilingEmoji(string name, string tag, int num, string smileReason) : base(name, tag, num) => SmileReason = smileReason;
+        public SmilingEmoji(int num)
+        {
+            Init();
+            _number = new(num);
+        }
         #endregion
 
         /// <summary>

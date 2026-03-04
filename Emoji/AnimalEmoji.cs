@@ -40,7 +40,11 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="animalPart">Часть тела животного в эмодзи</param>
-        public AnimalEmoji(string name, string tag, int num, string animalPart) :base(name, tag, num) => AnimalPart = animalPart;
+        public AnimalEmoji(int num)
+        {
+            Init();
+            _number = new(num);
+        }
         #endregion
 
         /// <summary>
@@ -69,8 +73,7 @@ namespace LibraryEmoji
         protected override void Init()
         {
             base.Init();
-
-            Output.Message("Введите часть тела животного в эмодзи", ConsoleColor.White);
+            Output.Message("Введите часть тела животного в эмодзи: ", ConsoleColor.White);
             AnimalPart = Input.Data();  
         }
 

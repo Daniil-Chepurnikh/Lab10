@@ -97,11 +97,10 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="emojiNname"></param>
         /// <param name="emojiTag"></param>
-        public Emoji(string emojiName, string emojiTag, int num)
+        public Emoji(int num)
         {
-            Name = emojiName;
-            Tag = emojiTag;
-            _number = new IdNumber(num);
+            Init();
+            _number = new(num);
         }
         #endregion
         

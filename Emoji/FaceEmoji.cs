@@ -37,7 +37,6 @@ namespace LibraryEmoji
             set
             {
                 ArgumentOutOfRangeException.ThrowIfLessThan(value, 0, "Сила лицевой эмодзи не может быть меньше 0");
-
                 ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 10, "Сила лицевой эмодзи не может быть больше 10");
 
                 _strength = value;
@@ -60,11 +59,10 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="expression">Выражение лица эмодзи</param>
-        public FaceEmoji(string name, string tag, int num, string expression, ushort strength) :base(name, tag, num)
+        public FaceEmoji(int num)
         {
-            Expression = expression;
-            Strength = strength;
-
+            Init();
+            _number = new(num);
         }
         #endregion
 
