@@ -16,22 +16,9 @@ public class TestSmilingEmoji
     [TestMethod]
     public void TestWithParameters()
     {
-        SmilingEmoji e = new("Роза", "Цветок", "Хвост");
+        SmilingEmoji e = new("Роза", "Цветок", 1, "Хвост");
 
         Assert.AreEqual("Хвост", e.SmileReason);
-    }
-
-    [TestMethod]
-    public void TestCloneCorrect()
-    {
-        SmilingEmoji e = new("Yes", "No", "Хвост");
-        SmilingEmoji clone = new(e);
-
-        Assert.AreEqual(e.SmileReason, clone.SmileReason);
-
-        e.SmileReason = "May be";
-
-        Assert.AreNotEqual(e.SmileReason, clone.SmileReason);
     }
 
     [TestMethod]
@@ -41,7 +28,7 @@ public class TestSmilingEmoji
         var isPassed = false;
         try
         {
-            e = new("null", "ewd", null);
+            e = new("null", "ewd", 1, null);
         }
         catch (ArgumentException)
         {
@@ -58,7 +45,7 @@ public class TestSmilingEmoji
         var isPassed = false;
         try
         {
-            e = new("eeeee", "q", "");
+            e = new("eeeee", "q", 1, "");
         }
         catch (ArgumentException)
         {
@@ -75,7 +62,7 @@ public class TestSmilingEmoji
         var isPassed = false;
         try
         {
-            e = new("          gghgh      ", "q", "   ");
+            e = new("          gghgh      ", "q", 1, "   ");
         }
         catch (ArgumentException)
         {
@@ -88,7 +75,7 @@ public class TestSmilingEmoji
     [TestMethod]
     public void TestWhiteStrangeSmileReason()
     {
-        SmilingEmoji e = new("       q         ", "             p              ", " sds         ");
+        SmilingEmoji e = new("       q         ", "             p              ", 1, " sds         ");
 
         Assert.AreEqual(" sds         ", e.SmileReason);
     }

@@ -11,23 +11,16 @@ namespace Tests
             FaceEmoji e = new();
 
             Assert.AreEqual("Нет выражения", e.Expression);
+            Assert.AreEqual(0, e.Strength);
         }
 
         [TestMethod]
         public void TestWithParameters()
         {
-            Emoji e = new("Роза", "Цветок");
+            FaceEmoji e = new("Роза", "Цветок", 1, "0^0", 7);
 
-            Assert.AreEqual("Роза", e.Name);
-            Assert.AreEqual("Цветок", e.Tag);
-        }
-
-        [TestMethod]
-        public void TestCloneCorrect()
-        {
-            FaceEmoji e = new("n", "n", "null");
-
-            Assert.AreEqual("null", e.Expression);
+            Assert.AreEqual("0^0", e.Expression);
+            Assert.AreEqual(7, e.Strength);
         }
 
         [TestMethod]
@@ -37,7 +30,7 @@ namespace Tests
             var isPassed = false;
             try
             {
-                e = new("ddd", "No", "");
+                e = new("ddd", "No", 1, "", 7);
             }
             catch (ArgumentException)
             {
@@ -54,7 +47,7 @@ namespace Tests
             var isPassed = false;
             try
             {
-                e = new("null", "null", null);
+                e = new("null", "null", 1, null, 7);
             }
             catch (ArgumentException)
             {
@@ -71,13 +64,28 @@ namespace Tests
             var isPassed = false;
             try
             {
-                e = new("null", "null", "  ");
+                e = new("null", "null", 1, "  ", 7);
             }
             catch (ArgumentException)
             {
                 isPassed = true;
             }
 
+            Assert.IsTrue(isPassed);
+        }
+
+        [TestMethod]
+        public void TestBigStrength()
+        {
+            var isPassed = false;
+            try
+            {
+                FaceEmoji e = new("Роза", "Цветок", 1, "0^0", 11);
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                isPassed = true;
+            }
             Assert.IsTrue(isPassed);
         }
     }

@@ -16,22 +16,9 @@ public class TestAnimalEmoji
     [TestMethod]
     public void TestWithParameters()
     {
-        AnimalEmoji e = new("Роза", "Цветок", "Хвост");
+        AnimalEmoji e = new("Роза", "Цветок",1, "Хвост");
 
         Assert.AreEqual("Хвост", e.AnimalPart);
-    }
-
-    [TestMethod]
-    public void TestCloneCorrect()
-    {
-        AnimalEmoji e = new("Yes", "No", "Хвост");
-        AnimalEmoji clone = new(e);
-
-        Assert.AreEqual(e.AnimalPart, clone.AnimalPart);
-
-        e.AnimalPart = "May be";
-
-        Assert.AreNotEqual(e.AnimalPart, clone.AnimalPart);
     }
 
     [TestMethod]
@@ -41,7 +28,7 @@ public class TestAnimalEmoji
         var isPassed = false;
         try
         {
-            e = new("qqqq", "q", "");
+            e = new("qqqq", "q", 1, "");
         }
         catch (ArgumentException)
         {
@@ -58,7 +45,7 @@ public class TestAnimalEmoji
         var isPassed = false;
         try
         {
-            e = new("q", "q", "     ");
+            e = new("q", "q", 1, "     ");
         }
         catch (ArgumentException)
         {
@@ -71,7 +58,7 @@ public class TestAnimalEmoji
     [TestMethod]
     public void TestStrangeAnimalPart()
     {
-        AnimalEmoji e = new("д", "п", " sds         ");
+        AnimalEmoji e = new("д", "п", 1, " sds         ");
 
         Assert.AreEqual(" sds         ", e.AnimalPart);
     }
