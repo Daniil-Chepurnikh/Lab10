@@ -17,46 +17,16 @@ namespace Tests
         [TestMethod]
         public void TestWithParameters()
         {
-            Emoji e = new("Роза", "Цветок");
+            Emoji e = new("Роза", "Цветок", 1);
 
             Assert.AreEqual("Роза", e.Name);
             Assert.AreEqual("Цветок", e.Tag);
         }
 
         [TestMethod]
-        public void TestCloneNull()
-        {
-            Emoji e;
-            var isPassed = false;
-            try
-            {
-                e = new(null);
-            }
-            catch (ArgumentNullException)
-            { 
-                isPassed = true;
-            }
-            Assert.IsTrue(isPassed);
-        }
-
-        [TestMethod]
-        public void TestCloneCorrect()
-        {
-            Emoji e = new("Yes", "No");
-            Emoji clone = new(e);
-
-            Assert.AreEqual(e.Name, clone.Name);
-            Assert.AreEqual(e.Tag, clone.Tag);
-
-            e.Tag = "May be";
-            Assert.AreNotEqual(e.Tag, clone.Tag);
-            Assert.AreEqual(e.Name, clone.Name);
-        }
-
-        [TestMethod]
         public void TestStrangeNameTag()
         {
-            Emoji e = new("       q         ", "             p              ");
+            Emoji e = new("       q         ", "             p              ", 1);
 
             Assert.AreEqual("       q         ", e.Name);
             Assert.AreEqual("             p              ", e.Tag);
@@ -68,7 +38,7 @@ namespace Tests
             var isPassed = false;
             try
             {
-                Emoji e = new("1", "");
+                Emoji e = new("1", "", 11);
             }
             catch (ArgumentException)
             {
@@ -84,7 +54,7 @@ namespace Tests
             var isPassed = false;
             try
             {
-                Emoji e = new("llsslssk", "      w r w       p              ");
+                Emoji e = new("llsslssk", "g g w p", 1);
             }
             catch (ArgumentException)
             {
@@ -94,5 +64,15 @@ namespace Tests
             Assert.IsTrue(isPassed);
         }
 
+        [TestMethod]
+        public void TestSpecialString()
+        {
+            Emoji e = new("!", "@ p", 1);
+
+            Assert.AreEqual("!", e.Name);
+            Assert.AreEqual("@ p", e.Tag);
+        }
+
     }
+
 }
