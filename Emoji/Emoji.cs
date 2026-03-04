@@ -1,12 +1,12 @@
-﻿using MyDCInputOutputConsole;
-using System.Data;
+﻿using lab_10_v5_ClassLibrary;
+using MyDCInputOutputConsole;
 using System.Text.RegularExpressions;
 
 namespace LibraryEmoji
 {
     public class Emoji
     {
-        protected const string ERROR_SPECIALSYMBOL_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";
+        protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
 
         protected static readonly Random random = new();
@@ -19,6 +19,9 @@ namespace LibraryEmoji
             "радость", "злость", "печаль", "гнев", "страх",
             "ненависть", "любовь", "спокойствие"
         ];
+
+        IdNumber _number;
+        
         
         string? _name;
         /// <summary>
@@ -29,28 +32,31 @@ namespace LibraryEmoji
             get => _name; 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
-
-                if (!IsCorrectString(value))
-                    throw new ArgumentException(ERROR_SPECIALSYMBOL_DIGIT_LONG_STRING);
-
-                _name = value;
+                if (IsCorrectString(value))
+                    _name = value;
             }
         }
 
         /// <summary>
-        /// Проверяет строку на МОИ требования
+        /// Проверяет строку на удовлетворение требованиям
         /// </summary>
-        /// <param name="checkString">проверяемая строка</param>
-        /// <returns>true если подходит</returns>
+        /// <param name="checkString"></param>
+        /// <returns>true если строка подходит</returns>
+        /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
+        /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
         protected static bool IsCorrectString(string checkString)
         {
+            if (string.IsNullOrWhiteSpace(checkString))
+                throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
+
             string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            //hasSpecialChar &&= words.Length > 2;  Спросить чё за жесть
+            //hasSpecialChar &&= words.Length > 2;  спросить чё за жесть
 
-            return !Regex.IsMatch(checkString, @"\d") && words.Length <= 2;
+            if (Regex.IsMatch(checkString, @"\d") || words.Length > 2)
+                throw new ArgumentException(ERROR_DIGIT_LONG_STRING);
+
+            return true;
         }
 
         /// <summary>
@@ -71,13 +77,8 @@ namespace LibraryEmoji
             get => _tag;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
-
-                if (!IsCorrectString(value))
-                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
-
-                _tag = value;
+                if (IsCorrectString(value))
+                    _tag = value;
             }
         }
 
@@ -89,6 +90,7 @@ namespace LibraryEmoji
         {
             Name = "Без названия";
             Tag = "Без тега";
+            _number = new IdNumber();
         }
 
         /// <summary>
@@ -96,22 +98,11 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="emojiNname"></param>
         /// <param name="emojiTag"></param>
-        public Emoji(string emojiName, string emojiTag)
+        public Emoji(string emojiName, string emojiTag, int num)
         {
             Name = emojiName;
             Tag = emojiTag;
-        }
-
-        /// <summary>
-        /// Конструктор копирования
-        /// </summary>
-        /// <param name="source">Копируемый эмодзи</param>
-        public Emoji(Emoji source)
-        {
-            ArgumentNullException.ThrowIfNull(source, "Невозможно скопировать эмодзи по null");
-            
-            Name = source.Name;
-            Tag = source.Tag;
+            _number = new IdNumber(num);
         }
         #endregion
 

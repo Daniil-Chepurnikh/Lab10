@@ -23,13 +23,8 @@ namespace LibraryEmoji
             get => _animalPart; 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
-
-                if (!IsCorrectString(value))
-                    throw new ArgumentException(ERROR_SPECIALSYMBOL_DIGIT_LONG_STRING);
-
-                _animalPart = value;
+                 if (IsCorrectString(value))
+                    _animalPart = value;
             }
         }
 
@@ -45,13 +40,7 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="animalPart">Часть тела животного в эмодзи</param>
-        public AnimalEmoji(string name, string tag, string animalPart) :base(name, tag) => AnimalPart = animalPart;
-
-        /// <summary>
-        /// Конструктор копирования
-        /// </summary>
-        /// <param name="source">Копируемый эмодзи</param>
-        public AnimalEmoji(AnimalEmoji source) :base(source) => AnimalPart = source.AnimalPart;
+        public AnimalEmoji(string name, string tag, int num, string animalPart) :base(name, tag, num) => AnimalPart = animalPart;
         #endregion
 
         /// <summary>

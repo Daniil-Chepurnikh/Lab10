@@ -24,13 +24,8 @@ namespace LibraryEmoji
             get => _smileReason;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
-
-                if (!IsCorrectString(value))
-                    throw new ArgumentException(ERROR_SPECIALSYMBOL_DIGIT_LONG_STRING);
-
-                _smileReason = value;
+                if (IsCorrectString(value))
+                    _smileReason = value;
             }
         }
 
@@ -46,13 +41,7 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="smileReason">Причина улыбки</param>
-        public SmilingEmoji(string name, string tag, string smileReason) : base(name, tag) => SmileReason = smileReason;
-
-        /// <summary>
-        /// Конструктор копирования
-        /// </summary>
-        /// <param name="source">Копируемый эмодзи</param>
-        public SmilingEmoji(SmilingEmoji source) : base(source) => SmileReason = source.SmileReason;
+        public SmilingEmoji(string name, string tag, int num, string smileReason) : base(name, tag, num) => SmileReason = smileReason;
         #endregion
 
         /// <summary>

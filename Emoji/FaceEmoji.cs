@@ -56,13 +56,7 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="expression">Выражение лица эмодзи</param>
-        public FaceEmoji(string name, string tag, string expression) :base(name, tag) => Expression = expression;
-
-        /// <summary>
-        /// Конструктор копирования
-        /// </summary>
-        /// <param name="source">Копируемый эмодзи</param>
-        public FaceEmoji(FaceEmoji source) : base(source) => Expression = source.Expression;
+        public FaceEmoji(string name, string tag, int num, string expression) :base(name, tag, num) => Expression = expression;
         #endregion
 
         /// <summary>
