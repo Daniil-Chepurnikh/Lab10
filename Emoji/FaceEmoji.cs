@@ -142,7 +142,7 @@ namespace LibraryEmoji
         {
             ArgumentNullException.ThrowIfNull(face);
 
-            return $"{face.Expression} ->(>_^)\n";
+            return $"{face.Expression} -> (>_^)\n";
         }
     }
 }
