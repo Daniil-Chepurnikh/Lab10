@@ -1,5 +1,4 @@
-﻿using lab_10_v5_ClassLibrary;
-using MyDCInputOutputConsole;
+﻿using MyDCInputOutputConsole;
 using System;
 
 namespace LibraryEmoji
@@ -10,7 +9,7 @@ namespace LibraryEmoji
         [
             ":(", ":)", "^|0_0|^", "(0 + 0(", 
             "://", ";(", "?:", ":-(", ":-)", "(~` _ ~`(",
-            "- _ -", "'_'"
+            "- _ -", "'_'", "|$_$|", "<|0,0|>"
         ];
         
         string? _expression;
