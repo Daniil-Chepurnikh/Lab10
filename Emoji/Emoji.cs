@@ -17,7 +17,7 @@ namespace LibraryEmoji
         /// <summary>
         /// возможные названия для случайного выбора
         /// </summary>
-        static readonly string[] names =
+        public static readonly string[] names =
         [
             "радость", "злость", "печаль", "гнев", "страх",
             "ненависть", "любовь", "спокойствие"
@@ -40,33 +40,9 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Проверяет строку на удовлетворение требованиям
-        /// </summary>
-        /// <param name="checkString"></param>
-        /// <returns>true если строка подходит</returns>
-        /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
-        /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
-        protected static bool IsCorrectString(string str)
-        {
-            if (string.IsNullOrWhiteSpace(str))
-                throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
-            
-            string checkString = str.Replace("\t", " ");
-            
-            string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            //hasSpecialChar &&= words.Length > 2;  спросить чё за жесть
-
-            if (Regex.IsMatch(checkString, @"\d") || words.Length > 2)
-                throw new ArgumentException(ERROR_DIGIT_LONG_STRING);
-
-            return true;
-        }
-
-        /// <summary>
         /// возможные теги для случайного выбора
         /// </summary>
-        static readonly string[] tags =
+        public static readonly string[] tags =
         [
             "улыбка", "слёзы", "мат", "поцелуй", "салют",
             "цветок", "деньги"
@@ -84,6 +60,28 @@ namespace LibraryEmoji
                 if (IsCorrectString(value))
                     _tag = value;
             }
+        }
+
+        /// <summary>
+        /// Проверяет строку на удовлетворение требованиям
+        /// </summary>
+        /// <param name="checkString"></param>
+        /// <returns>true если строка подходит</returns>
+        /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
+        /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
+        protected static bool IsCorrectString(string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
+
+            string checkString = str.Replace("\t", " ");
+
+            string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            if (Regex.IsMatch(checkString, @"\d") || words.Length > 2)
+                throw new ArgumentException(ERROR_DIGIT_LONG_STRING);
+
+            return true;
         }
 
         #region Конструкторы
@@ -122,10 +120,20 @@ namespace LibraryEmoji
         /// <returns>true если равны</returns>
         override public bool Equals(object? obj)
         {
-            return obj is Emoji emoji &&
-                   Name == emoji.Name &&
-                   Tag == emoji.Tag &&
-                   _number.Equals(emoji._number);
+            return obj is Emoji other &&
+            SimpleEquals(other);
+        }
+
+        /// <summary>
+        /// Проверяет равенство названия, тега и номера
+        /// </summary>
+        /// <param name="other">Сравниваемый эмодзи</param>
+        /// <returns>true, равны</returns>
+        virtual protected bool SimpleEquals(Emoji other)
+        {
+            return Name == other.Name &&
+                   Tag == other.Tag &&
+                   _number.Equals(other._number);
         }
 
         /// <summary>
@@ -133,6 +141,19 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Строка с информацией</returns>
         virtual public string VirtualShow() => ToString();
+
+        /// <summary>
+        /// Показывает данные эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public string Show() => ToString();
+
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. ";
+
 
         /// <summary>
         /// Получает хеш-код
@@ -148,7 +169,7 @@ namespace LibraryEmoji
             Name = names[random.Next(0, names.Length)];
             Tag = tags[random.Next(0, tags.Length)];
             _number = new(random.Next(0, 111));
-        } // спросить куда и как это пристроить
+        }
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -161,17 +182,5 @@ namespace LibraryEmoji
             Output.Message("Введите тег эмодзи: ", ConsoleColor.White);
             Tag = Input.Data();
         }
-
-        /// <summary>
-        /// Возвращает общие данные всех классов(название и тег)
-        /// </summary>
-        /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {nameof(Emoji)}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
-
-        /// <summary>
-        /// Показывает данные эмодзи
-        /// </summary>
-        /// <returns>Строка с информацией</returns>
-        public string Show() => ToString();
     }
 }
