@@ -111,5 +111,12 @@ namespace LibraryEmoji
         /// <returns>Строка с информацией</returns>
         public new string Show() => ToString();
 
+        /// <summary>
+        /// Без комментариев
+        /// </summary>
+        /// <returns>Без комментариев</returns>
+        public static string SayRrroarrr() => "~Rrroarrr~\n";
+
+
     }
 }
