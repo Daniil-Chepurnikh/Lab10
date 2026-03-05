@@ -1,7 +1,5 @@
-﻿using lab_10_v5_ClassLibrary;
-using MyDCInputOutputConsole;
+﻿using MyDCInputOutputConsole;
 using System;
-using System.Linq.Expressions;
 
 namespace LibraryEmoji
 {
@@ -13,7 +11,9 @@ namespace LibraryEmoji
         static readonly string[] smileReasons =
         [
             "хорошая погода", "победа команды", "хорошее настроение",
-            "вкусная еда", "весёлое видео", "выходные"
+            "вкусная еда", "весёлое видео", "выходные", "любимая музыка",
+            "сарказм", "поражение противника", "встреча родственников",
+            "переполнение эмоциями"
         ];
 
         string? _smileReason;
