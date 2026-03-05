@@ -1,5 +1,4 @@
-﻿using lab_10_v5_ClassLibrary;
-using MyDCInputOutputConsole;
+﻿using MyDCInputOutputConsole;
 using System;
 
 namespace LibraryEmoji
@@ -10,7 +9,7 @@ namespace LibraryEmoji
         [
             ":(", ":)", "^|0_0|^", "(0 + 0(", 
             "://", ";(", "?:", ":-(", ":-)", "(~` _ ~`(",
-            "- _ -", "'_'"
+            "- _ -", "'_'", "|$_$|", "<|0,0|>"
         ];
         
         string? _expression;
@@ -133,5 +132,17 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns></returns>
         public new string Show() => ToString();
+
+        /// <summary>
+        /// Подмигивает пользователю, если возможно
+        /// </summary>
+        /// <param name="face">То эмодзи, которое будет подмигивать</param>
+        /// <returns>Подмигивающая строка</returns>
+        public static string Wink(FaceEmoji face)
+        {
+            ArgumentNullException.ThrowIfNull(face);
+
+            return $"{face.Expression} -> (>_^)\n";
+        }
     }
 }

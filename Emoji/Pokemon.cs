@@ -1,8 +1,9 @@
-﻿using System;
+﻿using lab_10_v5_ClassLibrary;
+using System;
 
 namespace LibraryEmoji
 {
-    public class Pokemon
+    public class Pokemon : IRandomInit
     {
         #region Диапазон значений
         public const short MIN_ATK = 17;
@@ -120,13 +121,24 @@ namespace LibraryEmoji
         {
             Attack = atk;
         }
+
+        /// <summary>
+        /// Рандомный конструктор
+        /// </summary>
+        /// <param name="rnd">Просто метка рандома</param>
+        public Pokemon(Random rnd)
+        {
+            RandomInit();
+
+            Count++;
+        }
         #endregion
 
         /// <summary>
         /// Печатает все характеристики покемона
         /// </summary>
         /// <param name="p">Конкретный покемон</param>
-        public override string ToString() => $"Атака: {Attack,3}, защита: {Defense,3}, выносливость: {Stamina,3}\n";
+        override public string ToString() => $"Атака: {Attack,3}, защита: {Defense,3}, выносливость: {Stamina,3}\n";
 
         #region Увеличение параметров
         /// <summary>
@@ -292,7 +304,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="obj">Сравниваемый объект</param>
         /// <returns>true если объекты равны</returns>
-        public override bool Equals(object? obj)
+        override public bool Equals(object? obj)
         {
             ArgumentNullException.ThrowIfNull(obj, "Невозможно сравнить значение по null");
 
@@ -302,7 +314,21 @@ namespace LibraryEmoji
                     && pokemon.Stamina == Stamina;
         }
 
+        public void RandomInit(Random random)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RandomInit()
+        {
+            Random rn = new Random();
+            
+            Attack = rn.Next(100, 200);
+            Defense = rn.Next(100, 200);
+            Stamina = rn.Next(100, 200);
+        }
+
         // TODO: сделать GetHashCode при необходимости
-        
+
     }
 }

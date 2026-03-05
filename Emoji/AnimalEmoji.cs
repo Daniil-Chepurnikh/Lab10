@@ -12,7 +12,7 @@ namespace LibraryEmoji
         static readonly string[] animalParts =
         [
             "голова", "лапа", "хвост", "глаз", "ухо",
-            "нос", "зубы"
+            "нос", "зубы", "шея", "коготь"
         ];
 
         string? _animalPart;
@@ -59,7 +59,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="obj">Сравниваемый объект</param>
         /// <returns>true если равны</returns>
-        public override bool Equals(object? obj)
+        override public bool Equals(object? obj)
         {
             return obj is AnimalEmoji animal
                    && animal.AnimalPart == AnimalPart &&
@@ -72,12 +72,12 @@ namespace LibraryEmoji
         /// Передаёт информацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => ToString();
+        override public string VirtualShow() => ToString();
 
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        protected override void Init()
+        override protected void Init()
         {
             base.Init();
             Output.Message("Введите часть тела животного в эмодзи: ", ConsoleColor.White);
@@ -88,7 +88,7 @@ namespace LibraryEmoji
         /// Получает хеш-код объекта
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => base.GetHashCode() + AnimalPart.GetHashCode();
+        override public int GetHashCode() => base.GetHashCode() + AnimalPart.GetHashCode();
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
@@ -103,13 +103,20 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => $"Вид: {nameof(AnimalEmoji)}. Часть тела: {AnimalPart}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
+        override public string ToString() => $"Вид: {nameof(AnimalEmoji)}. Часть тела: {AnimalPart}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
 
         /// <summary>
         /// Показывает данные эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public new string Show() => ToString();
+        new public string Show() => ToString();
+
+        /// <summary>
+        /// Без комментариев
+        /// </summary>
+        /// <returns>Без комментариев</returns>
+        public static string SayRrroarrr() => "~Rrroarrr~\n";
+
 
     }
 }

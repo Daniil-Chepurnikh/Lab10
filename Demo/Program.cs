@@ -1,14 +1,17 @@
 ﻿using LibraryEmoji;
 using MyDCInputOutputConsole;
+using System;
 
 namespace Demo
 {
     public class Program
     {
         static void Main(string[] args)
-        {           
-            Emoji[] emojis = new Emoji[35];
-
+        {
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Green);
+            
+            Emoji[] emojis = new Emoji[35];            
+            
             for (int p = 0; p < emojis.Length; p++)
             {
                 Random rn = new();
@@ -37,7 +40,40 @@ namespace Demo
                 }
             }
 
+            Output.Separator();
+            
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Green);
 
+            int smileReasonLength = 0;
+            string? smileReason = null;
+            foreach (Emoji emoji in emojis)
+            {
+                if (typeof(SmilingEmoji) == emoji.GetType())
+                {
+                    int currentSmileReasonLength = SmilingEmoji.GetSmileReasonLength((SmilingEmoji)emoji);
+
+                    if (currentSmileReasonLength > smileReasonLength)
+                    {
+                        var smile = (SmilingEmoji)emoji;
+                        smileReason = smile.SmileReason;
+                        smileReasonLength = currentSmileReasonLength;
+                    }
+                }
+
+                if (emoji is AnimalEmoji animal)
+                    Output.Message(AnimalEmoji.SayRrroarrr(), ConsoleColor.Yellow);
+
+                FaceEmoji? face = emoji as FaceEmoji;
+                try
+                {
+                    Output.Message(FaceEmoji.Wink(face), ConsoleColor.Yellow);
+                }
+                catch (ArgumentNullException)
+                {
+                    Output.Message("Не получилсь подмигнуть\n", ConsoleColor.Blue);
+                }
+            }
+            Output.Message($"Самая длинная причина улыбки: {smileReason}, длина: { smileReasonLength}\n", ConsoleColor.Cyan);
 
         }
     }
