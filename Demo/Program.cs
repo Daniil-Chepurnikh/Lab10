@@ -9,7 +9,6 @@ namespace Demo
         static void Main(string[] args)
         {
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
-
             Output.Separator();
 
             Emoji[] emojis = new Emoji[31];            
@@ -23,7 +22,7 @@ namespace Demo
                     0 => new Emoji(rn),
                     1 => new AnimalEmoji(rn),
                     2 => new FaceEmoji(rn),
-                    _ => new SmilingEmoji(rn) // аналог дефолт в обычном свитч
+                    _ => new SmilingEmoji(rn) // как дефолт в обычном свитч
                 };
             }
 
@@ -43,40 +42,9 @@ namespace Demo
             }
 
             Output.Separator();
-            
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
-            int smileReasonLength = 0;
-            string? smileReason = null;
-            foreach (Emoji emoji in emojis)
-            {
-                if (typeof(SmilingEmoji) == emoji.GetType())
-                {
-                    int currentSmileReasonLength = SmilingEmoji.GetSmileReasonLength((SmilingEmoji)emoji);
-
-                    if (currentSmileReasonLength > smileReasonLength)
-                    {
-                        var smile = (SmilingEmoji)emoji;
-                        smileReason = smile.SmileReason;
-                        smileReasonLength = currentSmileReasonLength;
-                    }
-                }
-
-                if (emoji is AnimalEmoji animal)
-                    Output.Message(AnimalEmoji.SayRrroarrr(), ConsoleColor.Yellow);
-
-                FaceEmoji? face = emoji as FaceEmoji;
-                try
-                {
-                    Output.Message(FaceEmoji.Wink(face), ConsoleColor.Yellow);
-                }
-                catch (ArgumentNullException)
-                {
-                    Output.Message("Не получилсь подмигнуть\n", ConsoleColor.Blue);
-                }
-            }
-            Output.Message($"Самая длинная причина улыбки: {smileReason}, длина: { smileReasonLength}\n", ConsoleColor.Cyan);
-
+               
         }
     }
 }
