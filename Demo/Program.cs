@@ -8,6 +8,8 @@ namespace Demo
     {
         static void Main(string[] args)
         {
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Green);
+            
             Emoji[] emojis = new Emoji[35];            
             
             for (int p = 0; p < emojis.Length; p++)
@@ -39,12 +41,24 @@ namespace Demo
             }
 
             Output.Separator();
+            
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Green);
 
             int smileReasonLength = 0;
+            string? smileReason = null;
             foreach (Emoji emoji in emojis)
             {
                 if (typeof(SmilingEmoji) == emoji.GetType())
-                    smileReasonLength = Math.Max(smileReasonLength, SmilingEmoji.GetSmileReasonLength((SmilingEmoji)emoji));
+                {
+                    int currentSmileReasonLength = SmilingEmoji.GetSmileReasonLength((SmilingEmoji)emoji);
+
+                    if (currentSmileReasonLength > smileReasonLength)
+                    {
+                        var smile = (SmilingEmoji)emoji;
+                        smileReason = smile.SmileReason;
+                        smileReasonLength = currentSmileReasonLength;
+                    }
+                }
 
                 if (emoji is AnimalEmoji animal)
                     Output.Message(AnimalEmoji.SayRrroarrr(), ConsoleColor.Yellow);
@@ -59,8 +73,7 @@ namespace Demo
                     Output.Message("Не получилсь подмигнуть\n", ConsoleColor.Blue);
                 }
             }
-            // TODO: добавить вывод самой причины улыбки
-            Output.Message($"Самая длинная причина улыбки(длина): { smileReasonLength}\n", ConsoleColor.Cyan);
+            Output.Message($"Самая длинная причина улыбки: {smileReason}, длина: { smileReasonLength}\n", ConsoleColor.Cyan);
 
         }
     }
