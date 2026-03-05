@@ -3,13 +3,16 @@ using System;
 
 namespace LibraryEmoji
 {
+    /// <summary>
+    /// Класс лицевых эмодзи
+    /// </summary>
     public class FaceEmoji : Emoji
     {
         static readonly string[] expressions =
         [
             ":(", ":)", "^|0_0|^", "(0 + 0(", 
             "://", ";(", "?:", ":-(", ":-)", "(~` _ ~`(",
-            "- _ -", "'_'", "|$_$|", "<|0,0|>"
+            "- _ -", "'_'", "|$_$|", "<|0,0|>", @"_/(0 - 0(\_"
         ];
         
         string? _expression;

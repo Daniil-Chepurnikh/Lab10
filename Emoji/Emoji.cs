@@ -4,6 +4,9 @@ using System.Text.RegularExpressions;
 
 namespace LibraryEmoji
 {
+    /// <summary>
+    /// Базовый класс библиотеки
+    /// </summary>
     public class Emoji : IRandomInit
     {
         protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";

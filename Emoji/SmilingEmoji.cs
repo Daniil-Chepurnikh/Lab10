@@ -3,6 +3,9 @@ using System;
 
 namespace LibraryEmoji
 {
+    /// <summary>
+    /// Класс улыбающихся эмодзи
+    /// </summary>
     public class SmilingEmoji : Emoji
     {
         /// <summary>

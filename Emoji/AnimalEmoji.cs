@@ -4,6 +4,9 @@ using System;
 
 namespace LibraryEmoji
 {
+    /// <summary>
+    /// Класс животных эмодзи
+    /// </summary>
     public class AnimalEmoji : Emoji
     {
         /// <summary>

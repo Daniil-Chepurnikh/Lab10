@@ -1,8 +1,6 @@
 ﻿using LibraryEmoji;
 using System.Collections;
 
-namespace lab_10_v5_ClassLibrary;
-
 public class EmojiComparer : IComparer
 {
     public int Compare(object? x, object? y) // какой смог(захотел)

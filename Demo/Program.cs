@@ -8,9 +8,11 @@ namespace Demo
     {
         static void Main(string[] args)
         {
-            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Green);
-            
-            Emoji[] emojis = new Emoji[35];            
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
+
+            Output.Separator();
+
+            Emoji[] emojis = new Emoji[31];            
             
             for (int p = 0; p < emojis.Length; p++)
             {
@@ -21,7 +23,7 @@ namespace Demo
                     0 => new Emoji(rn),
                     1 => new AnimalEmoji(rn),
                     2 => new FaceEmoji(rn),
-                    _ => new SmilingEmoji(rn)
+                    _ => new SmilingEmoji(rn) // аналог дефолт в обычном свитч
                 };
             }
 
@@ -42,7 +44,7 @@ namespace Demo
 
             Output.Separator();
             
-            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Green);
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
             int smileReasonLength = 0;
             string? smileReason = null;

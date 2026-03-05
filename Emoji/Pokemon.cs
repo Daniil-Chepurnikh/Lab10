@@ -319,6 +319,9 @@ namespace LibraryEmoji
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Рандомная инициализация
+        /// </summary>
         public void RandomInit()
         {
             Random rn = new Random();
