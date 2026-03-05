@@ -132,5 +132,17 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns></returns>
         public new string Show() => ToString();
+
+        /// <summary>
+        /// Подмигивает пользователю, если возможно
+        /// </summary>
+        /// <param name="face">То эмодзи, которое будет подмигивать</param>
+        /// <returns>Подмигивающая строка</returns>
+        public static string Wink(FaceEmoji face)
+        {
+            ArgumentNullException.ThrowIfNull(face);
+
+            return $"{face.Expression} ->(>_^)\n";
+        }
     }
 }
