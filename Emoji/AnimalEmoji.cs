@@ -4,7 +4,7 @@ using System;
 
 namespace LibraryEmoji
 {
-    public class AnimalEmoji :Emoji, IRandomInit
+    public class AnimalEmoji : Emoji
     {
         /// <summary>
         /// возможные части тела животного для случайного выбора
@@ -93,7 +93,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
-        public void RandomInit()
+        override public void RandomInit()
         {
             base.RandomInit();
             AnimalPart = animalParts[random.Next(0, animalParts.Length)];

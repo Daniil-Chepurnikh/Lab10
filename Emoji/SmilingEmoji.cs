@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace LibraryEmoji
 {
-    public class SmilingEmoji :Emoji, IRandomInit
+    public class SmilingEmoji : Emoji
     {
         /// <summary>
         /// возможные причины улыбок для случайного выбора
@@ -94,7 +94,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
-        public void RandomInit()
+        override public void RandomInit()
         {
             base.RandomInit();
             SmileReason = smileReasons[random.Next(0, smileReasons.Length)];

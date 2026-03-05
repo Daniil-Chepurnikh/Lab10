@@ -4,7 +4,7 @@ using System;
 
 namespace LibraryEmoji
 {
-    public class FaceEmoji :Emoji, IRandomInit
+    public class FaceEmoji : Emoji
     {
         static readonly string[] expressions =
         [
@@ -116,7 +116,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
-        public void RandomInit()
+        override public void RandomInit()
         {
             base.RandomInit();
             Expression = expressions[random.Next(0, expressions.Length)];
