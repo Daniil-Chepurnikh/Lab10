@@ -1,9 +1,10 @@
-﻿using MyDCInputOutputConsole;
+﻿using lab_10_v5_ClassLibrary;
+using MyDCInputOutputConsole;
 using System;
 
 namespace LibraryEmoji
 {
-    public class AnimalEmoji :Emoji
+    public class AnimalEmoji :Emoji, IRandomInit
     {
         /// <summary>
         /// возможные части тела животного для случайного выбора
@@ -92,7 +93,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
-        protected virtual void RandomInit()
+        public void RandomInit()
         {
             base.RandomInit();
             AnimalPart = animalParts[random.Next(0, animalParts.Length)];

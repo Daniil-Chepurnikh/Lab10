@@ -1,9 +1,10 @@
-﻿using MyDCInputOutputConsole;
+﻿using lab_10_v5_ClassLibrary;
+using MyDCInputOutputConsole;
 using System;
 
 namespace LibraryEmoji
 {
-    public class FaceEmoji :Emoji
+    public class FaceEmoji :Emoji, IRandomInit
     {
         static readonly string[] expressions =
         [
@@ -115,7 +116,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
-        protected override void RandomInit()
+        public void RandomInit()
         {
             base.RandomInit();
             Expression = expressions[random.Next(0, expressions.Length)];

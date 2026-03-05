@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace LibraryEmoji
 {
-    public class Emoji
+    public class Emoji : IRandomInit
     {
         protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
@@ -140,7 +140,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
-        protected virtual void RandomInit()
+        public void RandomInit()
         {
             Name = names[random.Next(0, names.Length)];
             Tag = tags[random.Next(0, tags.Length)];
