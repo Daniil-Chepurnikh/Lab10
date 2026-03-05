@@ -106,6 +106,21 @@ namespace LibraryEmoji
         /// <returns>Строка с данными</returns>
         public override string ToString() => $"Вид: {nameof(SmilingEmoji)}. Причина улыбки: {SmileReason}. Название: {Name}, тег: {Tag}."; // спросить куда и как это пристроить
 
+        /// <summary>
+        /// Передаёт строку данных покемона
+        /// </summary>
+        /// <returns>Строка с данными</returns>
         public new string Show() => ToString();
+
+        /// <summary>
+        /// Возвращает длину причины улыбки, если возможно
+        /// </summary>
+        /// <param name="emoji">Эмодзи, длину причны улыбки которого мы хотим узнать</param>
+        /// <returns>Длина причины улыбки</returns>
+        /// <exception cref="ArgumentNullException">При передаче аргумента null</exception>
+        public static int GetSmileReasonLength(SmilingEmoji? emoji)
+        {
+            return emoji is not null ? emoji.SmileReason.Length : throw new ArgumentNullException();
+        }
     }
 }
