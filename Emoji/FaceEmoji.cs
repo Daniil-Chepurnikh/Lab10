@@ -1,9 +1,10 @@
-﻿using MyDCInputOutputConsole;
+﻿using lab_10_v5_ClassLibrary;
+using MyDCInputOutputConsole;
 using System;
 
 namespace LibraryEmoji
 {
-    public class FaceEmoji :Emoji
+    public class FaceEmoji : Emoji
     {
         static readonly string[] expressions =
         [
@@ -12,34 +13,34 @@ namespace LibraryEmoji
             "- _ -", "'_'"
         ];
         
-        string? expression;
+        string? _expression;
         /// <summary>
         /// Лицо эмодзи
         /// </summary>
         public string? Expression
         {
-            get => expression;
+            get => _expression;
             set
             {
-                // TODO: добавить адекватную проверку
-                expression = value;
+                if (string.IsNullOrWhiteSpace(value))
+                    throw new ArgumentException(ERROR_NULL_WHITESPACE_STRING);
+                _expression = value;
             }
         }
 
-        ushort strength;
+        ushort _strength;
         /// <summary>
         /// Сила эмодзи
         /// </summary>
         public ushort Strength
         {
-            get => strength;
+            get => _strength;
             set
             {
                 ArgumentOutOfRangeException.ThrowIfLessThan(value, 0, "Сила лицевой эмодзи не может быть меньше 0");
-
                 ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 10, "Сила лицевой эмодзи не может быть больше 10");
 
-                strength = value;
+                _strength = value;
             }
         }
 
@@ -47,7 +48,11 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public FaceEmoji() :base() => Expression = "Нет выражения лица";
+        public FaceEmoji() :base()
+        {
+             Expression = "Нет выражения";
+             Strength = 0;
+        }
 
         /// <summary>
         /// Конструктор с параметрами
@@ -55,20 +60,24 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="expression">Выражение лица эмодзи</param>
-        public FaceEmoji(string name, string tag, string expression) :base(name, tag) => Expression = expression;
+        public FaceEmoji(int num)
+        {
+            Init();
+            _number = new(num);
+        }
 
         /// <summary>
-        /// Конструктор копирования
+        /// Конструктор со случайнми значениями
         /// </summary>
-        /// <param name="source">Копируемый эмодзи</param>
-        public FaceEmoji(FaceEmoji source) : base(source) => Expression = source.Expression;
+        /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
+        public FaceEmoji(Random rnd) => RandomInit();
         #endregion
 
         /// <summary>
         /// Передаёт информацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => $"Выражение: {Expression}. Сила: {Strength}. {base.ToString()}";
+        public override string VirtualShow() => ToString();
 
         /// <summary>
         /// Сранивает объекты
@@ -80,7 +89,9 @@ namespace LibraryEmoji
             return obj is FaceEmoji face &&
                    face.Strength == Strength &&
                    face.Expression == Expression &&
-                   base.Equals(obj);
+                   face.Name == Name &&
+                   face.Tag == Tag &&
+                   face._number.Equals(_number);
         }
 
         /// <summary>
@@ -102,6 +113,25 @@ namespace LibraryEmoji
         public override int GetHashCode() => base.GetHashCode() + Strength.GetHashCode() +
                                              Expression.GetHashCode();
 
-        // TODO: доопределить RandomInit
+        /// <summary>
+        /// Инициализирует атрибуты случайными значениями
+        /// </summary>
+        override public void RandomInit()
+        {
+            base.RandomInit();
+            Expression = expressions[random.Next(0, expressions.Length)];
+        }
+
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        public override string ToString() => $"Вид: {nameof(FaceEmoji)}. Выражение: {Expression}. Сила: {Strength}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
+
+        /// <summary>
+        /// Возвращает данные объекта
+        /// </summary>
+        /// <returns></returns>
+        public new string Show() => ToString();
     }
 }

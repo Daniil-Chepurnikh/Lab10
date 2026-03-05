@@ -1,10 +1,11 @@
-﻿using MyDCInputOutputConsole;
+﻿using lab_10_v5_ClassLibrary;
+using MyDCInputOutputConsole;
 using System;
 using System.Linq.Expressions;
 
 namespace LibraryEmoji
 {
-    public class SmilingEmoji :Emoji
+    public class SmilingEmoji : Emoji
     {
         /// <summary>
         /// возможные причины улыбок для случайного выбора
@@ -15,24 +16,17 @@ namespace LibraryEmoji
             "вкусная еда", "весёлое видео", "выходные"
         ];
 
-
-        string? smileReason;
+        string? _smileReason;
         /// <summary>
         /// Причина улыбки
         /// </summary>
         public string? SmileReason
         {
-            get => smileReason;
+            get => _smileReason;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Причина улыбки не может быть пустой, состоять только из пробелов или нулевой");
-                
-                //TODO: придумать ограничения и их проверку
-
-
-                smileReason = value;
-
+                if (IsCorrectString(value))
+                    _smileReason = value;
             }
         }
 
@@ -40,7 +34,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public SmilingEmoji() :base() => SmileReason = "Улыбается без причины, просто счастлив в жизни";
+        public SmilingEmoji() :base() => SmileReason = "Просто улыбается";
 
         /// <summary>
         /// Конструктор с параметрами
@@ -48,20 +42,24 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="smileReason">Причина улыбки</param>
-        public SmilingEmoji(string name, string tag, string smileReason) : base(name, tag) => SmileReason = smileReason;
+        public SmilingEmoji(int num)
+        {
+            Init();
+            _number = new(num);
+        }
 
         /// <summary>
-        /// Конструктор копирования
+        /// Конструктор со случайнми значениями
         /// </summary>
-        /// <param name="source">Копируемый эмодзи</param>
-        public SmilingEmoji(SmilingEmoji source) : base(source) => SmileReason = source.SmileReason;
+        /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
+        public SmilingEmoji(Random rnd) => RandomInit();
         #endregion
 
         /// <summary>
         /// Передаёт инфорацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => $"Причина улыбки: {SmileReason}. {base.ToString()}";
+        public override string VirtualShow() => ToString();
 
         /// <summary>
         /// Сравнивает объекты
@@ -71,8 +69,10 @@ namespace LibraryEmoji
         public override bool Equals(object? obj)
         {
             return obj is SmilingEmoji smile
-                   && smile.SmileReason == SmileReason
-                   && base.Equals(obj);
+                   && smile.SmileReason == SmileReason &&
+                   smile.Name == Name &&
+                   smile.Tag == Tag &&
+                   smile._number.Equals(_number);
         }
 
         /// <summary>
@@ -91,7 +91,21 @@ namespace LibraryEmoji
             SmileReason = Input.Data();
         }
 
-        // TODO: доопределить RandomInit
+        /// <summary>
+        /// Инициализирует атрибуты случайными значениями
+        /// </summary>
+        override public void RandomInit()
+        {
+            base.RandomInit();
+            SmileReason = smileReasons[random.Next(0, smileReasons.Length)];
+        }
 
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        public override string ToString() => $"Вид: {nameof(SmilingEmoji)}. Причина улыбки: {SmileReason}. Название: {Name}, тег: {Tag}."; // спросить куда и как это пристроить
+
+        public new string Show() => ToString();
     }
 }

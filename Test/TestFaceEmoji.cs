@@ -1,25 +1,17 @@
 using LibraryEmoji;
 
-namespace Tests;
-
-[TestClass]
-public class TestFaceEmoji
+namespace Tests
 {
-    // Написать тесты
-    
-    [TestMethod]
-    public void TestCloneNull()
+    [TestClass]
+    public sealed class TestFaceEmoji
     {
-        Emoji e;
-        var isPassed = false;
-        try
+        [TestMethod]
+        public void TestWithoutParameters()
         {
-            e = new(null);
+            FaceEmoji e = new();
+
+            Assert.AreEqual("Нет выражения", e.Expression);
+            Assert.AreEqual(0, e.Strength);
         }
-        catch (ArgumentNullException)
-        {
-            isPassed = true;
-        }
-        Assert.IsTrue(isPassed);
     }
 }

@@ -126,7 +126,7 @@ namespace LibraryEmoji
         /// Печатает все характеристики покемона
         /// </summary>
         /// <param name="p">Конкретный покемон</param>
-        public string Show() => $"Атака: {Attack,3}, защита: {Defense,3}, выносливость: {Stamina,3}\n";
+        public override string ToString() => $"Атака: {Attack,3}, защита: {Defense,3}, выносливость: {Stamina,3}\n";
 
         #region Увеличение параметров
         /// <summary>
@@ -302,7 +302,7 @@ namespace LibraryEmoji
                     && pokemon.Stamina == Stamina;
         }
 
-        // TODO: сделать ToString и/или GetHashCode при необходимости
+        // TODO: сделать GetHashCode при необходимости
         
     }
 }

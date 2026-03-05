@@ -1,10 +1,15 @@
-﻿using MyDCInputOutputConsole;
+﻿using lab_10_v5_ClassLibrary;
+using MyDCInputOutputConsole;
+using System.Text.RegularExpressions;
 
 namespace LibraryEmoji
 {
-    public class Emoji
+    public class Emoji : IRandomInit
     {
-        static readonly Random random = new();
+        protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";
+        protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
+
+        protected static readonly Random random = new();
         
         /// <summary>
         /// возможные названия для случайного выбора
@@ -14,23 +19,45 @@ namespace LibraryEmoji
             "радость", "злость", "печаль", "гнев", "страх",
             "ненависть", "любовь", "спокойствие"
         ];
+
+        protected IdNumber _number;
         
-        string? name;
+        string? _name;
         /// <summary>
         /// Название эмодзи
         /// </summary>
         public string? Name 
         {
-            get => name; 
+            get => _name; 
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Название эмодзи не может быть пустым, состоять из пробелов или нулевым");
-
-                // TODO: Добавить проверку на не содержательную строку(пробельные символы и знаки препинания без нормальных слов
-
-                name = value;
+                if (IsCorrectString(value))
+                    _name = value;
             }
+        }
+
+        /// <summary>
+        /// Проверяет строку на удовлетворение требованиям
+        /// </summary>
+        /// <param name="checkString"></param>
+        /// <returns>true если строка подходит</returns>
+        /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
+        /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
+        protected static bool IsCorrectString(string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
+            
+            string checkString = str.Replace("\t", " ");
+            
+            string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            //hasSpecialChar &&= words.Length > 2;  спросить чё за жесть
+
+            if (Regex.IsMatch(checkString, @"\d") || words.Length > 2)
+                throw new ArgumentException(ERROR_DIGIT_LONG_STRING);
+
+            return true;
         }
 
         /// <summary>
@@ -42,25 +69,19 @@ namespace LibraryEmoji
             "цветок", "деньги"
         ];
 
-        string? tag;
+        string? _tag;
         /// <summary>
         /// Тег эмодзи
         /// </summary>
         public string? Tag 
         { 
-            get => tag;
+            get => _tag;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
-                    throw new ArgumentException("Тег эмодзи не может быть пустым, состоять только из пробелов или нулевым");
-
-                // TODO: Добавить проверку на знаки препинания без нормальных слов
-
-                tag = value;
+                if (IsCorrectString(value))
+                    _tag = value;
             }
         }
-
-        // TODO: Добавить проверку на знаки препинания без нормальных слов
 
         #region Конструкторы
         /// <summary>
@@ -70,6 +91,7 @@ namespace LibraryEmoji
         {
             Name = "Без названия";
             Tag = "Без тега";
+            _number = new IdNumber();
         }
 
         /// <summary>
@@ -77,23 +99,17 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="emojiNname"></param>
         /// <param name="emojiTag"></param>
-        public Emoji(string emojiName, string emojiTag)
+        public Emoji(int num)
         {
-            Name = emojiName;
-            Tag = emojiTag;
+            Init();
+            _number = new(num);
         }
 
         /// <summary>
-        /// Конструктор копирования
+        /// Конструктор со случайнми значениями
         /// </summary>
-        /// <param name="source">Копируемый эмодзи</param>
-        public Emoji(Emoji source)
-        {
-            ArgumentNullException.ThrowIfNull(source, "Невозможно скопировать эмодзи по null");
-            
-            Name = source.Name;
-            Tag = source.Tag;
-        }
+        /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
+        public Emoji(Random rnd) => RandomInit();
         #endregion
 
         /// <summary>
@@ -105,29 +121,31 @@ namespace LibraryEmoji
         {
             return obj is Emoji emoji &&
                    Name == emoji.Name &&
-                   Tag == emoji.Tag;
+                   Tag == emoji.Tag &&
+                   _number.Equals(emoji._number);
         }
 
         /// <summary>
         /// Показывает данные эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public virtual string VirtualShow() => $"Вид: {nameof(Emoji)}. " + ToString();
+        public virtual string VirtualShow() => ToString();
 
         /// <summary>
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode();
+        public override int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode() + _number.GetHashCode();
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
-        protected virtual void RandomInit()
+        virtual public void RandomInit()
         {
             Name = names[random.Next(0, names.Length)];
             Tag = tags[random.Next(0, tags.Length)];
-        }
+            _number = new(random.Next(0, 111));
+        } // спросить куда и как это пристроить
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -145,8 +163,12 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => $"Название: {Name}, тег: {Tag}\n";
+        public override string ToString() => $"Вид: {nameof(Emoji)}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
 
-
+        /// <summary>
+        /// Показывает данные эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public string Show() => ToString();
     }
 }
