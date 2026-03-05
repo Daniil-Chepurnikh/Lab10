@@ -6,7 +6,7 @@ namespace LibraryEmoji
     /// <summary>
     /// Класс улыбающихся эмодзи
     /// </summary>
-    public class SmilingEmoji : Emoji
+    public class SmilingEmoji : FaceEmoji
     {
         /// <summary>
         /// возможные причины улыбок для случайного выбора
@@ -59,24 +59,18 @@ namespace LibraryEmoji
         #endregion
 
         /// <summary>
-        /// Передаёт инфорацию об эмодзи
-        /// </summary>
-        /// <returns>Строка с информацией</returns>
-        override public string VirtualShow() => ToString();
-
-        /// <summary>
         /// Сравнивает объекты
         /// </summary>
         /// <param name="obj">Сравнивемый объект</param>
         /// <returns>true если равны</returns>
-        override public bool Equals(object? obj)
-        {
-            return obj is SmilingEmoji smile
-                   && smile.SmileReason == SmileReason &&
-                   smile.Name == Name &&
-                   smile.Tag == Tag &&
-                   smile._number.Equals(_number);
-        }
+        override public bool Equals(object? obj) => obj is SmilingEmoji smile && SimpleEquals(smile);
+
+        /// <summary>
+        /// Дополняет проверкой на равенство причин улыбки
+        /// </summary>
+        /// <param name="other">Сравниваемый эмодзи</param>
+        /// <returns>true, если равны</returns>
+        override protected bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && SmileReason == ((SmilingEmoji)other).SmileReason;
 
         /// <summary>
         /// Получает хеш-код
@@ -104,26 +98,32 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Возвращает общие данные всех классов(название и тег)
-        /// </summary>
-        /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {nameof(SmilingEmoji)}. Причина улыбки: {SmileReason}. Название: {Name}, тег: {Tag}."; // спросить куда и как это пристроить
-
-        /// <summary>
         /// Передаёт строку данных покемона
         /// </summary>
         /// <returns>Строка с данными</returns>
         new public string Show() => ToString();
 
         /// <summary>
-        /// Возвращает длину причины улыбки, если возможно
+        /// Передаёт инфорацию об эмодзи
         /// </summary>
-        /// <param name="emoji">Эмодзи, длину причны улыбки которого мы хотим узнать</param>
-        /// <returns>Длина причины улыбки</returns>
-        /// <exception cref="ArgumentNullException">При передаче аргумента null</exception>
-        public static int GetSmileReasonLength(SmilingEmoji? emoji)
-        {
-            return emoji is not null ? emoji.SmileReason.Length : throw new ArgumentNullException();
-        }
+        /// <returns>Строка с информацией</returns>
+        override public string VirtualShow() => ToString();
+
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        override public string ToString() => base.ToString() + $"Причина улыбки: {SmileReason}.";
+
+        ///// <summary>
+        ///// Возвращает длину причины улыбки, если возможно
+        ///// </summary>
+        ///// <param name="emoji">Эмодзи, длину причны улыбки которого мы хотим узнать</param>
+        ///// <returns>Длина причины улыбки</returns>
+        ///// <exception cref="ArgumentNullException">При передаче аргумента null</exception>
+        //public static int GetSmileReasonLength(SmilingEmoji? emoji)
+        //{
+        //    return emoji is not null ? emoji.SmileReason.Length : throw new ArgumentNullException();
+        //}
     }
 }

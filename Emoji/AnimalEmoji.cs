@@ -62,20 +62,32 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="obj">Сравниваемый объект</param>
         /// <returns>true если равны</returns>
-        override public bool Equals(object? obj)
-        {
-            return obj is AnimalEmoji animal
-                   && animal.AnimalPart == AnimalPart &&
-                   animal.Name == Name &&
-                   animal.Tag == Tag &&
-                   animal._number.Equals(_number);          
-        }
+        override public bool Equals(object? obj) => obj is AnimalEmoji an && SimpleEquals(an);
 
+        /// <summary>
+        /// Дополняет проверкой на равенство части животного
+        /// </summary>
+        /// <param name="other">Сравниваемый эмодзи</param>
+        /// <returns>true, если равны</returns>
+        override protected bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && AnimalPart == ((AnimalEmoji)other).AnimalPart;   
+        
         /// <summary>
         /// Передаёт информацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
         override public string VirtualShow() => ToString();
+
+        /// <summary>
+        /// Показывает данные эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        new public string Show() => ToString();
+
+        /// <summary>
+        /// Возвращает общие данные всех классов
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        override public string ToString() => base.ToString() + $"Часть тела: {AnimalPart}.";
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -103,22 +115,11 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Возвращает общие данные всех классов(название и тег)
-        /// </summary>
-        /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {nameof(AnimalEmoji)}. Часть тела: {AnimalPart}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
-
-        /// <summary>
-        /// Показывает данные эмодзи
-        /// </summary>
-        /// <returns>Строка с информацией</returns>
-        new public string Show() => ToString();
-
-        /// <summary>
         /// Без комментариев
         /// </summary>
         /// <returns>Без комментариев</returns>
-        public static string SayRrroarrr() => "~Rrroarrr~\n";
+        // TODO: переделать по комментариям
+        public static string SayRrroarrr(Emoji[] emos) => "~Rrroarrr~\n";
 
 
     }
