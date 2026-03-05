@@ -22,17 +22,17 @@ namespace Demo
                 };
             }
 
-            for (int p = 0; p < emojis.Length; p++)
+            foreach (Emoji emoji in emojis)
             {
                 Random rn = new();
 
                 switch (rn.Next(2))
                 {
                     case 0:
-                        Output.Message(emojis[p].Show() + '\n', ConsoleColor.Cyan);
+                        Output.Message(emoji.Show() + '\n', ConsoleColor.Cyan);
                         break; 
                     case 1:
-                        Output.Message(emojis[p].VirtualShow() + '\n', ConsoleColor.Magenta);
+                        Output.Message(emoji.VirtualShow() + '\n', ConsoleColor.Magenta);
                         break;
                 }
             }
