@@ -38,8 +38,9 @@ namespace Demo
                 }
             }
 
+            Output.Separator();
+
             int smileReasonLength = 0;
-            
             foreach (Emoji emoji in emojis)
             {
                 if (typeof(SmilingEmoji) == emoji.GetType())
@@ -58,7 +59,8 @@ namespace Demo
                     Output.Message("Не получилсь подмигнуть\n", ConsoleColor.Blue);
                 }
             }
-            
+            // TODO: добавить вывод самой причины улыбки
+            Output.Message($"Самая длинная причина улыбки(длина): { smileReasonLength}\n", ConsoleColor.Cyan);
 
         }
     }
