@@ -59,14 +59,14 @@ namespace LibraryEmoji
         /// Передаёт инфорацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public override string VirtualShow() => ToString();
+        override public string VirtualShow() => ToString();
 
         /// <summary>
         /// Сравнивает объекты
         /// </summary>
         /// <param name="obj">Сравнивемый объект</param>
         /// <returns>true если равны</returns>
-        public override bool Equals(object? obj)
+        override public bool Equals(object? obj)
         {
             return obj is SmilingEmoji smile
                    && smile.SmileReason == SmileReason &&
@@ -79,12 +79,12 @@ namespace LibraryEmoji
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => base.GetHashCode() + SmileReason.GetHashCode();
+        override public int GetHashCode() => base.GetHashCode() + SmileReason.GetHashCode();
 
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        protected override void Init()
+        override protected void Init()
         {
             base.Init();
             Output.Message("Введите причину улыбки эмодзи", ConsoleColor.White);
@@ -104,13 +104,13 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => $"Вид: {nameof(SmilingEmoji)}. Причина улыбки: {SmileReason}. Название: {Name}, тег: {Tag}."; // спросить куда и как это пристроить
+        override public string ToString() => $"Вид: {nameof(SmilingEmoji)}. Причина улыбки: {SmileReason}. Название: {Name}, тег: {Tag}."; // спросить куда и как это пристроить
 
         /// <summary>
         /// Передаёт строку данных покемона
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public new string Show() => ToString();
+        new public string Show() => ToString();
 
         /// <summary>
         /// Возвращает длину причины улыбки, если возможно

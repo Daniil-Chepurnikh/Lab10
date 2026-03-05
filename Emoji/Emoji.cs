@@ -117,7 +117,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="obj">Сравниваемый объект</param>
         /// <returns>true если равны</returns>
-        public override bool Equals(object? obj)
+        override public bool Equals(object? obj)
         {
             return obj is Emoji emoji &&
                    Name == emoji.Name &&
@@ -129,13 +129,13 @@ namespace LibraryEmoji
         /// Показывает данные эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        public virtual string VirtualShow() => ToString();
+        virtual public string VirtualShow() => ToString();
 
         /// <summary>
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode() + _number.GetHashCode();
+        override public int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode() + _number.GetHashCode();
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
@@ -150,7 +150,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        protected virtual void Init()
+        virtual protected void Init()
         {
             Output.Message("Введите название эмодзи: ", ConsoleColor.White);
             Name = Input.Data();
@@ -163,7 +163,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => $"Вид: {nameof(Emoji)}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
+        override public string ToString() => $"Вид: {nameof(Emoji)}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
 
         /// <summary>
         /// Показывает данные эмодзи
