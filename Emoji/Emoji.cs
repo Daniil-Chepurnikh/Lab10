@@ -7,7 +7,7 @@ namespace LibraryEmoji
     /// <summary>
     /// Базовый класс библиотеки
     /// </summary>
-    public class Emoji : IRandomInit
+    public class Emoji : IRandomInit, IComparable
     {
         protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
@@ -189,6 +189,19 @@ namespace LibraryEmoji
 
             Output.Message("Введите тег эмодзи: ", ConsoleColor.White);
             Tag = Input.Data();
+        }
+
+        virtual public int CompareTo(object? obj)
+        {
+            Emoji other = obj as Emoji;
+            ArgumentNullException.ThrowIfNull(other);
+
+            int result = string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+            
+            if (result != 0)
+                return result;
+            else
+                return string.Compare(Tag, other.Tag, StringComparison.OrdinalIgnoreCase);
         }
     }
 }
