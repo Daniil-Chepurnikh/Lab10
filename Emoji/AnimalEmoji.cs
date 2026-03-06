@@ -57,6 +57,7 @@ namespace LibraryEmoji
         public AnimalEmoji(Random rnd) => RandomInit();
         #endregion
 
+        #region Всё для Equals
         /// <summary>
         /// Сранивает объекты
         /// </summary>
@@ -69,8 +70,10 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="other">Сравниваемый эмодзи</param>
         /// <returns>true, если равны</returns>
-        override protected bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && AnimalPart == ((AnimalEmoji)other).AnimalPart;   
-        
+        override protected bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && AnimalPart == ((AnimalEmoji)other).AnimalPart;
+        #endregion
+
+        #region Show
         /// <summary>
         /// Передаёт информацию об эмодзи
         /// </summary>
@@ -82,6 +85,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Строка с информацией</returns>
         new public string Show() => ToString();
+        #endregion
 
         /// <summary>
         /// Возвращает общие данные всех классов
@@ -113,14 +117,5 @@ namespace LibraryEmoji
             base.RandomInit();
             AnimalPart = animalParts[random.Next(0, animalParts.Length)];
         }
-
-        /// <summary>
-        /// Без комментариев
-        /// </summary>
-        /// <returns>Без комментариев</returns>
-        // TODO: переделать по комментариям
-        public static string SayRrroarrr(Emoji[] emos) => "~Rrroarrr~\n";
-
-
     }
 }
