@@ -11,8 +11,8 @@ namespace Demo
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
             Output.Separator();
 
-            Emoji[] emojis = new Emoji[52];            
-            
+            Emoji[] emojis = new Emoji[52];
+
             for (int p = 0; p < emojis.Length; p++)
             {
                 Random rn = new();
@@ -34,7 +34,7 @@ namespace Demo
                 {
                     case 0:
                         Output.Message(emoji.Show() + '\n', ConsoleColor.Cyan);
-                        break; 
+                        break;
                     case 1:
                         Output.Message(emoji.VirtualShow() + '\n', ConsoleColor.Magenta);
                         break;
@@ -44,7 +44,11 @@ namespace Demo
             Output.Separator();
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
-               
+
+            // TODO: написать запросы нормальные
+            // GoodPractise: В запрос ты передаёшь 1 большой кусок входных данных и он уже сам его полностью обрабатывает
+            // а не самому каждый элемент просматривать и проверять
+
         }
     }
 }
