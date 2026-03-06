@@ -9,7 +9,7 @@ namespace LibraryEmoji
     /// </summary>
     public class Emoji : IRandomInit
     {
-        protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры!";
+        protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
 
         /// <summary>

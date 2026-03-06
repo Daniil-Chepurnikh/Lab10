@@ -6,7 +6,7 @@ namespace LibraryEmoji
     /// <summary>
     /// Класс лицевых эмодзи
     /// </summary>
-    public class FaceEmoji : Emoji
+    public class FaceEmoji : Emoji, IComparable
     {
         static readonly string[] expressions =
         [
@@ -143,5 +143,23 @@ namespace LibraryEmoji
         /// <returns>Значение хеш-кода</returns>
         public override int GetHashCode() => base.GetHashCode() + Strength.GetHashCode() +
                                              Expression.GetHashCode();
+
+        /// <summary>
+        /// Как сравнивать лицевые эмодзи
+        /// </summary>
+        /// <param name="obj">Сравниваемый эмодзи</param>
+        /// <returns>Значение согласно спецификации</returns>
+        public int CompareTo(object? obj)
+        {
+            FaceEmoji face = obj as FaceEmoji;
+            ArgumentNullException.ThrowIfNull(face, "Недопустимое значение");
+
+            if (Strength > face.Strength)
+                return 1;
+            else if (Strength < face.Strength)
+                return -1;
+ 
+            return 0;
+        }
     }
 }
