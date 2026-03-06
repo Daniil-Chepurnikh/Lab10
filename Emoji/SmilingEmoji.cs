@@ -58,6 +58,7 @@ namespace LibraryEmoji
         public SmilingEmoji(Random rnd) => RandomInit();
         #endregion
 
+        #region Всё для Equals
         /// <summary>
         /// Сравнивает объекты
         /// </summary>
@@ -71,6 +72,7 @@ namespace LibraryEmoji
         /// <param name="other">Сравниваемый эмодзи</param>
         /// <returns>true, если равны</returns>
         override protected bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && SmileReason == ((SmilingEmoji)other).SmileReason;
+        #endregion
 
         /// <summary>
         /// Получает хеш-код
@@ -97,6 +99,7 @@ namespace LibraryEmoji
             SmileReason = smileReasons[random.Next(0, smileReasons.Length)];
         }
 
+        #region Show 
         /// <summary>
         /// Передаёт строку данных покемона
         /// </summary>
@@ -108,22 +111,12 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Строка с информацией</returns>
         override public string VirtualShow() => ToString();
+        #endregion
 
         /// <summary>
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
         override public string ToString() => base.ToString() + $"Причина улыбки: {SmileReason}.";
-
-        ///// <summary>
-        ///// Возвращает длину причины улыбки, если возможно
-        ///// </summary>
-        ///// <param name="emoji">Эмодзи, длину причны улыбки которого мы хотим узнать</param>
-        ///// <returns>Длина причины улыбки</returns>
-        ///// <exception cref="ArgumentNullException">При передаче аргумента null</exception>
-        //public static int GetSmileReasonLength(SmilingEmoji? emoji)
-        //{
-        //    return emoji is not null ? emoji.SmileReason.Length : throw new ArgumentNullException();
-        //}
     }
 }
