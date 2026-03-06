@@ -9,11 +9,16 @@ namespace LibraryEmoji
     /// </summary>
     public class Emoji : IRandomInit
     {
-        protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";
+        protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры!";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
 
+        /// <summary>
+        /// Генератор случайных чисел для RandomInit
+        /// </summary>
         protected static readonly Random random = new();
-        
+
+        protected IdNumber _number;
+
         /// <summary>
         /// возможные названия для случайного выбора
         /// </summary>
@@ -22,8 +27,6 @@ namespace LibraryEmoji
             "радость", "злость", "печаль", "гнев", "страх",
             "ненависть", "любовь", "спокойствие"
         ];
-
-        protected IdNumber _number;
         
         string? _name;
         /// <summary>
@@ -113,6 +116,7 @@ namespace LibraryEmoji
         public Emoji(Random rnd) => RandomInit();
         #endregion
 
+        #region Всё для Equals
         /// <summary>
         /// Сранивает объекты
         /// </summary>
@@ -135,7 +139,9 @@ namespace LibraryEmoji
                    Tag == other.Tag &&
                    _number.Equals(other._number);
         }
+        #endregion
 
+        #region Show
         /// <summary>
         /// Показывает данные эмодзи
         /// </summary>
@@ -147,13 +153,15 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Строка с информацией</returns>
         public string Show() => ToString();
+        #endregion
 
         /// <summary>
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
         override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. ";
-
+        /* Сначала решил попробоавать просто гет тайп, но печатало ещё и с библиотекой. В интернете нашёл свойство Name
+         * это не мой Name а object*/
 
         /// <summary>
         /// Получает хеш-код
