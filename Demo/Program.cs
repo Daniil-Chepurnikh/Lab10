@@ -1,6 +1,7 @@
 ﻿using LibraryEmoji;
 using MyDCInputOutputConsole;
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Demo
 {
@@ -44,11 +45,37 @@ namespace Demo
             Output.Separator();
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
+            // просто захотел вернуть кортеж
+            (double average, bool isHappy) = CalculateAverageSmileStrength(emojis);
+
+
 
             // TODO: написать запросы нормальные
             // GoodPractise: В запрос ты передаёшь 1 большой кусок входных данных и он уже сам его полностью обрабатывает
-            // а не самому каждый элемент просматривать и проверять
-
+            // а не самому каждый элемент просматривать и проверят 
         }
+
+        /// <summary>
+        /// Возвращает среднюю силу улыбки и оценку счастливости набора эмодзи
+        /// </summary>
+        /// <param name="emos">Набор эмодзи</param>
+        /// <returns>Среднее, метка счастливости(true, если счастлив)</returns>
+        public static (double average, bool isHappy) CalculateAverageSmileStrength(Emoji[] emos)
+        {
+            double averageSmileStrength = 0.0;
+            uint smileCount = 0;
+            foreach (Emoji emo in emos)
+            {
+                if (emo is SmilingEmoji smile)
+                {
+                    averageSmileStrength += smile.Strength;
+                    smileCount++;
+                }
+            }
+            averageSmileStrength /= smileCount;
+
+            return (averageSmileStrength, averageSmileStrength > 5);
+        }
+
     }
 }
