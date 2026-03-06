@@ -75,6 +75,7 @@ namespace LibraryEmoji
         public FaceEmoji(Random rnd) => RandomInit();
         #endregion
 
+        #region Show
         /// <summary>
         /// Передаёт информацию об эмодзи
         /// </summary>
@@ -82,11 +83,19 @@ namespace LibraryEmoji
         public override string VirtualShow() => ToString();
 
         /// <summary>
+        /// Возвращает данные объекта
+        /// </summary>
+        /// <returns></returns>
+        public new string Show() => ToString();
+        #endregion
+
+        /// <summary>
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
         public override string ToString() => base.ToString() + $"Выражение: {Expression}. Сила: {Strength}. ";
 
+        #region Всё для Equals
         /// <summary>
         /// Сранивает объекты
         /// </summary>
@@ -105,6 +114,7 @@ namespace LibraryEmoji
                    Strength == ((FaceEmoji)other).Strength &&
                    Expression == ((FaceEmoji)other).Expression;
         }
+        #endregion
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -119,13 +129,6 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Получает хеш-код
-        /// </summary>
-        /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => base.GetHashCode() + Strength.GetHashCode() +
-                                             Expression.GetHashCode();
-
-        /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
         override public void RandomInit()
@@ -135,21 +138,10 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Возвращает данные объекта
+        /// Получает хеш-код
         /// </summary>
-        /// <returns></returns>
-        public new string Show() => ToString();
-
-        ///// <summary>
-        ///// Подмигивает пользователю, если возможно
-        ///// </summary>
-        ///// <param name="face">То эмодзи, которое будет подмигивать</param>
-        ///// <returns>Подмигивающая строка</returns>
-        //public static string Wink(Emoji[] emos)
-        //{
-        //    // ArgumentNullException.ThrowIfNull(face);
-
-        //    //return $"{face.Expression} -> (>_^)\n";
-        //}
+        /// <returns>Значение хеш-кода</returns>
+        public override int GetHashCode() => base.GetHashCode() + Strength.GetHashCode() +
+                                             Expression.GetHashCode();
     }
 }
