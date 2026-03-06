@@ -1,7 +1,6 @@
 ﻿using LibraryEmoji;
 using MyDCInputOutputConsole;
 using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Demo
 {
@@ -48,6 +47,8 @@ namespace Demo
             // просто захотел вернуть кортеж
             (double average, bool isHappy) = CalculateAverageSmileStrength(emojis);
 
+            Wink(emojis);
+
 
 
             // TODO: написать запросы нормальные
@@ -76,6 +77,25 @@ namespace Demo
 
             return (averageSmileStrength, averageSmileStrength > 5);
         }
+
+        /// <summary>
+        /// Подмигивает животным глазом
+        /// </summary>
+        /// <param name="emos">Набор эмодзи</param>
+        public static void Wink(Emoji[] emos)
+        {
+            foreach (Emoji emo in emos)
+            {
+                if (emo is AnimalEmoji an && an.AnimalPart == "глаз")
+                {
+                    Output.Message("Вам подмигнули: ", ConsoleColor.Magenta);
+                    Output.Message(an, ConsoleColor.Magenta);
+                }
+            }
+        }
+        
+
+
 
     }
 }
