@@ -48,8 +48,26 @@ namespace Demo
             (double average, bool isHappy) = CalculateAverageSmileStrength(emojis);
 
             Wink(emojis);
+            Output.Separator();
 
+            Array.Sort(emojis);
+            for (int q = 0; q < emojis.Length; q++)
+            {
+                ConsoleColor color = (q % 3) switch
+                {
+                    0 => ConsoleColor.Cyan,
+                    1 => ConsoleColor.Magenta,
+                    _ => ConsoleColor.Green
+                };
 
+                Output.Message(emojis[q] + "\n", color);
+            }
+            
+            int index = Array.BinarySearch(emojis, new Emoji(9999));
+            if (index < 0)
+                Output.Message("Элемент не найден", ConsoleColor.Blue);
+            else
+                Output.Message(emojis[index], ConsoleColor.White);
 
             // TODO: написать запросы нормальные
             // GoodPractise: В запрос ты передаёшь 1 большой кусок входных данных и он уже сам его полностью обрабатывает
@@ -88,13 +106,13 @@ namespace Demo
             {
                 if (emo is AnimalEmoji an && an.AnimalPart == "глаз")
                 {
-                    Output.Message("Вам подмигнули: ", ConsoleColor.Magenta);
-                    Output.Message(an, ConsoleColor.Magenta);
+                    Output.Message("Вам подмигнули: (^-0( ", ConsoleColor.Magenta);
+                    Output.Message(an + "\n", ConsoleColor.Magenta);
                 }
             }
         }
         
-
+        //public static да хер его знает какой запрос придумать
 
 
     }
