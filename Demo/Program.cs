@@ -11,7 +11,7 @@ namespace Demo
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
             Output.Separator();
 
-            Emoji[] emojis = new Emoji[31];            
+            Emoji[] emojis = new Emoji[52];            
             
             for (int p = 0; p < emojis.Length; p++)
             {

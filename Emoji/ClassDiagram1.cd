@@ -3,29 +3,29 @@
   <Class Name="LibraryEmoji.Emoji" Collapsed="true">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIABAAACgCAAEgAAAAAQAABAEAIgAAARCAABAAII=</HashCode>
+      <HashCode>AAAAIABAAACgKAAEgAAAAAQAABAEAIgAAARCAABAAII=</HashCode>
       <FileName>Emoji.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="LibraryEmoji.AnimalEmoji" Collapsed="true">
-    <Position X="0.5" Y="5" Width="1.5" />
+    <Position X="0.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAACACAAEgAAAAAAAAAgUAIAAAAAGAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAACAKAAEgAAAAAAAAAgUAIAAAAAGAAAAAAA=</HashCode>
       <FileName>AnimalEmoji.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LibraryEmoji.FaceEmoji" Collapsed="true">
-    <Position X="2.5" Y="5" Width="1.5" />
+    <Position X="2.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACACAAEgEAAAAAAAABEAIAQAAAigAAAAAI=</HashCode>
+      <HashCode>AAAAAAAAAACAKAAEgEAAAAAAAABEAIAQAAACgAAAAAI=</HashCode>
       <FileName>FaceEmoji.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LibraryEmoji.SmilingEmoji" Collapsed="true">
-    <Position X="2.5" Y="6.25" Width="1.5" />
+    <Position X="2.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAACACAAEgAAAAAAAAAAEAKAEAAACBAAAAAA=</HashCode>
+      <HashCode>BAAAAAAAAACAKAAEgAAAAAAAAAAEAIAEAAACBAAAAAA=</HashCode>
       <FileName>SmilingEmoji.cs</FileName>
     </TypeIdentifier>
   </Class>
