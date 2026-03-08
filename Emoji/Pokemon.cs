@@ -4,7 +4,7 @@ using System.Collections;
 
 namespace LibraryEmoji
 {
-    public class Pokemon : IRandomInit, IEnumerable
+    public class Pokemon : IRandomInit
     {
         #region Диапазон значений
         public const short MIN_ATK = 17;
