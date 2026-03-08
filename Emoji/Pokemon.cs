@@ -1,9 +1,10 @@
 ﻿using lab_10_v5_ClassLibrary;
 using System;
+using System.Collections;
 
 namespace LibraryEmoji
 {
-    public class Pokemon : IRandomInit
+    public class Pokemon : IRandomInit, IEnumerable
     {
         #region Диапазон значений
         public const short MIN_ATK = 17;
@@ -329,6 +330,11 @@ namespace LibraryEmoji
             Attack = rn.Next(100, 200);
             Defense = rn.Next(100, 200);
             Stamina = rn.Next(100, 200);
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
         }
 
         // TODO: сделать GetHashCode при необходимости

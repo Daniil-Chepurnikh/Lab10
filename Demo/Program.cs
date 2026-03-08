@@ -50,6 +50,9 @@ namespace Demo
             Wink(emojis);
             Output.Separator();
 
+            Output.Separator();
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 3<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
+            
             Array.Sort(emojis);
             for (int q = 0; q < emojis.Length; q++)
             {
@@ -72,6 +75,18 @@ namespace Demo
             // TODO: написать запросы нормальные
             // GoodPractise: В запрос ты передаёшь 1 большой кусок входных данных и он уже сам его полностью обрабатывает
             // а не самому каждый элемент просматривать и проверят 
+
+
+            Pokemon[] pokemons = new Pokemon[15];
+
+            pokemons[0] = new Pokemon(111, 111, 111);
+
+            foreach (Pokemon pokemon in pokemons)
+            {
+                Output.Message(pokemon, ConsoleColor.Yellow);
+            }
+
+
         }
 
         /// <summary>
