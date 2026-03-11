@@ -6,43 +6,152 @@ namespace Tests;
 public class TestEquals
 {
     [TestMethod]
-    public void TestEquals1()
+    public void TestSimpleEquals1()
     {
-        FaceEmoji e1 = new();
-        object obj = '_';
-        var res = e1.Equals(obj);
-
-        Assert.IsFalse(res);
-    }
-
-    [TestMethod]
-    public void TestEquals2()
-    {
-        AnimalEmoji e1 = new();
-        object obj = '_';
-        var res = e1.Equals(obj);
-
-        Assert.IsFalse(res);
-    }
-
-    [TestMethod]
-    public void TestEquals3()
-    {
-        SmilingEmoji e1 = new();
-        object obj = '_';
-        var res = e1.Equals(obj);
-
-        Assert.IsFalse(res);
-    }
-
-    [TestMethod]
-    public void TestEquals4()
-    {
+        Emoji e = new();
         Emoji e1 = new();
-        object obj = '_';
-        var res = e1.Equals(obj);
 
-        Assert.IsFalse(res);
+        bool isEqual = e.Equals(e1);
+
+        Assert.IsTrue(isEqual);
+    }
+
+    [TestMethod]
+    public void TestSimpleEquals2()
+    {
+        Emoji e = new();
+        Emoji e1 = new();
+
+        e.Name = "рок жив";
+
+        bool isEqual = e.Equals(e1);
+
+        Assert.IsFalse(isEqual);
+    }
+
+    [TestMethod]
+    public void TestSimpleEquals3()
+    {
+        Emoji e = new();
+        Emoji e1 = new();
+
+        e.Tag = "рок жив";
+
+        bool isEqual = e.Equals(e1);
+
+        Assert.IsFalse(isEqual);
+    }
+
+    [TestMethod]
+    public void TestSimpleEquals4()
+    {
+        Emoji e = new();
+        Emoji e1 = new();
+
+        e.Tag = "рок жив";
+
+        bool isEqual = e.Equals(e1);
+
+        Assert.IsFalse(isEqual);
+    }
+
+    [TestMethod]
+    public void TestSimpleEquals5()
+    {
+        FaceEmoji e = new();
+        FaceEmoji e1 = new();
+
+        e1.Strength = 10;
+
+        bool isEqual = e1.Equals(e);
+
+        Assert.IsFalse(isEqual);
+    }
+
+    [TestMethod]
+    public void TestSimpleEquals6()
+    {        
+        FaceEmoji e = new();
+        FaceEmoji e1 = new();
+
+        bool isEqual = e1.Equals(e);
+
+        Assert.IsTrue(isEqual);
+    }
+
+    [TestMethod]
+    public void TestSimpleEquals7()
+    {
+        FaceEmoji e = new();
+        FaceEmoji e1 = new();
+
+        bool isEqual = e1.Equals(e);
+
+        Assert.IsTrue(isEqual);
+    }
+
+    [TestMethod]
+    public void TestSimpleEquals8()
+    {
+        AnimalEmoji e = new();
+        AnimalEmoji e1 = new();
+
+        e.AnimalPart = "рога";
+
+        bool isEqual = e1.Equals(e);
+
+        Assert.IsFalse(isEqual);
+    }
+
+
+
+
+
+
+
+
+    [TestMethod]
+    public void TestEmojiEquals()
+    {
+        Emoji e = new();
+        Emoji e1 = new();
+
+        bool isEqual = e.Equals(e1);
+
+        Assert.IsTrue(isEqual);
+    }
+
+    [TestMethod]
+    public void TestFaceEmojiEquals()
+    {
+        FaceEmoji e = new();
+        FaceEmoji e1 = new();
+
+        bool isEqual = e1.Equals(e);
+
+        Assert.IsTrue(isEqual);
+    }
+
+    [TestMethod]
+    public void TestAnimalEmojiEquals1()
+    {
+        AnimalEmoji e = new();
+        AnimalEmoji e1 = new();
+
+        bool isEqual = e1.Equals(e);
+
+        Assert.IsTrue(isEqual);
+    }
+
+    [TestMethod]
+    public void TestAnimalEmojiEquals2()
+    {
+        AnimalEmoji e = new();
+        SmilingEmoji e1 = new();
+
+        bool isEqual = e1.Equals(e);
+
+        Assert.IsFalse(isEqual);
     }
 
 }
