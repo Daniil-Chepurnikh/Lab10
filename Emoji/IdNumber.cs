@@ -1,6 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace lab_10_v5_ClassLibrary;
+﻿namespace lab_10_v5_ClassLibrary;
 
 public class IdNumber
 {
