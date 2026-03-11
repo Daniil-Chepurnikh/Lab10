@@ -17,7 +17,7 @@ namespace LibraryEmoji
         /// </summary>
         protected static readonly Random random = new();
 
-        protected IdNumber _number;
+        public IdNumber _number;
 
         /// <summary>
         /// возможные названия для случайного выбора
@@ -95,7 +95,7 @@ namespace LibraryEmoji
         {
             Name = "Без названия";
             Tag = "Без тега";
-            _number = new IdNumber();
+            _number = new();
         }
 
         /// <summary>
@@ -160,14 +160,14 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Строка с данными</returns>
         override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. ";
-        /* Сначала решил попробоавать просто гет тайп, но печатало ещё и с библиотекой. В интернете нашёл свойство Name
+        /* Сначала решил попробоавать просто геттайп, но печатало с библиотекой
          * это не мой Name а object*/
 
         /// <summary>
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode() + _number.GetHashCode();
+        override public int GetHashCode() => HashCode.Combine(Name, Tag, _number);
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
@@ -191,6 +191,11 @@ namespace LibraryEmoji
             Tag = Input.Data();
         }
 
+        /// <summary>
+        /// Реализация интерфейса IComparable
+        /// </summary>
+        /// <param name="obj">Сравниваемый объект</param>
+        /// <returns>Результат сравнения</returns>
         virtual public int CompareTo(object? obj)
         {
             Emoji other = obj as Emoji;
