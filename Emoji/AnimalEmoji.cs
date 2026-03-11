@@ -12,10 +12,10 @@ namespace LibraryEmoji
         /// <summary>
         /// возможные части тела животного для случайного выбора
         /// </summary>
-        static readonly string[] animalParts =
+        public static readonly string[] animalParts =
         [
             "голова", "лапа", "хвост", "глаз", "ухо",
-            "нос", "зубы", "шея", "коготь"
+            "нос", "зубы", "шея", "коготь", "рога"
         ];
 
         string? _animalPart;
@@ -107,7 +107,7 @@ namespace LibraryEmoji
         /// Получает хеш-код объекта
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => base.GetHashCode() + AnimalPart.GetHashCode();
+        override public int GetHashCode() => HashCode.Combine(base.GetHashCode(), AnimalPart);
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
