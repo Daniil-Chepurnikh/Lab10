@@ -5,6 +5,7 @@ namespace Tests;
 [TestClass]
 public class TestEquals
 {
+    #region Тестирование SimpleEquals
     [TestMethod]
     public void TestSimpleEquals1()
     {
@@ -103,13 +104,21 @@ public class TestEquals
         Assert.IsFalse(isEqual);
     }
 
+    [TestMethod]
+    public void TestSimpleEquals9()
+    {
+        SmilingEmoji e = new();
+        SmilingEmoji e1 = new();
 
+        e.SmileReason = "рога";
 
+        bool isEqual = e1.Equals(e);
 
+        Assert.IsFalse(isEqual);
+    }
+    #endregion
 
-
-
-
+    #region Тестирование Equals
     [TestMethod]
     public void TestEmojiEquals()
     {
@@ -154,4 +163,36 @@ public class TestEquals
         Assert.IsFalse(isEqual);
     }
 
+    [TestMethod]
+    public void TestSmilingEmojiEquals1()
+    {
+        SmilingEmoji e = new();
+        SmilingEmoji e1 = new();
+
+        bool isEqual = e1.Equals(e);
+
+        Assert.IsTrue(isEqual);
+    }
+
+    [TestMethod]
+    public void TestSmilingEmojiEquals2()
+    {
+        SmilingEmoji e = new();
+        Emoji e1 = new();
+
+        bool isEqual = e.Equals(e1);
+
+        Assert.IsFalse(isEqual);
+    }
+
+    [TestMethod]
+    public void TestEquals1()
+    {
+        SmilingEmoji e1 = new();
+
+        bool isEqual = e1.Equals(e1);
+
+        Assert.IsTrue(isEqual);
+    }
+    #endregion
 }
