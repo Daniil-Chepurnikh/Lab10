@@ -74,18 +74,7 @@ namespace Demo
 
             // TODO: написать запросы нормальные
             // GoodPractise: В запрос ты передаёшь 1 большой кусок входных данных и он уже сам его полностью обрабатывает
-            // а не самому каждый элемент просматривать и проверят 
-
-
-            Pokemon[] pokemons = new Pokemon[15];
-
-            pokemons[0] = new Pokemon(111, 111, 111);
-
-            foreach (Pokemon pokemon in pokemons)
-            {
-                Output.Message(pokemon, ConsoleColor.Yellow);
-            }
-
+            // а не самому каждый элемент просматривать и проверят
 
         }
 
