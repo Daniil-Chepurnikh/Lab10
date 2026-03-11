@@ -11,7 +11,7 @@ namespace LibraryEmoji
         /// <summary>
         /// возможные причины улыбок для случайного выбора
         /// </summary>
-        static readonly string[] smileReasons =
+        public static readonly string[] smileReasons =
         [
             "хорошая погода", "победа команды", "хорошее настроение",
             "вкусная еда", "весёлое видео", "выходные", "любимая музыка",
@@ -78,7 +78,7 @@ namespace LibraryEmoji
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => base.GetHashCode() + SmileReason.GetHashCode();
+        override public int GetHashCode() => HashCode.Combine(base.GetHashCode(), SmileReason);
 
         /// <summary>
         /// Инициализирует атрибуты
