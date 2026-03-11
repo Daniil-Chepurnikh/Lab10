@@ -1,5 +1,4 @@
-﻿using lab_10_v5_ClassLibrary;
-using MyDCInputOutputConsole;
+﻿using MyDCInputOutputConsole;
 using System;
 
 namespace LibraryEmoji
@@ -70,7 +69,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="other">Сравниваемый эмодзи</param>
         /// <returns>true, если равны</returns>
-        override protected bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && AnimalPart == ((AnimalEmoji)other).AnimalPart;
+        override public bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && AnimalPart == ((AnimalEmoji)other).AnimalPart;
         #endregion
 
         #region Show

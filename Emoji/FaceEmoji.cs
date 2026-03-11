@@ -108,7 +108,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="other"></param>
         /// <returns>true, если равны</returns>
-        override protected bool SimpleEquals(Emoji other)
+        override public bool SimpleEquals(Emoji other)
         {
             return base.SimpleEquals(other) &&
                    Strength == ((FaceEmoji)other).Strength &&

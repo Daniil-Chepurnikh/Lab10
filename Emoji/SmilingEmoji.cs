@@ -71,7 +71,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="other">Сравниваемый эмодзи</param>
         /// <returns>true, если равны</returns>
-        override protected bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && SmileReason == ((SmilingEmoji)other).SmileReason;
+        override public bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && SmileReason == ((SmilingEmoji)other).SmileReason;
         #endregion
 
         /// <summary>

@@ -133,7 +133,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="other">Сравниваемый эмодзи</param>
         /// <returns>true, равны</returns>
-        virtual protected bool SimpleEquals(Emoji other)
+        virtual public bool SimpleEquals(Emoji other)
         {
             return Name == other.Name &&
                    Tag == other.Tag &&
