@@ -20,4 +20,21 @@ public class TestAnimalEmoji
 
         Assert.AreEqual("хвост", a);
     }
+
+    [TestMethod]
+    public void TestAnimalPart()
+    {
+        AnimalEmoji e = new();
+        bool isPassed = false;
+        try
+        {
+            e.AnimalPart = null;
+        }
+        catch (ArgumentNullException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
 }
