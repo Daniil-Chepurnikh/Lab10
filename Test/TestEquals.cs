@@ -12,7 +12,7 @@ public class TestEquals
         Emoji e = new();
         Emoji e1 = new();
 
-        bool isEqual = e.SimpleEquals(e1);
+        bool isEqual = e.Equals(e1);
 
         Assert.IsTrue(isEqual);
     }
