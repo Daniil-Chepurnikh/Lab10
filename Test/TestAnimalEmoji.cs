@@ -37,4 +37,20 @@ public class TestAnimalEmoji
 
         Assert.IsTrue(isPassed);
     }
+
+    [TestMethod]
+    public void TestShowToString()
+    {
+        Random rnd = new Random();
+        
+        AnimalEmoji e = new(rnd);
+
+        string toString = e.ToString();
+        string show = e.ToString();
+        string showVirtual = e.ToString();
+
+        Assert.AreEqual(showVirtual, show);
+        Assert.AreEqual(toString, show);
+        Assert.AreEqual(showVirtual, toString);
+    }
 }
