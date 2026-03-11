@@ -12,4 +12,29 @@ public class TestSmilingEmoji
 
         Assert.AreEqual("Просто улыбается", e.SmileReason);
     }
+
+    [TestMethod]
+    public void TestSmileReasons()
+    {
+        string s = SmilingEmoji.smileReasons[1];
+
+        Assert.AreEqual("победа команды", s);
+    }
+
+    [TestMethod]
+    public void TestSmileReason()
+    {
+        SmilingEmoji e = new();
+        bool isPassed = false;
+        try
+        {
+            e.SmileReason = "     ";
+        }
+        catch (ArgumentNullException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
 }
