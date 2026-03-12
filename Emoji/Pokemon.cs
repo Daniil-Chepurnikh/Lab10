@@ -1,5 +1,4 @@
-﻿using lab_10_v5_ClassLibrary;
-using System;
+﻿using System;
 using System.Collections;
 
 namespace LibraryEmoji

@@ -1,5 +1,4 @@
-﻿using lab_10_v5_ClassLibrary;
-using MyDCInputOutputConsole;
+﻿using MyDCInputOutputConsole;
 using System.Text.RegularExpressions;
 
 namespace LibraryEmoji
