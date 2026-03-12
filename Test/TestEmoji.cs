@@ -63,7 +63,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void TestIdNumber()
+        public void TestIdNumber1()
         {
             Emoji e = new();
             bool isPassed = false;
@@ -76,6 +76,24 @@ namespace Tests
                 isPassed = true;
             }
             Assert.IsTrue(isPassed);
+        }
+
+        [TestMethod]
+        public void TestIdNumber2()
+        {
+            IdNumber e = new(5);
+            IdNumber e1 = new(1);
+            
+            Assert.IsFalse(e.Equals(e1));
+        }
+
+        [TestMethod]
+        public void TestIdNumber3()
+        {
+            IdNumber e = new(1);
+            IdNumber e1 = new(1);
+
+            Assert.IsTrue(e1.Equals(e));
         }
 
         [TestMethod]
@@ -208,6 +226,40 @@ namespace Tests
             Assert.AreEqual(showVirtual, show);
             Assert.AreEqual(toString, show);
             Assert.AreEqual(showVirtual, toString);
+        }
+
+        [TestMethod]
+        public void TestCompare1()
+        {
+            Emoji[] emojis = { new Emoji(), new Emoji() };
+
+            emojis[0].Name = "Test";
+            emojis[1].Name = "A";
+            
+            Array.Sort(emojis, new EmojiComparer());
+
+            string name = emojis[0].Name;
+            Assert.AreEqual("A", name);
+            
+        }
+
+        [TestMethod]
+        public void TestCompare2() // очень странно. Почему нельзя просто вернуть то же самое исключение что
+            // сгенерилось внутри, зачем делать новое под предлогом возникновения старого
+        {
+            Emoji[] emojis = { new Emoji(), null };
+            
+            bool isPassed = false;
+            try
+            {
+                Array.Sort(emojis, new EmojiComparer());
+            }
+            catch (InvalidOperationException)
+            {
+                isPassed= true;
+            }
+
+            Assert.IsTrue(isPassed);
         }
     }
 }
