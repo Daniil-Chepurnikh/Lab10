@@ -39,7 +39,6 @@ namespace LibraryEmoji
             get => _strength;
             set
             {
-                ArgumentOutOfRangeException.ThrowIfLessThan(value, 0, "Сила лицевой эмодзи не может быть меньше 0");
                 ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 10, "Сила лицевой эмодзи не может быть больше 10");
 
                 _strength = value;
