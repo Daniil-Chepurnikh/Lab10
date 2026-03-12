@@ -195,7 +195,11 @@ namespace LibraryEmoji
         /// Реализация интерфейса IComparable
         /// </summary>
         /// <param name="obj">Сравниваемый объект</param>
-        /// <returns>Результат сравнения</returns>
+        /// <returns>
+        /// "-число" если меньше
+        /// "+число" если больше
+        /// "0" если равны
+        /// </returns>
         virtual public int CompareTo(object? obj)
         {
             Emoji other = obj as Emoji;
