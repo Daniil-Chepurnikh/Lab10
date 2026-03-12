@@ -5,6 +5,11 @@ namespace Tests
     [TestClass]
     public sealed class TestEmoji
     {
+        // TODO: добавить тесты интерефейсов
+
+
+
+
         [TestMethod]
         public void TestWithoutParameters()
         {
