@@ -5,9 +5,49 @@ namespace Tests
     [TestClass]
     public sealed class TestEmoji
     {
-        // TODO: добавить тесты интерефейсов
+        // TODO: добавить тесты IComparer ICloneable
 
+        [TestMethod]
+        public void TestCompareTo1()
+        {
+            Emoji e = new();
+            Emoji e1 = new();
 
+            e.Name = "Абат";
+            e1.Name = "Абба";
+
+            int res = e.CompareTo(e1);
+
+            Assert.IsLessThan(0, res);
+        }
+
+        [TestMethod]
+        public void TestCompareTo2()
+        {
+            Emoji e = new();
+            Emoji e1 = new();
+
+            e.Name = "Аб";
+            e1.Name = "Абб";
+
+            int res = e.CompareTo(e1);
+
+            Assert.IsLessThan(0, res);
+        }
+
+        [TestMethod]
+        public void TestCompareTo3()
+        {
+            Emoji e = new();
+            Emoji e1 = new();
+
+            e.Tag = "Аб";
+            e1.Tag = "Ав";
+
+            int res = e.CompareTo(e1);
+
+            Assert.IsLessThan(0, res);
+        }
 
 
         [TestMethod]
