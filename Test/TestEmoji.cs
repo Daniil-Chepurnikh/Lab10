@@ -15,8 +15,27 @@ namespace Tests
         {
             Emoji e = new();
 
+            IdNumber num = new();
+            
             Assert.AreEqual("Без названия", e.Name);
             Assert.AreEqual("Без тега", e.Tag);
+            Assert.AreEqual(num, e._number);
+        }
+
+        [TestMethod]
+        public void TestIdNumber()
+        {
+            Emoji e = new();
+            bool isPassed = false;
+            try
+            {
+                IdNumber num = new(-11111);
+            }
+            catch (ArgumentException)
+            {
+                isPassed = true;
+            }
+            Assert.IsTrue(isPassed);
         }
 
         [TestMethod]
