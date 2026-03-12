@@ -44,15 +44,19 @@ namespace Demo
             Output.Separator();
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
-            // просто захотел вернуть кортеж
-            (double average, bool isHappy) = CalculateAverageSmileStrength(emojis);
+            if (CalculateAverageSmileStrength(emojis) > 5)
+                Output.Message("Эмодзи счастливы", ConsoleColor.Blue);
+            else
+                Output.Message("Эмодзи печальны", ConsoleColor.DarkRed);
 
             Wink(emojis);
             Output.Separator();
 
+            Output.Message("Самое длинное выражение: " + MaxExpressionLength(emojis), ConsoleColor.White);
+
             Output.Separator();
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 3<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
-            
+
             Array.Sort(emojis);
             for (int q = 0; q < emojis.Length; q++)
             {
@@ -65,25 +69,25 @@ namespace Demo
 
                 Output.Message(emojis[q] + "\n", color);
             }
-            
+
+            Output.Message("Начался бинарный поиск\n", ConsoleColor.White);
+
             int index = Array.BinarySearch(emojis, new Emoji(9999));
             if (index < 0)
                 Output.Message("Элемент не найден", ConsoleColor.Blue);
             else
+            {
                 Output.Message(emojis[index], ConsoleColor.White);
-
-            // TODO: написать запросы нормальные
-            // GoodPractise: В запрос ты передаёшь 1 большой кусок входных данных и он уже сам его полностью обрабатывает
-            // а не самому каждый элемент просматривать и проверят
-
+                Output.Message($" Номер элемента: {index + 1}", ConsoleColor.White);
+            }
         }
 
         /// <summary>
-        /// Возвращает среднюю силу улыбки и оценку счастливости набора эмодзи
+        /// Возвращает среднюю силу улыбки
         /// </summary>
         /// <param name="emos">Набор эмодзи</param>
-        /// <returns>Среднее, метка счастливости(true, если счастлив)</returns>
-        public static (double average, bool isHappy) CalculateAverageSmileStrength(Emoji[] emos)
+        /// <returns>Средняя счастливость</returns>
+        public static double CalculateAverageSmileStrength(Emoji[] emos)
         {
             double averageSmileStrength = 0.0;
             uint smileCount = 0;
@@ -97,7 +101,7 @@ namespace Demo
             }
             averageSmileStrength /= smileCount;
 
-            return (averageSmileStrength, averageSmileStrength > 5);
+            return averageSmileStrength;
         }
 
         /// <summary>
@@ -108,16 +112,29 @@ namespace Demo
         {
             foreach (Emoji emo in emos)
             {
-                if (emo is AnimalEmoji an && an.AnimalPart == "глаз")
+                if (emo is AnimalEmoji an)
                 {
                     Output.Message("Вам подмигнули: (^-0( ", ConsoleColor.Magenta);
                     Output.Message(an + "\n", ConsoleColor.Magenta);
                 }
             }
         }
-        
-        //public static да хер его знает какой запрос придумать
 
+        public static string MaxExpressionLength(Emoji[] emos)
+        {
+            string str = string.Empty;
+            foreach (Emoji emo in emos)
+            {
+                FaceEmoji face = emo as FaceEmoji;
 
+                try
+                {
+                    if (str.Length < face.Expression.Length)
+                        str = face.Expression;
+                }
+                catch {}
+            }
+            return str;
+        }
     }
 }
