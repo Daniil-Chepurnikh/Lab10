@@ -5,7 +5,23 @@ namespace Tests
     [TestClass]
     public sealed class TestEmoji
     {
-        // TODO: добавить тесты IComparer ICloneable
+        // TODO: добавить тесты ICloneable
+
+        [TestMethod]
+        public void TestGetHashCode()
+        {
+            Emoji e = new();
+
+            int hash1 = e.GetHashCode();
+
+            e.Name = "Cristiano Ronaldo";
+            e.Tag = "Manchester United";
+            e._number = new(7);
+
+            int hash2 = e.GetHashCode();
+
+            Assert.AreNotEqual(hash1, hash2);
+        }
 
         [TestMethod]
         public void TestCompareTo1()
@@ -219,9 +235,9 @@ namespace Tests
         {
             Emoji e = new();
 
-            string toString = e.ToString();
-            string show = e.ToString();
-            string showVirtual = e.ToString();
+            string toString = e.Show();
+            string show = e.Show();
+            string showVirtual = e.VirtualShow();
 
             Assert.AreEqual(showVirtual, show);
             Assert.AreEqual(toString, show);
@@ -257,6 +273,23 @@ namespace Tests
             catch (InvalidOperationException)
             {
                 isPassed= true;
+            }
+
+            Assert.IsTrue(isPassed);
+        }
+
+        public void TestCompare3()
+        {
+            Emoji[] emojis = { new Emoji(), null };
+
+            bool isPassed = false;
+            try
+            {
+                Array.Sort(emojis, new EmojiComparer());
+            }
+            catch (InvalidOperationException)
+            {
+                isPassed = true;
             }
 
             Assert.IsTrue(isPassed);
