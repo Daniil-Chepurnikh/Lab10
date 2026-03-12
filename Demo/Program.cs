@@ -8,10 +8,11 @@ namespace Demo
     {
         static void Main(string[] args)
         {
-            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Green);
-            
-            Emoji[] emojis = new Emoji[35];            
-            
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 1<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
+            Output.Separator();
+
+            Emoji[] emojis = new Emoji[52];
+
             for (int p = 0; p < emojis.Length; p++)
             {
                 Random rn = new();
@@ -21,7 +22,7 @@ namespace Demo
                     0 => new Emoji(rn),
                     1 => new AnimalEmoji(rn),
                     2 => new FaceEmoji(rn),
-                    _ => new SmilingEmoji(rn)
+                    _ => new SmilingEmoji(rn) // как дефолт в обычном свитч
                 };
             }
 
@@ -33,7 +34,7 @@ namespace Demo
                 {
                     case 0:
                         Output.Message(emoji.Show() + '\n', ConsoleColor.Cyan);
-                        break; 
+                        break;
                     case 1:
                         Output.Message(emoji.VirtualShow() + '\n', ConsoleColor.Magenta);
                         break;
@@ -41,40 +42,104 @@ namespace Demo
             }
 
             Output.Separator();
-            
-            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Green);
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
-            int smileReasonLength = 0;
-            string? smileReason = null;
-            foreach (Emoji emoji in emojis)
+            if (CalculateAverageSmileStrength(emojis) > 5)
+                Output.Message("Эмодзи счастливы", ConsoleColor.Blue);
+            else
+                Output.Message("Эмодзи печальны", ConsoleColor.DarkRed);
+
+            Wink(emojis);
+            Output.Separator();
+
+            Output.Message("Самое длинное выражение: " + MaxExpressionLength(emojis), ConsoleColor.White);
+
+            Output.Separator();
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 3<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
+
+            Array.Sort(emojis);
+            for (int q = 0; q < emojis.Length; q++)
             {
-                if (typeof(SmilingEmoji) == emoji.GetType())
+                ConsoleColor color = (q % 3) switch
                 {
-                    int currentSmileReasonLength = SmilingEmoji.GetSmileReasonLength((SmilingEmoji)emoji);
+                    0 => ConsoleColor.Cyan,
+                    1 => ConsoleColor.Magenta,
+                    _ => ConsoleColor.Green
+                };
 
-                    if (currentSmileReasonLength > smileReasonLength)
-                    {
-                        var smile = (SmilingEmoji)emoji;
-                        smileReason = smile.SmileReason;
-                        smileReasonLength = currentSmileReasonLength;
-                    }
-                }
+                Output.Message(emojis[q] + "\n", color);
+            }
 
-                if (emoji is AnimalEmoji animal)
-                    Output.Message(AnimalEmoji.SayRrroarrr(), ConsoleColor.Yellow);
+            Output.Message("Начался бинарный поиск\n", ConsoleColor.White);
 
-                FaceEmoji? face = emoji as FaceEmoji;
-                try
+            int index = Array.BinarySearch(emojis, new Emoji(9999));
+            if (index < 0)
+                Output.Message("Элемент не найден", ConsoleColor.Blue);
+            else
+            {
+                Output.Message(emojis[index], ConsoleColor.White);
+                Output.Message($" Номер элемента: {index + 1}", ConsoleColor.White);
+            }
+        }
+
+        /// <summary>
+        /// Возвращает среднюю силу улыбки
+        /// </summary>
+        /// <param name="emos">Набор эмодзи</param>
+        /// <returns>Средняя счастливость</returns>
+        public static double CalculateAverageSmileStrength(Emoji[] emos)
+        {
+            double averageSmileStrength = 0.0;
+            uint smileCount = 0;
+            foreach (Emoji emo in emos)
+            {
+                if (emo is SmilingEmoji smile)
                 {
-                    Output.Message(FaceEmoji.Wink(face), ConsoleColor.Yellow);
-                }
-                catch (ArgumentNullException)
-                {
-                    Output.Message("Не получилсь подмигнуть\n", ConsoleColor.Blue);
+                    averageSmileStrength += smile.Strength;
+                    smileCount++;
                 }
             }
-            Output.Message($"Самая длинная причина улыбки: {smileReason}, длина: { smileReasonLength}\n", ConsoleColor.Cyan);
+            averageSmileStrength /= smileCount;
 
+            return averageSmileStrength;
+        }
+
+        /// <summary>
+        /// Подмигивает животным глазом
+        /// </summary>
+        /// <param name="emos">Набор эмодзи</param>
+        public static void Wink(Emoji[] emos)
+        {
+            foreach (Emoji emo in emos)
+            {
+                if (emo is AnimalEmoji an)
+                {
+                    Output.Message("Вам подмигнули: (^-0( ", ConsoleColor.Magenta);
+                    Output.Message(an + "\n", ConsoleColor.Magenta);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Возвращает выражение максимальной длины в массиве
+        /// </summary>
+        /// <param name="emos">Массив эмодзи</param>
+        /// <returns>Выражение</returns>
+        public static string MaxExpressionLength(Emoji[] emos)
+        {
+            string str = string.Empty;
+            foreach (Emoji emo in emos)
+            {
+                FaceEmoji face = emo as FaceEmoji;
+
+                try
+                {
+                    if (str.Length < face.Expression.Length)
+                        str = face.Expression;
+                }
+                catch {}
+            }
+            return str;
         }
     }
 }

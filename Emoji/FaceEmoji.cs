@@ -3,13 +3,16 @@ using System;
 
 namespace LibraryEmoji
 {
+    /// <summary>
+    /// Класс лицевых эмодзи
+    /// </summary>
     public class FaceEmoji : Emoji
     {
         static readonly string[] expressions =
         [
             ":(", ":)", "^|0_0|^", "(0 + 0(", 
-            "://", ";(", "?:", ":-(", ":-)", "(~` _ ~`(",
-            "- _ -", "'_'", "|$_$|", "<|0,0|>"
+            "://", ";(", ";)", "?:", ":-(", ":-)", "(~` _ ~`(",
+            "- _ -", "'_'", "|$_$|", "<|0,0|>", @"_/(0 - 0(\_"
         ];
         
         string? _expression;
@@ -36,7 +39,6 @@ namespace LibraryEmoji
             get => _strength;
             set
             {
-                ArgumentOutOfRangeException.ThrowIfLessThan(value, 0, "Сила лицевой эмодзи не может быть меньше 0");
                 ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 10, "Сила лицевой эмодзи не может быть больше 10");
 
                 _strength = value;
@@ -72,6 +74,7 @@ namespace LibraryEmoji
         public FaceEmoji(Random rnd) => RandomInit();
         #endregion
 
+        #region Show
         /// <summary>
         /// Передаёт информацию об эмодзи
         /// </summary>
@@ -79,24 +82,43 @@ namespace LibraryEmoji
         public override string VirtualShow() => ToString();
 
         /// <summary>
+        /// Возвращает данные объекта
+        /// </summary>
+        /// <returns></returns>
+        public new string Show() => ToString();
+        #endregion
+
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        public override string ToString() => base.ToString() + $"Выражение: {Expression}. Сила: {Strength}. ";
+
+        #region Всё для Equals
+        /// <summary>
         /// Сранивает объекты
         /// </summary>
         /// <param name="obj">Сравниваемый объект</param>
         /// <returns>true если равны</returns>
-        public override bool Equals(object? obj)
+        override public bool Equals(object? obj) => obj is FaceEmoji f && SimpleEquals(f);
+
+        /// <summary>
+        /// Дополнительно проверяет равенство силы и выражения
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns>true, если равны</returns>
+        override public bool SimpleEquals(Emoji other)
         {
-            return obj is FaceEmoji face &&
-                   face.Strength == Strength &&
-                   face.Expression == Expression &&
-                   face.Name == Name &&
-                   face.Tag == Tag &&
-                   face._number.Equals(_number);
+            return base.SimpleEquals(other) &&
+                   Strength == ((FaceEmoji)other).Strength &&
+                   Expression == ((FaceEmoji)other).Expression;
         }
+        #endregion
 
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        protected override void Init()
+        override protected void Init()
         {
             base.Init();
             Output.Message("Введите выражение лица эмодзи", ConsoleColor.White);
@@ -106,43 +128,19 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Получает хеш-код
-        /// </summary>
-        /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => base.GetHashCode() + Strength.GetHashCode() +
-                                             Expression.GetHashCode();
-
-        /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
         override public void RandomInit()
         {
             base.RandomInit();
             Expression = expressions[random.Next(0, expressions.Length)];
+            Strength = (ushort)random.Next(10);
         }
 
         /// <summary>
-        /// Возвращает общие данные всех классов(название и тег)
+        /// Получает хеш-код
         /// </summary>
-        /// <returns>Строка с данными</returns>
-        public override string ToString() => $"Вид: {nameof(FaceEmoji)}. Выражение: {Expression}. Сила: {Strength}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
-
-        /// <summary>
-        /// Возвращает данные объекта
-        /// </summary>
-        /// <returns></returns>
-        public new string Show() => ToString();
-
-        /// <summary>
-        /// Подмигивает пользователю, если возможно
-        /// </summary>
-        /// <param name="face">То эмодзи, которое будет подмигивать</param>
-        /// <returns>Подмигивающая строка</returns>
-        public static string Wink(FaceEmoji face)
-        {
-            ArgumentNullException.ThrowIfNull(face);
-
-            return $"{face.Expression} -> (>_^)\n";
-        }
+        /// <returns>Значение хеш-кода</returns>
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode, Strength, Expression);
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace lab_10_v5_ClassLibrary;
-
-public class IdNumber
+﻿public class IdNumber
 {
     private int _number;
-
+    /// <summary>
+    /// Номер
+    /// </summary>
     public int Number
     {
         get => _number;
@@ -18,18 +18,12 @@ public class IdNumber
     /// <summary>
     /// Конструктор без параметров
     /// </summary>
-    public IdNumber()
-    {
-        _number = 0;
-    }
-
+    public IdNumber() => _number = 0; 
+        
     /// <summary>
     /// Конструктор с параметрами
     /// </summary>
-    public IdNumber(int number)
-    {
-        Number = number;
-    }
+    public IdNumber(int number) => Number = number;
 
     /// <summary>
     /// Сравнивает два номера

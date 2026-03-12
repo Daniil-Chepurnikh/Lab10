@@ -3,12 +3,15 @@ using System;
 
 namespace LibraryEmoji
 {
-    public class SmilingEmoji : Emoji
+    /// <summary>
+    /// Класс улыбающихся эмодзи
+    /// </summary>
+    public class SmilingEmoji : FaceEmoji
     {
         /// <summary>
         /// возможные причины улыбок для случайного выбора
         /// </summary>
-        static readonly string[] smileReasons =
+        public static readonly string[] smileReasons =
         [
             "хорошая погода", "победа команды", "хорошее настроение",
             "вкусная еда", "весёлое видео", "выходные", "любимая музыка",
@@ -55,31 +58,27 @@ namespace LibraryEmoji
         public SmilingEmoji(Random rnd) => RandomInit();
         #endregion
 
-        /// <summary>
-        /// Передаёт инфорацию об эмодзи
-        /// </summary>
-        /// <returns>Строка с информацией</returns>
-        override public string VirtualShow() => ToString();
-
+        #region Всё для Equals
         /// <summary>
         /// Сравнивает объекты
         /// </summary>
         /// <param name="obj">Сравнивемый объект</param>
         /// <returns>true если равны</returns>
-        override public bool Equals(object? obj)
-        {
-            return obj is SmilingEmoji smile
-                   && smile.SmileReason == SmileReason &&
-                   smile.Name == Name &&
-                   smile.Tag == Tag &&
-                   smile._number.Equals(_number);
-        }
+        override public bool Equals(object? obj) => obj is SmilingEmoji smile && SimpleEquals(smile);
+
+        /// <summary>
+        /// Дополняет проверкой на равенство причин улыбки
+        /// </summary>
+        /// <param name="other">Сравниваемый эмодзи</param>
+        /// <returns>true, если равны</returns>
+        override public bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && SmileReason == ((SmilingEmoji)other).SmileReason;
+        #endregion
 
         /// <summary>
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => base.GetHashCode() + SmileReason.GetHashCode();
+        override public int GetHashCode() => HashCode.Combine(base.GetHashCode(), SmileReason);
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -100,12 +99,7 @@ namespace LibraryEmoji
             SmileReason = smileReasons[random.Next(0, smileReasons.Length)];
         }
 
-        /// <summary>
-        /// Возвращает общие данные всех классов(название и тег)
-        /// </summary>
-        /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {nameof(SmilingEmoji)}. Причина улыбки: {SmileReason}. Название: {Name}, тег: {Tag}."; // спросить куда и как это пристроить
-
+        #region Show 
         /// <summary>
         /// Передаёт строку данных покемона
         /// </summary>
@@ -113,14 +107,16 @@ namespace LibraryEmoji
         new public string Show() => ToString();
 
         /// <summary>
-        /// Возвращает длину причины улыбки, если возможно
+        /// Передаёт инфорацию об эмодзи
         /// </summary>
-        /// <param name="emoji">Эмодзи, длину причны улыбки которого мы хотим узнать</param>
-        /// <returns>Длина причины улыбки</returns>
-        /// <exception cref="ArgumentNullException">При передаче аргумента null</exception>
-        public static int GetSmileReasonLength(SmilingEmoji? emoji)
-        {
-            return emoji is not null ? emoji.SmileReason.Length : throw new ArgumentNullException();
-        }
+        /// <returns>Строка с информацией</returns>
+        override public string VirtualShow() => ToString();
+        #endregion
+
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        override public string ToString() => base.ToString() + $"Причина улыбки: {SmileReason}.";
     }
 }

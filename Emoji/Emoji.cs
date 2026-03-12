@@ -4,23 +4,29 @@ using System.Text.RegularExpressions;
 
 namespace LibraryEmoji
 {
-    public class Emoji : IRandomInit
+    /// <summary>
+    /// Базовый класс библиотеки
+    /// </summary>
+    public class Emoji : IRandomInit, IComparable
     {
-        protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры и специальные символы";
+        protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
 
+        /// <summary>
+        /// Генератор случайных чисел для RandomInit
+        /// </summary>
         protected static readonly Random random = new();
-        
+
+        public IdNumber _number;
+
         /// <summary>
         /// возможные названия для случайного выбора
         /// </summary>
-        static readonly string[] names =
+        public static readonly string[] names =
         [
             "радость", "злость", "печаль", "гнев", "страх",
             "ненависть", "любовь", "спокойствие"
         ];
-
-        protected IdNumber _number;
         
         string? _name;
         /// <summary>
@@ -37,33 +43,9 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Проверяет строку на удовлетворение требованиям
-        /// </summary>
-        /// <param name="checkString"></param>
-        /// <returns>true если строка подходит</returns>
-        /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
-        /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
-        protected static bool IsCorrectString(string str)
-        {
-            if (string.IsNullOrWhiteSpace(str))
-                throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
-            
-            string checkString = str.Replace("\t", " ");
-            
-            string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            //hasSpecialChar &&= words.Length > 2;  спросить чё за жесть
-
-            if (Regex.IsMatch(checkString, @"\d") || words.Length > 2)
-                throw new ArgumentException(ERROR_DIGIT_LONG_STRING);
-
-            return true;
-        }
-
-        /// <summary>
         /// возможные теги для случайного выбора
         /// </summary>
-        static readonly string[] tags =
+        public static readonly string[] tags =
         [
             "улыбка", "слёзы", "мат", "поцелуй", "салют",
             "цветок", "деньги"
@@ -83,6 +65,28 @@ namespace LibraryEmoji
             }
         }
 
+        /// <summary>
+        /// Проверяет строку на удовлетворение требованиям
+        /// </summary>
+        /// <param name="checkString"></param>
+        /// <returns>true если строка подходит</returns>
+        /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
+        /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
+        protected static bool IsCorrectString(string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+                throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
+
+            string checkString = str.Replace("\t", " ");
+
+            string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            if (Regex.IsMatch(checkString, @"\d") || words.Length > 2)
+                throw new ArgumentException(ERROR_DIGIT_LONG_STRING);
+
+            return true;
+        }
+
         #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
@@ -91,7 +95,7 @@ namespace LibraryEmoji
         {
             Name = "Без названия";
             Tag = "Без тега";
-            _number = new IdNumber();
+            _number = new();
         }
 
         /// <summary>
@@ -112,6 +116,7 @@ namespace LibraryEmoji
         public Emoji(Random rnd) => RandomInit();
         #endregion
 
+        #region Всё для Equals
         /// <summary>
         /// Сранивает объекты
         /// </summary>
@@ -119,12 +124,24 @@ namespace LibraryEmoji
         /// <returns>true если равны</returns>
         override public bool Equals(object? obj)
         {
-            return obj is Emoji emoji &&
-                   Name == emoji.Name &&
-                   Tag == emoji.Tag &&
-                   _number.Equals(emoji._number);
+            return obj is Emoji other &&
+            SimpleEquals(other);
         }
 
+        /// <summary>
+        /// Проверяет равенство названия, тега и номера
+        /// </summary>
+        /// <param name="other">Сравниваемый эмодзи</param>
+        /// <returns>true, равны</returns>
+        virtual public bool SimpleEquals(Emoji other)
+        {
+            return Name == other.Name &&
+                   Tag == other.Tag &&
+                   _number.Equals(other._number);
+        }
+        #endregion
+
+        #region Show
         /// <summary>
         /// Показывает данные эмодзи
         /// </summary>
@@ -132,10 +149,25 @@ namespace LibraryEmoji
         virtual public string VirtualShow() => ToString();
 
         /// <summary>
+        /// Показывает данные эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        public string Show() => ToString();
+        #endregion
+
+        /// <summary>
+        /// Возвращает общие данные всех классов(название и тег)
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. ";
+        /* Сначала решил попробоавать просто геттайп, но печатало с библиотекой
+         * это не мой Name а object*/
+
+        /// <summary>
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => Name.GetHashCode() + Tag.GetHashCode() + _number.GetHashCode();
+        override public int GetHashCode() => HashCode.Combine(Name, Tag, _number);
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
@@ -145,7 +177,7 @@ namespace LibraryEmoji
             Name = names[random.Next(0, names.Length)];
             Tag = tags[random.Next(0, tags.Length)];
             _number = new(random.Next(0, 111));
-        } // спросить куда и как это пристроить
+        }
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -160,15 +192,21 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Возвращает общие данные всех классов(название и тег)
+        /// Реализация интерфейса IComparable
         /// </summary>
-        /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {nameof(Emoji)}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
+        /// <param name="obj">Сравниваемый объект</param>
+        /// <returns>Результат сравнения</returns>
+        virtual public int CompareTo(object? obj)
+        {
+            Emoji other = obj as Emoji;
+            ArgumentNullException.ThrowIfNull(other);
 
-        /// <summary>
-        /// Показывает данные эмодзи
-        /// </summary>
-        /// <returns>Строка с информацией</returns>
-        public string Show() => ToString();
+            int result = string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+            
+            if (result != 0)
+                return result;
+            else
+                return string.Compare(Tag, other.Tag, StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

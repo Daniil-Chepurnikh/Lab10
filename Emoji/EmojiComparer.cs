@@ -1,13 +1,11 @@
 ﻿using LibraryEmoji;
 using System.Collections;
 
-namespace lab_10_v5_ClassLibrary;
-
 public class EmojiComparer : IComparer
 {
     public int Compare(object? x, object? y) // какой смог(захотел)
     {
-        if (x == null && y == null)
+        if (x != null && y != null)
         {
             Emoji em1 = (Emoji)x;
             Emoji em2 = (Emoji)x;

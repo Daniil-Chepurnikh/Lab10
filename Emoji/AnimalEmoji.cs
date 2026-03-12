@@ -1,18 +1,20 @@
-﻿using lab_10_v5_ClassLibrary;
-using MyDCInputOutputConsole;
+﻿using MyDCInputOutputConsole;
 using System;
 
 namespace LibraryEmoji
 {
+    /// <summary>
+    /// Класс животных эмодзи
+    /// </summary>
     public class AnimalEmoji : Emoji
     {
         /// <summary>
         /// возможные части тела животного для случайного выбора
         /// </summary>
-        static readonly string[] animalParts =
+        public static readonly string[] animalParts =
         [
             "голова", "лапа", "хвост", "глаз", "ухо",
-            "нос", "зубы", "шея", "коготь"
+            "нос", "зубы", "шея", "коготь", "рога"
         ];
 
         string? _animalPart;
@@ -54,25 +56,41 @@ namespace LibraryEmoji
         public AnimalEmoji(Random rnd) => RandomInit();
         #endregion
 
+        #region Всё для Equals
         /// <summary>
         /// Сранивает объекты
         /// </summary>
         /// <param name="obj">Сравниваемый объект</param>
         /// <returns>true если равны</returns>
-        override public bool Equals(object? obj)
-        {
-            return obj is AnimalEmoji animal
-                   && animal.AnimalPart == AnimalPart &&
-                   animal.Name == Name &&
-                   animal.Tag == Tag &&
-                   animal._number.Equals(_number);          
-        }
+        override public bool Equals(object? obj) => obj is AnimalEmoji an && SimpleEquals(an);
 
+        /// <summary>
+        /// Дополняет проверкой на равенство части животного
+        /// </summary>
+        /// <param name="other">Сравниваемый эмодзи</param>
+        /// <returns>true, если равны</returns>
+        override public bool SimpleEquals(Emoji other) => base.SimpleEquals(other) && AnimalPart == ((AnimalEmoji)other).AnimalPart;
+        #endregion
+
+        #region Show
         /// <summary>
         /// Передаёт информацию об эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
         override public string VirtualShow() => ToString();
+
+        /// <summary>
+        /// Показывает данные эмодзи
+        /// </summary>
+        /// <returns>Строка с информацией</returns>
+        new public string Show() => ToString();
+        #endregion
+
+        /// <summary>
+        /// Возвращает общие данные всех классов
+        /// </summary>
+        /// <returns>Строка с данными</returns>
+        override public string ToString() => base.ToString() + $"Часть тела: {AnimalPart}.";
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -88,7 +106,7 @@ namespace LibraryEmoji
         /// Получает хеш-код объекта
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => base.GetHashCode() + AnimalPart.GetHashCode();
+        override public int GetHashCode() => HashCode.Combine(base.GetHashCode(), AnimalPart);
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
@@ -98,25 +116,5 @@ namespace LibraryEmoji
             base.RandomInit();
             AnimalPart = animalParts[random.Next(0, animalParts.Length)];
         }
-
-        /// <summary>
-        /// Возвращает общие данные всех классов(название и тег)
-        /// </summary>
-        /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {nameof(AnimalEmoji)}. Часть тела: {AnimalPart}. Название: {Name}, тег: {Tag}"; // спросить куда и как это пристроить
-
-        /// <summary>
-        /// Показывает данные эмодзи
-        /// </summary>
-        /// <returns>Строка с информацией</returns>
-        new public string Show() => ToString();
-
-        /// <summary>
-        /// Без комментариев
-        /// </summary>
-        /// <returns>Без комментариев</returns>
-        public static string SayRrroarrr() => "~Rrroarrr~\n";
-
-
     }
 }

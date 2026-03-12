@@ -1,5 +1,6 @@
 ﻿using lab_10_v5_ClassLibrary;
 using System;
+using System.Collections;
 
 namespace LibraryEmoji
 {
@@ -319,6 +320,9 @@ namespace LibraryEmoji
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Рандомная инициализация
+        /// </summary>
         public void RandomInit()
         {
             Random rn = new Random();
@@ -326,6 +330,11 @@ namespace LibraryEmoji
             Attack = rn.Next(100, 200);
             Defense = rn.Next(100, 200);
             Stamina = rn.Next(100, 200);
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
         }
 
         // TODO: сделать GetHashCode при необходимости
