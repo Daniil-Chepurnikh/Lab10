@@ -1,6 +1,4 @@
-﻿namespace lab_10_v5_ClassLibrary;
-
-public class IdNumber
+﻿public class IdNumber
 {
     private int _number;
     /// <summary>
