@@ -8,9 +8,11 @@ namespace Demo
     {
         static void Main(string[] args)
         {
-            Emoji[] emojis = new Emoji[22];
+            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
-            Emoji[] emojis2 = { new Emoji()};
+            Emoji[] emojis = new Emoji[15];
+
+            Emoji[] emojis2 = { new Emoji() };
 
             for (int p = 0; p < emojis.Length; p++)
             {
@@ -25,8 +27,6 @@ namespace Demo
                 };
             }
 
-            Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
-
             if (CalculateAverageSmileStrength(emojis) > 5)
                 Output.Message("Эмодзи счастливы\n", ConsoleColor.Blue);
             else if (CalculateAverageSmileStrength(emojis) > 0)
@@ -34,6 +34,8 @@ namespace Demo
             else
                 Output.Message("Нет ни одной улыбающейся эмоции\n", ConsoleColor.White);
 
+            Output.Separator();
+            
             if (CalculateAverageSmileStrength(emojis2) > 5)
                 Output.Message("Эмодзи счастливы\n", ConsoleColor.Blue);
             else if (CalculateAverageSmileStrength(emojis2) > 0)
@@ -41,7 +43,7 @@ namespace Demo
             else
                 Output.Message("Нет ни одной улыбающейся эмоции\n", ConsoleColor.White);
 
-            Output.Message($"Количество трёхбуквенных частей тела живтоных: {CountAnimalParts(emojis)}\n", ConsoleColor.Blue);
+            Output.Message($"Количество трёхбуквенных частей тела животных: {CountAnimalParts(emojis)}\n", ConsoleColor.Blue);
 
             Output.Message("Самое длинное выражение: " + MaxExpressionLength(emojis) + "\n", ConsoleColor.White);
 
@@ -71,6 +73,46 @@ namespace Demo
                 Output.Message(emojis[index] +"\n", ConsoleColor.White);
                 Output.Message($" Номер элемента: {index + 1}\n", ConsoleColor.White);
             }
+
+            Emoji[] emojisComaparer = new Emoji[15];
+
+            for (int p = 0; p < emojisComaparer.Length; p++)
+            {
+                Random rn = new();
+
+                emojisComaparer[p] = rn.Next(4) switch
+                {
+                    0 => new Emoji(rn),
+                    1 => new AnimalEmoji(rn),
+                    2 => new FaceEmoji(rn),
+                    _ => new SmilingEmoji(rn) // как дефолт в обычном свитч
+                };
+            }
+
+            Array.Sort(emojisComaparer, new EmojiComparer());
+            for (int q = 0; q < emojisComaparer.Length; q++)
+            {
+                ConsoleColor color = (q % 3) switch
+                {
+                    0 => ConsoleColor.Cyan,
+                    1 => ConsoleColor.Magenta,
+                    _ => ConsoleColor.Green
+                };
+
+                Output.Message(emojisComaparer[q] + "\n", color);
+            }
+
+            Output.Message("Начался бинарный поиск\n", ConsoleColor.White);
+
+            int indexComparer = Array.BinarySearch(emojisComaparer, new Emoji(9999), new EmojiComparer());
+            if (index < 0)
+                Output.Message("Элемент не найден\n", ConsoleColor.Blue);
+            else
+            {
+                Output.Message(emojisComaparer[index] + "\n", ConsoleColor.White);
+                Output.Message($" Номер элемента: {index + 1}\n", ConsoleColor.White);
+            }
+
         }
 
         /// <summary>
