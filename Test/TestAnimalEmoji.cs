@@ -22,13 +22,47 @@ public class TestAnimalEmoji
     }
 
     [TestMethod]
-    public void TestAnimalPart()
+    public void TestAnimalPart1()
     {
         AnimalEmoji e = new();
         bool isPassed = false;
         try
         {
             e.AnimalPart = null;
+        }
+        catch (ArgumentNullException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
+
+    [TestMethod]
+    public void TestAnimalPart2()
+    {
+        AnimalEmoji e = new();
+        bool isPassed = false;
+        try
+        {
+            e.AnimalPart = "";
+        }
+        catch (ArgumentNullException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
+
+    [TestMethod]
+    public void TestAnimalPart3()
+    {
+        AnimalEmoji e = new();
+        bool isPassed = false;
+        try
+        {
+            e.AnimalPart = "                                      ";
         }
         catch (ArgumentNullException)
         {

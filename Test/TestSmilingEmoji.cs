@@ -22,7 +22,7 @@ public class TestSmilingEmoji
     }
 
     [TestMethod]
-    public void TestSmileReason()
+    public void TestSmileReason1()
     {
         SmilingEmoji e = new();
         bool isPassed = false;
@@ -31,6 +31,40 @@ public class TestSmilingEmoji
             e.SmileReason = "     ";
         }
         catch (ArgumentNullException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
+
+    [TestMethod]
+    public void TestSmileReason2()
+    {
+        SmilingEmoji e = new();
+        bool isPassed = false;
+        try
+        {
+            e.SmileReason = "";
+        }
+        catch (ArgumentNullException)
+        {
+            isPassed = true;
+        }
+
+        Assert.IsTrue(isPassed);
+    }
+
+    [TestMethod]
+    public void TestSmileReason3()
+    {
+        SmilingEmoji e = new();
+        bool isPassed = false;
+        try
+        {
+            e.SmileReason = "q q q";
+        }
+        catch (ArgumentException)
         {
             isPassed = true;
         }

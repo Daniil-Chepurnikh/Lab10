@@ -15,6 +15,43 @@ namespace Tests
         }
 
         [TestMethod]
+        public void TestExpression()
+        {
+            FaceEmoji e = new();
+
+            bool isPassed = false;
+            try
+            {
+                e.Expression = "                        ";
+            }
+            catch (ArgumentException)
+            {
+                isPassed = true;
+            }
+
+            Assert.IsTrue(isPassed);
+        }
+
+
+        [TestMethod]
+        public void TestStrength()
+        {
+            FaceEmoji e = new();
+
+            bool isPassed = false;
+            try
+            {
+                e.Strength = 1111;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                isPassed = true;
+            }
+
+            Assert.IsTrue(isPassed);
+        }
+
+        [TestMethod]
         public void TestShowToString()
         {
             Random rnd = new Random();
