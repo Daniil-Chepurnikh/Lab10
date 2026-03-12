@@ -142,7 +142,6 @@ namespace LibraryEmoji
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => base.GetHashCode() + Strength.GetHashCode() +
-                                             Expression.GetHashCode();
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode, Strength, Expression);
     }
 }
