@@ -280,7 +280,24 @@ namespace Tests
 
         public void TestCompare3()
         {
-            Emoji[] emojis = { new Emoji(), null };
+            Emoji[] emojis = { null, new Emoji() };
+
+            bool isPassed = false;
+            try
+            {
+                Array.Sort(emojis, new EmojiComparer());
+            }
+            catch (InvalidOperationException)
+            {
+                isPassed = true;
+            }
+
+            Assert.IsTrue(isPassed);
+        }
+
+        public void TestCompare4()
+        {
+            Emoji[] emojis = { null, null };
 
             bool isPassed = false;
             try
