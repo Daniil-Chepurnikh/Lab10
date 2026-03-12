@@ -120,6 +120,11 @@ namespace Demo
             }
         }
 
+        /// <summary>
+        /// Возвращает выражение максимальной длины в массиве
+        /// </summary>
+        /// <param name="emos">Массив эмодзи</param>
+        /// <returns>Выражение</returns>
         public static string MaxExpressionLength(Emoji[] emos)
         {
             string str = string.Empty;
