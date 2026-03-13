@@ -6,6 +6,20 @@ namespace Tests;
 public class TestSmilingEmoji
 {
     [TestMethod]
+    public void TestGetHashCode()
+    {
+        SmilingEmoji e = new();
+
+        int hash1 = e.GetHashCode();
+
+        e.SmileReason = "Реал Мадрид";
+
+        int hash2 = e.GetHashCode();
+
+        Assert.AreNotEqual(hash1, hash2);
+    }
+
+    [TestMethod]
     public void TestWithoutParameters()
     {
         SmilingEmoji e = new();
@@ -80,8 +94,8 @@ public class TestSmilingEmoji
         SmilingEmoji e = new(rnd);
 
         string toString = e.ToString();
-        string show = e.ToString();
-        string showVirtual = e.ToString();
+        string show = e.Show();
+        string showVirtual = e.VirtualShow();
 
         Assert.AreEqual(showVirtual, show);
         Assert.AreEqual(toString, show);

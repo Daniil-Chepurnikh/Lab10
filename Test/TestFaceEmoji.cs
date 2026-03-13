@@ -6,6 +6,21 @@ namespace Tests
     public sealed class TestFaceEmoji
     {
         [TestMethod]
+        public void TestGetHashCode()
+        {
+            FaceEmoji e = new();
+
+            int hash1 = e.GetHashCode();
+
+            e.Expression = "-----_-------";
+            e.Strength = 7;
+
+            int hash2 = e.GetHashCode();
+
+            Assert.AreNotEqual(hash1, hash2);
+        }
+
+        [TestMethod]
         public void TestWithoutParameters()
         {
             FaceEmoji e = new();
@@ -59,8 +74,8 @@ namespace Tests
             FaceEmoji e = new(rnd);
 
             string toString = e.ToString();
-            string show = e.ToString();
-            string showVirtual = e.ToString();
+            string show = e.Show();
+            string showVirtual = e.VirtualShow();
 
             Assert.AreEqual(showVirtual, show);
             Assert.AreEqual(toString, show);

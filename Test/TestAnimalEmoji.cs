@@ -6,6 +6,20 @@ namespace Tests;
 public class TestAnimalEmoji
 {
     [TestMethod]
+    public void TestGetHashCode()
+    {
+        AnimalEmoji e = new();
+
+        int hash1 = e.GetHashCode();
+
+        e.AnimalPart = "Муха вертолёт";
+
+        int hash2 = e.GetHashCode();
+
+        Assert.AreNotEqual(hash1, hash2);
+    }
+
+    [TestMethod]
     public void TestWithoutParameters()
     {
         AnimalEmoji e = new();
@@ -79,9 +93,9 @@ public class TestAnimalEmoji
         
         AnimalEmoji e = new(rnd);
 
-        string toString = e.ToString();
-        string show = e.ToString();
-        string showVirtual = e.ToString();
+        string toString = e.Show();
+        string show = e.Show();
+        string showVirtual = e.VirtualShow();
 
         Assert.AreEqual(showVirtual, show);
         Assert.AreEqual(toString, show);
