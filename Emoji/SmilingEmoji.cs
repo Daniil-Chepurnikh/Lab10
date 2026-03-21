@@ -40,11 +40,9 @@ namespace LibraryEmoji
         public SmilingEmoji() :base() => SmileReason = "Просто улыбается";
 
         /// <summary>
-        /// Конструктор с параметрами
+        /// Инициализация с клавиатуры
         /// </summary>
-        /// <param name="name">Название эмодзи</param>
-        /// <param name="tag">Тег эмодзи</param>
-        /// <param name="smileReason">Причина улыбки</param>
+        /// <param name="num">Название эмодзи</param>
         public SmilingEmoji(int num)
         {
             Init();
@@ -54,8 +52,23 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор со случайнми значениями
         /// </summary>
-        /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
+        /// <param name="rnd">Просто маркер того, что нужны случайные значения</param>
         public SmilingEmoji(Random rnd) => RandomInit();
+
+        /// <summary>
+        /// Конструктор с параметрами
+        /// </summary>
+        /// <param name="name">Название жмодзи</param>
+        /// <param name="tag">Тег эмодзи</param>
+        /// <param name="expression">Выражение лица эмодзи</param>
+        /// <param name="smileReason">Причина улыбки эмодзи</param>
+        /// <param name="strength">Сила эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
+        public SmilingEmoji(string name, string tag, string expression, string smileReason, ushort strength, int num)
+            : base(name, tag, expression,  strength, num)
+        {
+            SmileReason = smileReason;
+        }
         #endregion
 
         #region Всё для Equals
