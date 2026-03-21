@@ -38,15 +38,25 @@ namespace LibraryEmoji
         public AnimalEmoji() :base() => AnimalPart = "Часть тела";
 
         /// <summary>
-        /// Конструктор с параметрами
+        /// Инициализация с клавиатуры
         /// </summary>
-        /// <param name="name">Название эмодзи</param>
-        /// <param name="tag">Тег эмодзи</param>
-        /// <param name="animalPart">Часть тела животного в эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
         public AnimalEmoji(int num)
         {
             Init();
             _number = new(num);
+        }
+
+        /// <summary>
+        /// Конструктор с параметрами
+        /// </summary>
+        /// <param name="name">Название эмодзи</param>
+        /// <param name="tag">Тег эмодзи</param>
+        /// <param name="animalPart">Часть животного в эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
+        public AnimalEmoji(string name, string tag, string animalPart, int num) : base(name, tag, num)
+        {
+            AnimalPart = animalPart;
         }
 
         /// <summary>
@@ -115,6 +125,18 @@ namespace LibraryEmoji
         {
             base.RandomInit();
             AnimalPart = animalParts[random.Next(0, animalParts.Length)];
+        }
+
+        /// <summary>
+        /// Клонирует животное эмодзи
+        /// </summary>
+        /// <returns></returns>
+        override public object Clone()
+        {
+            AnimalEmoji an = (AnimalEmoji)base.Clone();
+            an.AnimalPart = AnimalPart;
+
+            return an;
         }
     }
 }
