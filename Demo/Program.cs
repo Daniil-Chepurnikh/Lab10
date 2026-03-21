@@ -85,7 +85,7 @@ namespace Demo
                     0 => new Emoji(rn),
                     1 => new AnimalEmoji(rn),
                     2 => new FaceEmoji(rn),
-                    _ => new SmilingEmoji(rn) // как дефолт в обычном свитч
+                    _ => new SmilingEmoji(rn)
                 };
             }
 
@@ -104,7 +104,7 @@ namespace Demo
 
             Output.Message("Начался бинарный поиск\n", ConsoleColor.White);
 
-            int indexComparer = Array.BinarySearch(emojisComaparer, new Emoji(9999), new EmojiComparer());
+            int indexComparer = Array.BinarySearch(emojisComaparer, new Emoji(1), new EmojiComparer());
             if (index < 0)
                 Output.Message("Элемент не найден\n", ConsoleColor.Blue);
             else
@@ -113,6 +113,8 @@ namespace Demo
                 Output.Message($" Номер элемента: {index + 1}\n", ConsoleColor.White);
             }
 
+
+            // TODO: добавить демонстрацию IClonable
         }
 
         /// <summary>
