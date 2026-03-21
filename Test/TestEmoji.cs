@@ -7,6 +7,8 @@ namespace Tests
     {
         // TODO: добавить тесты ICloneable
 
+        // TODO: добавить тесты конкструктора с параметрами
+
         [TestMethod]
         public void TestGetHashCode()
         {
