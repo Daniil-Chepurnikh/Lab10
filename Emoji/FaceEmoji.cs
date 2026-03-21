@@ -56,11 +56,9 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Конструктор с параметрами
+        /// Инициализация с клавиатуры
         /// </summary>
-        /// <param name="name">Название эмодзи</param>
-        /// <param name="tag">Тег эмодзи</param>
-        /// <param name="expression">Выражение лица эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
         public FaceEmoji(int num)
         {
             Init();
@@ -72,6 +70,20 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
         public FaceEmoji(Random rnd) => RandomInit();
+
+        /// <summary>
+        /// Конструктор с параметрами
+        /// </summary>
+        /// <param name="name">Название эмодзи</param>
+        /// <param name="tag">Тег эмодзи</param>
+        /// <param name="expression">Выражение лица эмодзи</param>
+        /// <param name="strength">Сила эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
+        public FaceEmoji(string name, string tag, string expression, ushort strength, int num) : base(name, tag, num)
+        {
+            Expression = expression;
+            Strength = strength;
+        }
         #endregion
 
         #region Show
