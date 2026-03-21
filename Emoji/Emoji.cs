@@ -6,7 +6,7 @@ namespace LibraryEmoji
     /// <summary>
     /// Базовый класс библиотеки
     /// </summary>
-    public class Emoji : IRandomInit, IComparable
+    public class Emoji : IRandomInit, IComparable, ICloneable
     {
         protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
@@ -98,13 +98,25 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Конструктор с параметрами
+        /// Конструктор инициализации из консоли
         /// </summary>
-        /// <param name="emojiNname"></param>
-        /// <param name="emojiTag"></param>
+        /// <param name="num">Номер эмодзи</param>
         public Emoji(int num)
         {
             Init();
+            _number = new(num);
+        }
+
+        /// <summary>
+        /// Конструктор с параметрами
+        /// </summary>
+        /// <param name="name">Название эмодзи</param>
+        /// <param name="tag">Тег эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
+        public Emoji(string name, string tag, int num)
+        {
+            Name = name;
+            Tag = tag;
             _number = new(num);
         }
 
@@ -158,7 +170,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. ";
+        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. Номер: {_number}";
         /* Сначала решил попробоавать просто геттайп, но печатало с библиотекой
          * это не мой Name а object*/
 
@@ -211,5 +223,11 @@ namespace LibraryEmoji
             else
                 return string.Compare(Tag, other.Tag, StringComparison.OrdinalIgnoreCase);
         }
+
+        /// <summary>
+        /// Реализация интерфейса IClonable
+        /// </summary>
+        /// <returns></returns>
+        virtual public object Clone() => new Emoji { Name = Name, Tag = Tag, _number = _number };
     }
 }
