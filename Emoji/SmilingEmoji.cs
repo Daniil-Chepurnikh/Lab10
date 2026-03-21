@@ -118,5 +118,14 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Строка с данными</returns>
         override public string ToString() => base.ToString() + $"Причина улыбки: {SmileReason}.";
+
+        override public object Clone()
+        {
+            SmilingEmoji smile = (SmilingEmoji)base.Clone();
+            smile.Strength = Strength;
+            smile.Expression = Expression;
+
+            return smile;
+        }
     }
 }

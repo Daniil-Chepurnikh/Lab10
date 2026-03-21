@@ -142,5 +142,14 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
         public override int GetHashCode() => HashCode.Combine(base.GetHashCode, Strength, Expression);
+
+        override public object Clone()
+        {
+            FaceEmoji face = (FaceEmoji)base.Clone();
+            face.Strength = Strength;
+            face.Expression = Expression;
+
+            return face;
+        }
     }
 }
