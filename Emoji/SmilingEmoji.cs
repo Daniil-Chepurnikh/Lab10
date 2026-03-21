@@ -117,7 +117,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => base.ToString() + $"Причина улыбки: {SmileReason}.";
+        override public string ToString() => base.ToString() + $" Причина улыбки: {SmileReason}.";
 
         override public object Clone()
         {

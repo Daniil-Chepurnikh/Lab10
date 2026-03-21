@@ -104,7 +104,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => base.ToString() + $"Выражение: {Expression}. Сила: {Strength}. ";
+        public override string ToString() => base.ToString() + $" Выражение: {Expression}. Сила: {Strength}. ";
 
         #region Всё для Equals
         /// <summary>

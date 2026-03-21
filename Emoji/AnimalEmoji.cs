@@ -100,7 +100,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => base.ToString() + $"Часть тела: {AnimalPart}.";
+        override public string ToString() => base.ToString() + $" Часть тела: {AnimalPart}.";
 
         /// <summary>
         /// Инициализирует атрибуты
