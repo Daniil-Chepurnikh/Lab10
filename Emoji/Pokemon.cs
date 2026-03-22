@@ -137,8 +137,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Печатает все характеристики покемона
         /// </summary>
-        /// <param name="p">Конкретный покемон</param>
-        override public string ToString() => $"Атака: {Attack,3}, защита: {Defense,3}, выносливость: {Stamina,3}\n";
+        override public string ToString() => $"Вид: {GetType().Name}, атака: {Attack,3}, защита: {Defense,3}, выносливость: {Stamina,3}";
 
         #region Увеличение параметров
         /// <summary>
@@ -335,8 +334,5 @@ namespace LibraryEmoji
         {
             throw new NotImplementedException();
         }
-
-        // TODO: сделать GetHashCode при необходимости
-
     }
 }
