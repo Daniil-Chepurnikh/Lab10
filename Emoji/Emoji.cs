@@ -228,6 +228,13 @@ namespace LibraryEmoji
         /// Реализация интерфейса IClonable
         /// </summary>
         /// <returns></returns>
-        virtual public object Clone() => new Emoji { Name = Name, Tag = Tag, _number = _number };
+        virtual public object Clone()
+        {
+            Emoji emo = (Emoji)this.MemberwiseClone();
+
+            emo._number = new IdNumber(this._number.Number);
+
+            return emo;
+        }
     }
 }

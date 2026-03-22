@@ -158,8 +158,8 @@ namespace LibraryEmoji
         override public object Clone()
         {
             FaceEmoji face = (FaceEmoji)base.Clone();
-            face.Strength = Strength;
-            face.Expression = Expression;
+            face.Strength = this.Strength;
+            face.Expression = this.Expression;
 
             return face;
         }

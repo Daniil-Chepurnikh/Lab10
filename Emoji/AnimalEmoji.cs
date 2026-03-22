@@ -134,7 +134,7 @@ namespace LibraryEmoji
         override public object Clone()
         {
             AnimalEmoji an = (AnimalEmoji)base.Clone();
-            an.AnimalPart = AnimalPart;
+            an.AnimalPart = this.AnimalPart;
 
             return an;
         }

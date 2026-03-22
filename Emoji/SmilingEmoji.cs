@@ -135,8 +135,7 @@ namespace LibraryEmoji
         override public object Clone()
         {
             SmilingEmoji smile = (SmilingEmoji)base.Clone();
-            smile.Strength = Strength;
-            smile.Expression = Expression;
+            smile.SmileReason = this.SmileReason;
 
             return smile;
         }
