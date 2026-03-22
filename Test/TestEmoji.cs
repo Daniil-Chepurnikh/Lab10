@@ -1,13 +1,74 @@
 ﻿using LibraryEmoji;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 namespace Tests
 {
     [TestClass]
     public sealed class TestEmoji
     {
-        // TODO: добавить тесты ICloneable
+        [TestMethod]
+        public void TestCopy()
+        {
+            SmilingEmoji smile = new SmilingEmoji
+            {
+                Expression = "qqqq",
+                Name = "pppp",
+                SmileReason = "hhhh",
+                Strength = 1,
+                Tag = "oooo",
+                Number = new(190)
+            };
 
-        // TODO: добавить тесты конкструктора с параметрами
+            SmilingEmoji smileCopy = smile.ShallowCopy();
+
+            Assert.AreEqual(smile, smileCopy);
+            
+            smile.Name = "русский рок";
+            smile.Expression = "рок жив";
+            smile.Strength = 9;
+            smile.Tag = "Манчестер Красный";
+            smile.Number.Number = new();
+            smile.SmileReason = "ssss";
+
+            Assert.AreNotEqual(smileCopy.Tag, smile.Tag);
+            Assert.AreNotEqual(smileCopy.Name, smile.Name);
+            Assert.AreEqual(smileCopy.Number, smile.Number);
+            Assert.AreNotEqual(smileCopy.Expression, smile.Expression);
+            Assert.AreNotEqual(smileCopy.Strength, smile.Strength);
+        }
+
+        [TestMethod]
+        public void TestClone()
+        {
+            SmilingEmoji emo = new SmilingEmoji { Name = "qqq", Tag = "fwfff", SmileReason = "Нафиг унывать", Expression = ":)))", Strength = 1 };
+
+            SmilingEmoji emoClone = (SmilingEmoji)emo.Clone();
+
+            Assert.AreEqual(emo, emoClone);
+
+            emo.SmileReason = "www";
+            emo.Strength = 9;
+            emo.Expression = "*_*";
+            emo.Name = "qwerty";
+            emo.Tag = "zxcvb";
+            emo.Number = new(3);
+
+            Assert.AreNotEqual(emoClone.Tag, emo.Tag);
+            Assert.AreNotEqual(emoClone.Name, emo.Name);
+            Assert.AreNotEqual(emoClone.Number, emo.Number);
+            Assert.AreNotEqual(emoClone.Expression, emo.Expression);
+            Assert.AreNotEqual(emoClone.Strength, emo.Strength);
+        }
+
+        [TestMethod]
+        public void TestWithParameters()
+        {
+            Emoji e = new("q", "p", new IdNumber(9));
+
+            Assert.AreEqual(expected: "p", e.Tag);
+            Assert.AreEqual(expected: "q", e.Name);
+            Assert.AreEqual(expected: new IdNumber(9),  e.Number);
+        }
 
         [TestMethod]
         public void TestGetHashCode()

@@ -6,6 +6,18 @@ namespace Tests
     public sealed class TestFaceEmoji
     {
         [TestMethod]
+        public void TestWithParameters()
+        {
+            FaceEmoji e = new("q", "p", "h", 10, new IdNumber(9));
+
+            Assert.AreEqual(expected: "p", actual: e.Tag);
+            Assert.AreEqual(expected: "q", actual: e.Name);
+            Assert.AreEqual(expected: new IdNumber(9), actual: e.Number);
+            Assert.AreEqual(expected: "h", actual: e.Expression);
+            Assert.AreEqual(expected: 10, actual: e.Strength);
+        }
+
+        [TestMethod]
         public void TestGetHashCode()
         {
             FaceEmoji e = new();

@@ -6,6 +6,17 @@ namespace Tests;
 public class TestAnimalEmoji
 {
     [TestMethod]
+    public void TestWithParameters()
+    {
+        AnimalEmoji e = new("q", "p", "h", new IdNumber(9));
+
+        Assert.AreEqual(expected: "p", actual: e.Tag);
+        Assert.AreEqual(expected: "q", actual: e.Name);
+        Assert.AreEqual(expected: new IdNumber(9), actual: e.Number);
+        Assert.AreEqual(expected: "h", actual: e.AnimalPart);
+    }
+
+    [TestMethod]
     public void TestGetHashCode()
     {
         AnimalEmoji e = new();

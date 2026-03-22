@@ -6,6 +6,19 @@ namespace Tests;
 public class TestSmilingEmoji
 {
     [TestMethod]
+    public void TestWithParameters()
+    {
+        SmilingEmoji e = new("q", "p", "h", "o", 10, new IdNumber(9));
+
+        Assert.AreEqual(expected: "p", actual: e.Tag);
+        Assert.AreEqual(expected: "q", actual: e.Name);
+        Assert.AreEqual(expected: new IdNumber(9), actual: e.Number);
+        Assert.AreEqual(expected: "h", actual: e.Expression);
+        Assert.AreEqual(expected: 10, actual: e.Strength);
+        Assert.AreEqual(expected: "o", actual: e.SmileReason);
+    }
+
+    [TestMethod]
     public void TestGetHashCode()
     {
         SmilingEmoji e = new();
