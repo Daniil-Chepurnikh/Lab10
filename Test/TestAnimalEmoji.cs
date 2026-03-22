@@ -6,6 +6,45 @@ namespace Tests;
 public class TestAnimalEmoji
 {
     [TestMethod]
+    public void TestClone()
+    {
+        AnimalEmoji emo = new AnimalEmoji { Name = "qqq", Tag = "fwfff", AnimalPart = "Нафиг унывать" };
+
+        AnimalEmoji emoClone = (AnimalEmoji)emo.Clone();
+
+        Assert.AreEqual(emo, emoClone);
+
+        emo.AnimalPart = "www";
+        emo.Name = "qwerty";
+        emo.Tag = "zxcvb";
+        emo.Number = new(3);
+
+        Assert.AreNotEqual(emoClone.Tag, emo.Tag);
+        Assert.AreNotEqual(emoClone.Name, emo.Name);
+        Assert.AreNotEqual(emoClone.Number, emo.Number);
+        Assert.AreNotEqual(emoClone.AnimalPart, emo.AnimalPart);
+    }
+
+    [TestMethod]
+    public void TestCopy()
+    {
+        AnimalEmoji e = new AnimalEmoji { Name = "pppp", Tag = "oooo", Number = new(190), AnimalPart = "www" };
+        AnimalEmoji copy = e.ShallowCopy();
+
+        Assert.AreEqual(copy, e);
+
+        copy.Name = "русский рок";
+        copy.Tag = "Манчестер Красный";
+        copy.Number.Number = new();
+        copy.AnimalPart = "qqqqqqqqqqqqqqqqqqqqqqq";
+
+        Assert.AreNotEqual(copy.Tag, e.Tag);
+        Assert.AreNotEqual(copy.Name, e.Name);
+        Assert.AreNotEqual(copy.AnimalPart, e.AnimalPart);
+        Assert.AreEqual(copy.Number, e.Number);
+    }
+
+    [TestMethod]
     public void TestWithParameters()
     {
         AnimalEmoji e = new("q", "p", "h", new IdNumber(9));

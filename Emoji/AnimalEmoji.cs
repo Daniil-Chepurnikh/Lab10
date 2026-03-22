@@ -1,5 +1,4 @@
 ﻿using MyDCInputOutputConsole;
-using System;
 
 namespace LibraryEmoji
 {
@@ -41,10 +40,10 @@ namespace LibraryEmoji
         /// Инициализация с клавиатуры
         /// </summary>
         /// <param name="num">Номер эмодзи</param>
-        public AnimalEmoji(int num)
+        public AnimalEmoji(IdNumber id)
         {
             Init();
-            Number = new(num);
+            Number = id;
         }
 
         /// <summary>
