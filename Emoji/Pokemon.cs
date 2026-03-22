@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-
-namespace LibraryEmoji
+﻿namespace LibraryEmoji
 {
     public class Pokemon : IRandomInit
     {
@@ -313,11 +310,6 @@ namespace LibraryEmoji
                     && pokemon.Stamina == Stamina;
         }
 
-        public void RandomInit(Random random)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Рандомная инициализация
         /// </summary>
@@ -328,11 +320,6 @@ namespace LibraryEmoji
             Attack = rn.Next(100, 200);
             Defense = rn.Next(100, 200);
             Stamina = rn.Next(100, 200);
-        }
-
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
         }
     }
 }
