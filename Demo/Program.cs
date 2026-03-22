@@ -64,7 +64,7 @@ namespace Demo
 
             Output.Message(".......................Поиск по IComparable.........................\n", ConsoleColor.White);
 
-            int indexComparable = Array.BinarySearch(emojis, new Emoji(9999));
+            int indexComparable = Array.BinarySearch(emojis, new Emoji(new IdNumber(9999)));
             if (indexComparable < 0)
                 Output.Message("Элемент не найден\n", ConsoleColor.Blue);
             else
@@ -103,7 +103,7 @@ namespace Demo
                 Output.Message(emojisComaparer[q] + "\n", color);
             }
 
-            int indexCompare = Array.BinarySearch(emojisComaparer, new Emoji(1), new EmojiComparer());
+            int indexCompare = Array.BinarySearch(emojisComaparer, new Emoji(new IdNumber(1)), new EmojiComparer());
             if (indexCompare < 0)
                 Output.Message("Элемент не найден\n", ConsoleColor.Blue);
             else
@@ -157,6 +157,50 @@ namespace Demo
             Output.Message($"Копия: {smileCopy} \n", ConsoleColor.Red);
             Output.Message($"Эмодзи исходник: {smile} \n", ConsoleColor.Cyan);
 
+            Output.Separator();
+            Output.Message($"..............................Массив из эмодзи и покемонов..................................\n", ConsoleColor.Yellow);
+
+            object[] emojis_pokemons = new object[20];
+
+            for (int p = 0; p < emojis_pokemons.Length; p++)
+            {
+                Random rn = new();
+
+                emojis_pokemons[p] = rn.Next(5) switch
+                {
+                    0 => new Emoji(rn),
+                    1 => new AnimalEmoji(rn),
+                    2 => new FaceEmoji(rn),
+                    3 => new SmilingEmoji(rn),
+                    _ => new Pokemon(rn)
+                };
+            }
+
+            uint emNum, smileNum, anNum, faceNum, pokNum;
+            emNum = smileNum = anNum = faceNum = pokNum = 0;
+            
+            for (int p = 0; p < emojis_pokemons.Length; p++)
+            {
+                Output.Message($"{emojis_pokemons[p]}\n", ConsoleColor.White);
+
+                if (typeof(Emoji) == emojis_pokemons[p].GetType())
+                    emNum++;
+                else if (typeof(AnimalEmoji) == emojis_pokemons[p].GetType())
+                    anNum++;
+                else if (typeof(FaceEmoji) == emojis_pokemons[p].GetType())
+                    faceNum++;
+                else if (typeof(SmilingEmoji) == emojis_pokemons[p].GetType())
+                    smileNum++;
+                else
+                    pokNum++;
+            }
+            Output.Separator();
+
+            Output.Message($"Покемонов: {pokNum}\n", ConsoleColor.Magenta);
+            Output.Message($"Эмодзи: {emNum}\n", ConsoleColor.Magenta);
+            Output.Message($"Лиц: {faceNum} \n", ConsoleColor.Magenta);
+            Output.Message($"Животных: {anNum} \n", ConsoleColor.Magenta);
+            Output.Message($"Улыбок: {smileNum} \n", ConsoleColor.Magenta);
         }
 
         /// <summary>
