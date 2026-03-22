@@ -18,7 +18,7 @@
     /// <summary>
     /// Конструктор без параметров
     /// </summary>
-    public IdNumber() => _number = 0; 
+    public IdNumber() => Number = 0; 
         
     /// <summary>
     /// Конструктор с параметрами
