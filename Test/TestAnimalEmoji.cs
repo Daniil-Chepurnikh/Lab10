@@ -6,6 +6,26 @@ namespace Tests;
 public class TestAnimalEmoji
 {
     [TestMethod]
+    public void TestInit()
+    {
+        // 1. Подготовка: Создаем строку с ожидаемыми значениями
+        // Используем Environment.NewLine для имитации нажатия Enter
+        string simulatedInput = $"www{Environment.NewLine}eee{Environment.NewLine}vvv{Environment.NewLine}";
+
+        // 2. Перенаправляем стандартный ввод на наш StringReader
+        StringReader reader = new StringReader(simulatedInput);
+        Console.SetIn(reader);
+
+        // 3. Вызываем метод, который использует Console.ReadLine()
+        AnimalEmoji a = new AnimalEmoji(new IdNumber(111));
+
+        // 4. Проверяем результаты
+        Assert.AreEqual("www", a.Name);
+        Assert.AreEqual("eee", a.Tag);
+        Assert.AreEqual("vvv", a.AnimalPart);
+    }
+
+    [TestMethod]
     public void TestClone()
     {
         AnimalEmoji emo = new AnimalEmoji { Name = "qqq", Tag = "fwfff", AnimalPart = "Нафиг унывать" };

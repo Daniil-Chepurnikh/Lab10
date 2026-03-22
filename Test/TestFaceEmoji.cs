@@ -6,6 +6,35 @@ namespace Tests
     public sealed class TestFaceEmoji
     {
         [TestMethod]
+        public void TestCopy()
+        {
+            FaceEmoji smile = new FaceEmoji
+            {
+                Expression = "qqqq",
+                Name = "pppp",
+                Strength = 1,
+                Tag = "oooo",
+                Number = new(190)
+            };
+
+            FaceEmoji smileCopy = smile.ShallowCopy();
+
+            Assert.AreEqual(smile, smileCopy);
+
+            smile.Name = "русский рок";
+            smile.Expression = "рок жив";
+            smile.Strength = 9;
+            smile.Tag = "Манчестер Красный";
+            smile.Number.Number = new();
+
+            Assert.AreNotEqual(smileCopy.Tag, smile.Tag);
+            Assert.AreNotEqual(smileCopy.Name, smile.Name);
+            Assert.AreEqual(smileCopy.Number, smile.Number);
+            Assert.AreNotEqual(smileCopy.Expression, smile.Expression);
+            Assert.AreNotEqual(smileCopy.Strength, smile.Strength);
+        }
+
+        [TestMethod]
         public void TestWithParameters()
         {
             FaceEmoji e = new("q", "p", "h", 10, new IdNumber(9));

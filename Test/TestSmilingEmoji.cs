@@ -6,6 +6,29 @@ namespace Tests;
 public class TestSmilingEmoji
 {
     [TestMethod]
+    public void TestInit()
+    {
+        // 1. Подготовка: Создаем строку с ожидаемыми значениями
+        // Используем Environment.NewLine для имитации нажатия Enter
+        string simulatedInput = $"www{Environment.NewLine}eee{Environment.NewLine}qqq{Environment.NewLine}5{Environment.NewLine}vvv{Environment.NewLine}";
+
+        // 2. Перенаправляем стандартный ввод на наш StringReader
+        StringReader reader = new StringReader(simulatedInput);
+        Console.SetIn(reader);
+
+        // 3. Вызываем метод, который использует Console.ReadLine()
+        SmilingEmoji a = new SmilingEmoji(new IdNumber(111));
+
+        // 4. Проверяем результаты
+        Assert.AreEqual("www", a.Name);
+        Assert.AreEqual("eee", a.Tag);
+        Assert.AreEqual("vvv", a.SmileReason);
+        Assert.AreEqual("qqq", a.Expression);
+        Assert.AreEqual(5, a.Strength);
+    }
+
+
+    [TestMethod]
     public void TestCopy()
     {
         SmilingEmoji smile = new SmilingEmoji

@@ -142,7 +142,7 @@ public class TestEquals
     }
 
     [TestMethod]
-    public void TestAnimalEmojiEquals1()
+    public void TestAnimalEmojiEquals()
     {
         AnimalEmoji e = new();
         AnimalEmoji e1 = new();
