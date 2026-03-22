@@ -8,7 +8,7 @@ namespace LibraryEmoji
         /// Реализация интерфейса IComparer
         /// </summary>
         /// <param name="x">Первый объект для сравнения</param>
-        /// <param name="y">второй объект для сравнения</param>
+        /// <param name="y">Второй объект для сравнения</param>
         /// <returns>Результат сравнения</returns>
         /// <exception cref="ArgumentNullException">В случае если хотя бы 1 из аргументов null</exception>
         public int Compare(object? x, object? y)
