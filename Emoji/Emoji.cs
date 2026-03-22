@@ -16,7 +16,7 @@ namespace LibraryEmoji
         /// </summary>
         protected static readonly Random random = new();
 
-        private IdNumber _number;
+        private IdNumber _idNumber;
 
         public IdNumber Number { get; set; }
 
@@ -103,10 +103,10 @@ namespace LibraryEmoji
         /// Конструктор инициализации из консоли
         /// </summary>
         /// <param name="num">Номер эмодзи</param>
-        public Emoji(int num)
+        public Emoji(IdNumber id)
         {
             Init();
-            Number = new(num);
+            Number = id;
         }
 
         /// <summary>
@@ -115,11 +115,11 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="num">Номер эмодзи</param>
-        public Emoji(string name, string tag, int num)
+        public Emoji(string name, string tag, IdNumber id)
         {
             Name = name;
             Tag = tag;
-            Number = new(num);
+            Number = id;
         }
 
         /// <summary>

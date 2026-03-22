@@ -79,7 +79,7 @@ namespace LibraryEmoji
         /// <param name="expression">Выражение лица эмодзи</param>
         /// <param name="strength">Сила эмодзи</param>
         /// <param name="num">Номер эмодзи</param>
-        public FaceEmoji(string name, string tag, string expression, ushort strength, int num) : base(name, tag, num)
+        public FaceEmoji(string name, string tag, string expression, ushort strength, IdNumber id) : base(name, tag, id)
         {
             Expression = expression;
             Strength = strength;
