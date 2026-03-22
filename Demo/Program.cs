@@ -113,6 +113,7 @@ namespace Demo
             }
 
             Output.Message(".....................Клонирование.......................\n", ConsoleColor.White);
+            Output.Separator();
 
             SmilingEmoji face = new SmilingEmoji { Name = "qqq", Tag = "fwfff", SmileReason = "Нафиг унывать", Expression = ":)))", Strength = 1 };
             Output.Message($"Эмодзи исходник: {face} \n", ConsoleColor.Cyan);
@@ -131,7 +132,31 @@ namespace Demo
             Output.Message($"Эмодзи исходник после изменений в клоне: {face} \n", ConsoleColor.Cyan);
             Output.Message($"Клон после изменений: {emo} \n", ConsoleColor.Red);
 
-            // TODO: добавить демонстрацию ShallowCopy
+            Output.Message(".....................Поверхностное копирование.......................\n", ConsoleColor.White);
+            Output.Separator();
+
+            SmilingEmoji smile = new SmilingEmoji{ Expression = "qqqq", Name = "pppp", SmileReason = "hhhh", Strength= 1,
+                                                   Tag = "oooo", Number = new(190) };
+
+            SmilingEmoji smileCopy = smile.ShallowCopy();
+
+            Output.Message($"Эмодзи исходник: {smile} \n", ConsoleColor.Cyan);
+            Output.Message($"Копия: {smileCopy} \n", ConsoleColor.Red);
+
+            smile.Name = "русский рок";
+            smile.Expression = "рок жив";
+            smile.Strength = 9;
+            smile.Tag = "Манчестер Красный";
+            smile.Number.Number = new();
+            smile.SmileReason = "ssss";
+
+            Output.Separator();
+            Output.Message($"..............................Провели изменения в копии..................................\n", ConsoleColor.Yellow);
+            Output.Separator();
+
+            Output.Message($"Копия: {smileCopy} \n", ConsoleColor.Red);
+            Output.Message($"Эмодзи исходник: {smile} \n", ConsoleColor.Cyan);
+
         }
 
         /// <summary>
