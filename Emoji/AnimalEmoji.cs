@@ -44,7 +44,7 @@ namespace LibraryEmoji
         public AnimalEmoji(int num)
         {
             Init();
-            _number = new(num);
+            Number = new(num);
         }
 
         /// <summary>
@@ -138,5 +138,11 @@ namespace LibraryEmoji
 
             return an;
         }
+
+        /// <summary>
+        /// Создаёт поверхностную копию эмодзи
+        /// </summary>
+        /// <returns>Ссылка на копию</returns>
+        new public AnimalEmoji ShallowCopy() => (AnimalEmoji)MemberwiseClone();
     }
 }

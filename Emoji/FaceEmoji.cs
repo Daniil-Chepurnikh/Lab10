@@ -62,7 +62,7 @@ namespace LibraryEmoji
         public FaceEmoji(int num)
         {
             Init();
-            _number = new(num);
+            Number = new(num);
         }
 
         /// <summary>
@@ -155,6 +155,10 @@ namespace LibraryEmoji
         /// <returns>Значение хеш-кода</returns>
         public override int GetHashCode() => HashCode.Combine(base.GetHashCode, Strength, Expression);
 
+        /// <summary>
+        /// Клонирует лицевую эмодзи
+        /// </summary>
+        /// <returns>Ссылка на клона</returns>
         override public object Clone()
         {
             FaceEmoji face = (FaceEmoji)base.Clone();
@@ -163,5 +167,11 @@ namespace LibraryEmoji
 
             return face;
         }
+
+        /// <summary>
+        /// Создаёт поверхностную копию лицевого эмодзи
+        /// </summary>
+        /// <returns>Ссылка на копию</returns>
+        new public FaceEmoji ShallowCopy() => (FaceEmoji)MemberwiseClone();
     }
 }

@@ -16,7 +16,9 @@ namespace LibraryEmoji
         /// </summary>
         protected static readonly Random random = new();
 
-        public IdNumber _number;
+        private IdNumber _number;
+
+        public IdNumber Number { get; set; }
 
         /// <summary>
         /// возможные названия для случайного выбора
@@ -94,7 +96,7 @@ namespace LibraryEmoji
         {
             Name = "Без названия";
             Tag = "Без тега";
-            _number = new();
+            Number = new();
         }
 
         /// <summary>
@@ -104,7 +106,7 @@ namespace LibraryEmoji
         public Emoji(int num)
         {
             Init();
-            _number = new(num);
+            Number = new(num);
         }
 
         /// <summary>
@@ -117,7 +119,7 @@ namespace LibraryEmoji
         {
             Name = name;
             Tag = tag;
-            _number = new(num);
+            Number = new(num);
         }
 
         /// <summary>
@@ -148,7 +150,7 @@ namespace LibraryEmoji
         {
             return Name == other.Name &&
                    Tag == other.Tag &&
-                   _number.Equals(other._number);
+                   Number.Equals(other.Number);
         }
         #endregion
 
@@ -170,7 +172,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {_number}";
+        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {Number}";
         /* Сначала решил попробоавать просто геттайп, но печатало с библиотекой
          * это не мой Name а object*/
 
@@ -178,7 +180,7 @@ namespace LibraryEmoji
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => HashCode.Combine(Name, Tag, _number);
+        override public int GetHashCode() => HashCode.Combine(Name, Tag, Number);
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
@@ -187,7 +189,7 @@ namespace LibraryEmoji
         {
             Name = names[random.Next(0, names.Length)];
             Tag = tags[random.Next(0, tags.Length)];
-            _number = new(random.Next(0, 111));
+            Number = new(random.Next(0, 111));
         }
 
         /// <summary>
@@ -227,14 +229,20 @@ namespace LibraryEmoji
         /// <summary>
         /// Реализация интерфейса IClonable
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Ссылка на новый объект</returns>
         virtual public object Clone()
         {
             Emoji emo = (Emoji)this.MemberwiseClone();
 
-            emo._number = new IdNumber(this._number.Number);
+            emo.Number = new IdNumber(Number.Number);
 
             return emo;
         }
+
+        /// <summary>
+        /// Создаёт поверхностную копию эмодзи
+        /// </summary>
+        /// <returns>Ссылка на копию</returns>
+        public Emoji ShallowCopy() => (Emoji)MemberwiseClone();
     }
 }

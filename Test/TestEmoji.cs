@@ -18,7 +18,7 @@ namespace Tests
 
             e.Name = "Cristiano Ronaldo";
             e.Tag = "Manchester United";
-            e._number = new(7);
+            e.Number = new(7);
 
             int hash2 = e.GetHashCode();
 
@@ -77,7 +77,7 @@ namespace Tests
             
             Assert.AreEqual("Без названия", e.Name);
             Assert.AreEqual("Без тега", e.Tag);
-            Assert.AreEqual(num, e._number);
+            Assert.AreEqual(num, e.Number);
         }
 
         [TestMethod]

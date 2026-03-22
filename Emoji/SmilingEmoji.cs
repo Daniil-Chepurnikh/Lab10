@@ -46,7 +46,7 @@ namespace LibraryEmoji
         public SmilingEmoji(int num)
         {
             Init();
-            _number = new(num);
+            Number = new(num);
         }
 
         /// <summary>
@@ -132,6 +132,10 @@ namespace LibraryEmoji
         /// <returns>Строка с данными</returns>
         override public string ToString() => base.ToString() + $" Причина улыбки: {SmileReason}.";
 
+        /// <summary>
+        /// Создайт клон улыбающейся эмодзи
+        /// </summary>
+        /// <returns>ссылка на кло</returns>
         override public object Clone()
         {
             SmilingEmoji smile = (SmilingEmoji)base.Clone();
@@ -139,5 +143,11 @@ namespace LibraryEmoji
 
             return smile;
         }
+
+        /// <summary>
+        /// Создаёт поверхностную копию эмодзи
+        /// </summary>
+        /// <returns>Ссылка на копию</returns>
+        new public SmilingEmoji ShallowCopy() => (SmilingEmoji)MemberwiseClone();
     }
 }
