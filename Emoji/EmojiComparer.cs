@@ -2,6 +2,9 @@
 
 namespace LibraryEmoji
 {
+    /// <summary>
+    /// Сравнивает эмодзи по названиям
+    /// </summary>
     public class EmojiComparer : IComparer
     {
         /// <summary>
