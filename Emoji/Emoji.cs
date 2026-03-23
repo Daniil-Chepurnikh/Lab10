@@ -18,7 +18,7 @@ namespace LibraryEmoji
 
         private IdNumber _idNumber;
 
-        public IdNumber Number { get; set; }
+        public IdNumber IdNumber { get; set; }
 
         /// <summary>
         /// возможные названия для случайного выбора
@@ -96,7 +96,7 @@ namespace LibraryEmoji
         {
             Name = "Без названия";
             Tag = "Без тега";
-            Number = new();
+            IdNumber = new();
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace LibraryEmoji
         public Emoji(IdNumber id)
         {
             Init();
-            Number = id;
+            IdNumber = id;
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace LibraryEmoji
         {
             Name = name;
             Tag = tag;
-            Number = id;
+            IdNumber = id;
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace LibraryEmoji
         {
             return Name == other.Name &&
                    Tag == other.Tag &&
-                   Number.Equals(other.Number);
+                   IdNumber.Equals(other.IdNumber);
         }
         #endregion
 
@@ -172,7 +172,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {Number}";
+        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {IdNumber}";
         /* Сначала решил попробоавать просто геттайп, но печатало с библиотекой
          * это не мой Name а object*/
 
@@ -180,7 +180,7 @@ namespace LibraryEmoji
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => HashCode.Combine(Name, Tag, Number);
+        override public int GetHashCode() => HashCode.Combine(Name, Tag, IdNumber);
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
@@ -189,7 +189,7 @@ namespace LibraryEmoji
         {
             Name = names[random.Next(0, names.Length)];
             Tag = tags[random.Next(0, tags.Length)];
-            Number = new(random.Next(0, 111));
+            IdNumber = new(random.Next(0, 111));
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace LibraryEmoji
         {
             Emoji emo = (Emoji)this.MemberwiseClone();
 
-            emo.Number = new IdNumber(Number.Number);
+            emo.IdNumber = new IdNumber(IdNumber.Number);
 
             return emo;
         }

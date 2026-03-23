@@ -43,7 +43,7 @@ namespace LibraryEmoji
         public AnimalEmoji(IdNumber id)
         {
             Init();
-            Number = id;
+            IdNumber = id;
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace LibraryEmoji
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="animalPart">Часть животного в эмодзи</param>
         /// <param name="num">Номер эмодзи</param>
-        public AnimalEmoji(string name, string tag, string animalPart, IdNumber id) : base(name, tag, id)
+        public AnimalEmoji(string name, string tag, IdNumber id, string animalPart) : base(name, tag, id)
         {
             AnimalPart = animalPart;
         }

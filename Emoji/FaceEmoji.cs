@@ -62,7 +62,7 @@ namespace LibraryEmoji
         public FaceEmoji(int num)
         {
             Init();
-            Number = new(num);
+            IdNumber = new(num);
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace LibraryEmoji
         /// <param name="expression">Выражение лица эмодзи</param>
         /// <param name="strength">Сила эмодзи</param>
         /// <param name="num">Номер эмодзи</param>
-        public FaceEmoji(string name, string tag, string expression, ushort strength, IdNumber id) : base(name, tag, id)
+        public FaceEmoji(string name, string tag, IdNumber id, string expression, ushort strength) : base(name, tag, id)
         {
             Expression = expression;
             Strength = strength;

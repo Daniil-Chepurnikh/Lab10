@@ -1,5 +1,6 @@
 ﻿using MyDCInputOutputConsole;
 using System;
+using System.Linq.Expressions;
 
 namespace LibraryEmoji
 {
@@ -46,7 +47,7 @@ namespace LibraryEmoji
         public SmilingEmoji(IdNumber id)
         {
             Init();
-            Number = id;
+            IdNumber = id;
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace LibraryEmoji
         /// <param name="strength">Сила эмодзи</param>
         /// <param name="num">Номер эмодзи</param>
         public SmilingEmoji(string name, string tag, string expression, string smileReason, ushort strength, IdNumber id)
-            : base(name, tag, expression,  strength, id)
+            : base(name, tag, id, expression,  strength)
         {
             SmileReason = smileReason;
         }
