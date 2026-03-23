@@ -1,4 +1,7 @@
-﻿public class IdNumber
+﻿/// <summary>
+/// Идентификационный номер эмодзи
+/// </summary>
+public class IdNumber
 {
     private int _number;
     /// <summary>
