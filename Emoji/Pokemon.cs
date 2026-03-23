@@ -315,7 +315,7 @@
         /// </summary>
         public void RandomInit()
         {
-            Random rn = new Random();
+            Random rn = new();
             
             Attack = rn.Next(100, 200);
             Defense = rn.Next(100, 200);
