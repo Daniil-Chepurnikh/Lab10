@@ -10,9 +10,8 @@ namespace Demo
         {
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
-            Emoji[] emojis = new Emoji[15];
-
-            Emoji[] emojis2 = { new Emoji() };
+            Emoji[] emojis = new Emoji[15]; // основной
+            Emoji[] emojis2 = { new Emoji() }; // чтобы показать как работает один из запросов
 
             for (int p = 0; p < emojis.Length; p++)
             {
@@ -63,15 +62,15 @@ namespace Demo
                 Output.Message(emojis[q] + "\n", color);
             }
 
-            Output.Message("Начался бинарный поиск\n", ConsoleColor.White);
+            Output.Message(".......................Поиск по IComparable.........................\n", ConsoleColor.White);
 
-            int index = Array.BinarySearch(emojis, new Emoji(9999));
-            if (index < 0)
+            int indexComparable = Array.BinarySearch(emojis, new Emoji(new IdNumber(9999)));
+            if (indexComparable < 0)
                 Output.Message("Элемент не найден\n", ConsoleColor.Blue);
             else
             {
-                Output.Message(emojis[index] +"\n", ConsoleColor.White);
-                Output.Message($" Номер элемента: {index + 1}\n", ConsoleColor.White);
+                Output.Message(emojis[indexComparable] +"\n", ConsoleColor.White);
+                Output.Message($" Номер элемента: {indexComparable + 1}\n", ConsoleColor.White);
             }
 
             Emoji[] emojisComaparer = new Emoji[15];
@@ -85,9 +84,11 @@ namespace Demo
                     0 => new Emoji(rn),
                     1 => new AnimalEmoji(rn),
                     2 => new FaceEmoji(rn),
-                    _ => new SmilingEmoji(rn) // как дефолт в обычном свитч
+                    _ => new SmilingEmoji(rn)
                 };
             }
+
+            Output.Message(".....................Поиск по ICompare.....................\n", ConsoleColor.White);
 
             Array.Sort(emojisComaparer, new EmojiComparer());
             for (int q = 0; q < emojisComaparer.Length; q++)
@@ -102,17 +103,104 @@ namespace Demo
                 Output.Message(emojisComaparer[q] + "\n", color);
             }
 
-            Output.Message("Начался бинарный поиск\n", ConsoleColor.White);
-
-            int indexComparer = Array.BinarySearch(emojisComaparer, new Emoji(9999), new EmojiComparer());
-            if (index < 0)
+            int indexCompare = Array.BinarySearch(emojisComaparer, new Emoji(new IdNumber(1)), new EmojiComparer());
+            if (indexCompare < 0)
                 Output.Message("Элемент не найден\n", ConsoleColor.Blue);
             else
             {
-                Output.Message(emojisComaparer[index] + "\n", ConsoleColor.White);
-                Output.Message($" Номер элемента: {index + 1}\n", ConsoleColor.White);
+                Output.Message(emojisComaparer[indexCompare] + "\n", ConsoleColor.White);
+                Output.Message($"Номер элемента: {indexCompare + 1}\n", ConsoleColor.White);
             }
 
+            Output.Message(".....................Клонирование.......................\n", ConsoleColor.White);
+            Output.Separator();
+
+            SmilingEmoji face = new SmilingEmoji { Name = "qqq", Tag = "fwfff", SmileReason = "Нафиг унывать", Expression = ":)))", Strength = 1 };
+            Output.Message($"Эмодзи исходник: {face} \n", ConsoleColor.Cyan);
+
+            SmilingEmoji emo = (SmilingEmoji)face.Clone();
+
+            Output.Message($"Эмодзи исходник после создания клона: {face} \n", ConsoleColor.Cyan);
+            Output.Message($"Клон сейчас: {emo} \n", ConsoleColor.Red);
+
+            emo.SmileReason = "www";
+            emo.Strength = 9;
+            emo.Expression = "*_*";
+            emo.Name = "qwerty";
+            emo.Tag = "zxcvb";
+
+            Output.Message($"Эмодзи исходник после изменений в клоне: {face} \n", ConsoleColor.Cyan);
+            Output.Message($"Клон после изменений: {emo} \n", ConsoleColor.Red);
+
+            Output.Message(".....................Поверхностное копирование.......................\n", ConsoleColor.White);
+            Output.Separator();
+
+            SmilingEmoji smile = new SmilingEmoji{ Expression = "qqqq", Name = "pppp", SmileReason = "hhhh", Strength= 1,
+                                                   Tag = "oooo", Number = new(190) };
+
+            SmilingEmoji smileCopy = smile.ShallowCopy();
+
+            Output.Message($"Эмодзи исходник: {smile} \n", ConsoleColor.Cyan);
+            Output.Message($"Копия: {smileCopy} \n", ConsoleColor.Red);
+
+            smile.Name = "русский рок";
+            smile.Expression = "рок жив";
+            smile.Strength = 9;
+            smile.Tag = "Манчестер Красный";
+            smile.Number.Number = new();
+            smile.SmileReason = "ssss";
+
+            Output.Separator();
+            Output.Message($"..............................Провели изменения в копии..................................\n", ConsoleColor.Yellow);
+            Output.Separator();
+
+            Output.Message($"Копия: {smileCopy} \n", ConsoleColor.Red);
+            Output.Message($"Эмодзи исходник: {smile} \n", ConsoleColor.Cyan);
+
+            Output.Separator();
+            Output.Message($"..............................Массив из эмодзи и покемонов..................................\n", ConsoleColor.Yellow);
+
+            object[] emojis_pokemons = new object[20];
+
+            for (int p = 0; p < emojis_pokemons.Length; p++)
+            {
+                Random rn = new();
+
+                emojis_pokemons[p] = rn.Next(5) switch
+                {
+                    0 => new Emoji(rn),
+                    1 => new AnimalEmoji(rn),
+                    2 => new FaceEmoji(rn),
+                    3 => new SmilingEmoji(rn),
+                    _ => new Pokemon(rn)
+                };
+            }
+
+            uint emNum, smileNum, anNum, faceNum, pokNum;
+            emNum = smileNum = anNum = faceNum = pokNum = 0;
+            
+            for (int p = 0; p < emojis_pokemons.Length; p++)
+            {
+                Output.Message($"{emojis_pokemons[p]}\n", ConsoleColor.White);
+
+                if (typeof(Emoji) == emojis_pokemons[p].GetType())
+                    emNum++;
+                else if (typeof(AnimalEmoji) == emojis_pokemons[p].GetType())
+                    anNum++;
+                else if (typeof(FaceEmoji) == emojis_pokemons[p].GetType())
+                    faceNum++;
+                else if (typeof(SmilingEmoji) == emojis_pokemons[p].GetType())
+                    smileNum++;
+                else
+                    pokNum++;
+            }
+            Output.Separator();
+
+            Output.Message($"Покемонов: {pokNum}\n", ConsoleColor.Magenta);
+            Output.Message($"Эмодзи: {emNum}\n", ConsoleColor.Magenta);
+            Output.Message($"Лиц: {faceNum} \n", ConsoleColor.Magenta);
+            Output.Message($"Животных: {anNum} \n", ConsoleColor.Magenta);
+            Output.Message($"Улыбок: {smileNum} \n", ConsoleColor.Magenta);
         }
 
         /// <summary>
@@ -169,10 +257,9 @@ namespace Demo
             string str = string.Empty;
             foreach (Emoji emo in emos)
             {
-                FaceEmoji face = emo as FaceEmoji;
-
                 try
                 {
+                    FaceEmoji face = emo as FaceEmoji;
                     if (str.Length < face.Expression.Length)
                         str = face.Expression;
                 }

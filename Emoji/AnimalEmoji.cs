@@ -1,5 +1,4 @@
 ﻿using MyDCInputOutputConsole;
-using System;
 
 namespace LibraryEmoji
 {
@@ -38,15 +37,25 @@ namespace LibraryEmoji
         public AnimalEmoji() :base() => AnimalPart = "Часть тела";
 
         /// <summary>
+        /// Инициализация с клавиатуры
+        /// </summary>
+        /// <param name="num">Номер эмодзи</param>
+        public AnimalEmoji(IdNumber id)
+        {
+            Init();
+            Number = id;
+        }
+
+        /// <summary>
         /// Конструктор с параметрами
         /// </summary>
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
-        /// <param name="animalPart">Часть тела животного в эмодзи</param>
-        public AnimalEmoji(int num)
+        /// <param name="animalPart">Часть животного в эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
+        public AnimalEmoji(string name, string tag, string animalPart, IdNumber id) : base(name, tag, id)
         {
-            Init();
-            _number = new(num);
+            AnimalPart = animalPart;
         }
 
         /// <summary>
@@ -90,7 +99,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => base.ToString() + $"Часть тела: {AnimalPart}.";
+        override public string ToString() => base.ToString() + $" Часть тела: {AnimalPart}.";
 
         /// <summary>
         /// Инициализирует атрибуты
@@ -116,5 +125,23 @@ namespace LibraryEmoji
             base.RandomInit();
             AnimalPart = animalParts[random.Next(0, animalParts.Length)];
         }
+
+        /// <summary>
+        /// Клонирует животное эмодзи
+        /// </summary>
+        /// <returns></returns>
+        override public object Clone()
+        {
+            AnimalEmoji an = (AnimalEmoji)base.Clone();
+            an.AnimalPart = this.AnimalPart;
+
+            return an;
+        }
+
+        /// <summary>
+        /// Создаёт поверхностную копию эмодзи
+        /// </summary>
+        /// <returns>Ссылка на копию</returns>
+        new public AnimalEmoji ShallowCopy() => (AnimalEmoji)MemberwiseClone();
     }
 }

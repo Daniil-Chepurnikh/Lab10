@@ -3,7 +3,7 @@
   <Class Name="LibraryEmoji.Emoji" Collapsed="true">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIABAAACgKAAEgAAAAAQAABAEAIgAAARCAABAAII=</HashCode>
+      <HashCode>AAAAIABAAACgKAQEgAAAAAQAABAEAIgAAARCAABAAII=</HashCode>
       <FileName>Emoji.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="LibraryEmoji.AnimalEmoji" Collapsed="true">
     <Position X="0.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAACAKAAEgAAAAAAAAAgUAIAAAAAGAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAACAKAAEgAAAAAAAAAgUAIAAAAAGAAAAAAA=</HashCode>
       <FileName>AnimalEmoji.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -32,12 +32,12 @@
   <Class Name="LibraryEmoji.Pokemon" Collapsed="true">
     <Position X="6.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAgAAABBCQAAQEiAKgBgSAAIAAAQKSAgCBAgAAAAY=</HashCode>
+      <HashCode>ACAAgAAABBCQAAQEiAKgBgSAAIAAAYKSAgCBAgAAAAY=</HashCode>
       <FileName>Pokemon.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="EmojiComparer" Collapsed="true">
+  <Class Name="LibraryEmoji.EmojiComparer" Collapsed="true">
     <Position X="8.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
@@ -45,14 +45,14 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="lab_10_v5_ClassLibrary.IdNumber" Collapsed="true">
+  <Class Name="IdNumber" Collapsed="true">
     <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEgEAAAAAAAAAAAIAAAAAAAABAAAA=</HashCode>
       <FileName>IdNumber.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="lab_10_v5_ClassLibrary.IRandomInit" Collapsed="true">
+  <Interface Name="LibraryEmoji.IRandomInit" Collapsed="true">
     <Position X="10" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

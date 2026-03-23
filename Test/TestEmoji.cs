@@ -1,11 +1,37 @@
 ﻿using LibraryEmoji;
+using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 namespace Tests
 {
     [TestClass]
     public sealed class TestEmoji
     {
-        // TODO: добавить тесты ICloneable
+        [TestMethod]
+        public void TestCopy()
+        {
+            Emoji e = new Emoji { Name = "pppp", Tag = "oooo", Number = new(190) };
+            Emoji copy = e.ShallowCopy();
+
+            Assert.AreEqual(copy, e);
+
+            copy.Name = "русский рок";
+            copy.Tag = "Манчестер Красный";
+            copy.Number.Number = new();
+
+            Assert.AreNotEqual(copy.Tag, e.Tag);
+            Assert.AreNotEqual(copy.Name, e.Name);
+            Assert.AreEqual(copy.Number, e.Number);
+        }
+
+        [TestMethod]
+        public void TestWithParameters()
+        {
+            Emoji e = new("q", "p", new IdNumber(9));
+
+            Assert.AreEqual(expected: "p", e.Tag);
+            Assert.AreEqual(expected: "q", e.Name);
+            Assert.AreEqual(expected: new IdNumber(9),  e.Number);
+        }
 
         [TestMethod]
         public void TestGetHashCode()
@@ -16,7 +42,7 @@ namespace Tests
 
             e.Name = "Cristiano Ronaldo";
             e.Tag = "Manchester United";
-            e._number = new(7);
+            e.Number = new(7);
 
             int hash2 = e.GetHashCode();
 
@@ -75,7 +101,7 @@ namespace Tests
             
             Assert.AreEqual("Без названия", e.Name);
             Assert.AreEqual("Без тега", e.Tag);
-            Assert.AreEqual(num, e._number);
+            Assert.AreEqual(num, e.Number);
         }
 
         [TestMethod]
@@ -280,7 +306,24 @@ namespace Tests
 
         public void TestCompare3()
         {
-            Emoji[] emojis = { new Emoji(), null };
+            Emoji[] emojis = { null, new Emoji() };
+
+            bool isPassed = false;
+            try
+            {
+                Array.Sort(emojis, new EmojiComparer());
+            }
+            catch (InvalidOperationException)
+            {
+                isPassed = true;
+            }
+
+            Assert.IsTrue(isPassed);
+        }
+
+        public void TestCompare4()
+        {
+            Emoji[] emojis = { null, null };
 
             bool isPassed = false;
             try

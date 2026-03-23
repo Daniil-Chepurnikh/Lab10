@@ -40,22 +40,35 @@ namespace LibraryEmoji
         public SmilingEmoji() :base() => SmileReason = "Просто улыбается";
 
         /// <summary>
-        /// Конструктор с параметрами
+        /// Инициализация с клавиатуры
         /// </summary>
-        /// <param name="name">Название эмодзи</param>
-        /// <param name="tag">Тег эмодзи</param>
-        /// <param name="smileReason">Причина улыбки</param>
-        public SmilingEmoji(int num)
+        /// <param name="num">Название эмодзи</param>
+        public SmilingEmoji(IdNumber id)
         {
             Init();
-            _number = new(num);
+            Number = id;
         }
 
         /// <summary>
         /// Конструктор со случайнми значениями
         /// </summary>
-        /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
+        /// <param name="rnd">Просто маркер того, что нужны случайные значения</param>
         public SmilingEmoji(Random rnd) => RandomInit();
+
+        /// <summary>
+        /// Конструктор с параметрами
+        /// </summary>
+        /// <param name="name">Название жмодзи</param>
+        /// <param name="tag">Тег эмодзи</param>
+        /// <param name="expression">Выражение лица эмодзи</param>
+        /// <param name="smileReason">Причина улыбки эмодзи</param>
+        /// <param name="strength">Сила эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
+        public SmilingEmoji(string name, string tag, string expression, string smileReason, ushort strength, IdNumber id)
+            : base(name, tag, expression,  strength, id)
+        {
+            SmileReason = smileReason;
+        }
         #endregion
 
         #region Всё для Equals
@@ -117,6 +130,24 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => base.ToString() + $"Причина улыбки: {SmileReason}.";
+        override public string ToString() => base.ToString() + $" Причина улыбки: {SmileReason}.";
+
+        /// <summary>
+        /// Создайт клон улыбающейся эмодзи
+        /// </summary>
+        /// <returns>ссылка на кло</returns>
+        override public object Clone()
+        {
+            SmilingEmoji smile = (SmilingEmoji)base.Clone();
+            smile.SmileReason = this.SmileReason;
+
+            return smile;
+        }
+
+        /// <summary>
+        /// Создаёт поверхностную копию эмодзи
+        /// </summary>
+        /// <returns>Ссылка на копию</returns>
+        new public SmilingEmoji ShallowCopy() => (SmilingEmoji)MemberwiseClone();
     }
 }

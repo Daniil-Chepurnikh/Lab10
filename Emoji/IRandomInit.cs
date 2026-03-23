@@ -1,6 +1,10 @@
-﻿namespace lab_10_v5_ClassLibrary;
-
-public interface IRandomInit
+﻿namespace LibraryEmoji
 {
-    void RandomInit();
+    /// <summary>
+    /// Интерфейс инициализации случайными значениями
+    /// </summary>
+    public interface IRandomInit
+    {
+        void RandomInit();
+    }
 }

@@ -56,15 +56,13 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Конструктор с параметрами
+        /// Инициализация с клавиатуры
         /// </summary>
-        /// <param name="name">Название эмодзи</param>
-        /// <param name="tag">Тег эмодзи</param>
-        /// <param name="expression">Выражение лица эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
         public FaceEmoji(int num)
         {
             Init();
-            _number = new(num);
+            Number = new(num);
         }
 
         /// <summary>
@@ -72,6 +70,20 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
         public FaceEmoji(Random rnd) => RandomInit();
+
+        /// <summary>
+        /// Конструктор с параметрами
+        /// </summary>
+        /// <param name="name">Название эмодзи</param>
+        /// <param name="tag">Тег эмодзи</param>
+        /// <param name="expression">Выражение лица эмодзи</param>
+        /// <param name="strength">Сила эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
+        public FaceEmoji(string name, string tag, string expression, ushort strength, IdNumber id) : base(name, tag, id)
+        {
+            Expression = expression;
+            Strength = strength;
+        }
         #endregion
 
         #region Show
@@ -92,7 +104,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        public override string ToString() => base.ToString() + $"Выражение: {Expression}. Сила: {Strength}. ";
+        public override string ToString() => base.ToString() + $" Выражение: {Expression}. Сила: {Strength}. ";
 
         #region Всё для Equals
         /// <summary>
@@ -142,5 +154,24 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
         public override int GetHashCode() => HashCode.Combine(base.GetHashCode, Strength, Expression);
+
+        /// <summary>
+        /// Клонирует лицевую эмодзи
+        /// </summary>
+        /// <returns>Ссылка на клона</returns>
+        override public object Clone()
+        {
+            FaceEmoji face = (FaceEmoji)base.Clone();
+            face.Strength = this.Strength;
+            face.Expression = this.Expression;
+
+            return face;
+        }
+
+        /// <summary>
+        /// Создаёт поверхностную копию лицевого эмодзи
+        /// </summary>
+        /// <returns>Ссылка на копию</returns>
+        new public FaceEmoji ShallowCopy() => (FaceEmoji)MemberwiseClone();
     }
 }

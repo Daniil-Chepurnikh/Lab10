@@ -1,4 +1,7 @@
-﻿public class IdNumber
+﻿/// <summary>
+/// Идентификационный номер эмодзи
+/// </summary>
+public class IdNumber
 {
     private int _number;
     /// <summary>
@@ -18,7 +21,7 @@
     /// <summary>
     /// Конструктор без параметров
     /// </summary>
-    public IdNumber() => _number = 0; 
+    public IdNumber() => Number = 0; 
         
     /// <summary>
     /// Конструктор с параметрами

@@ -1,5 +1,4 @@
-﻿using lab_10_v5_ClassLibrary;
-using MyDCInputOutputConsole;
+﻿using MyDCInputOutputConsole;
 using System.Text.RegularExpressions;
 
 namespace LibraryEmoji
@@ -7,7 +6,7 @@ namespace LibraryEmoji
     /// <summary>
     /// Базовый класс библиотеки
     /// </summary>
-    public class Emoji : IRandomInit, IComparable
+    public class Emoji : IRandomInit, IComparable, ICloneable
     {
         protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
@@ -17,7 +16,9 @@ namespace LibraryEmoji
         /// </summary>
         protected static readonly Random random = new();
 
-        public IdNumber _number;
+        private IdNumber _idNumber;
+
+        public IdNumber Number { get; set; }
 
         /// <summary>
         /// возможные названия для случайного выбора
@@ -95,18 +96,30 @@ namespace LibraryEmoji
         {
             Name = "Без названия";
             Tag = "Без тега";
-            _number = new();
+            Number = new();
+        }
+
+        /// <summary>
+        /// Конструктор инициализации из консоли
+        /// </summary>
+        /// <param name="num">Номер эмодзи</param>
+        public Emoji(IdNumber id)
+        {
+            Init();
+            Number = id;
         }
 
         /// <summary>
         /// Конструктор с параметрами
         /// </summary>
-        /// <param name="emojiNname"></param>
-        /// <param name="emojiTag"></param>
-        public Emoji(int num)
+        /// <param name="name">Название эмодзи</param>
+        /// <param name="tag">Тег эмодзи</param>
+        /// <param name="num">Номер эмодзи</param>
+        public Emoji(string name, string tag, IdNumber id)
         {
-            Init();
-            _number = new(num);
+            Name = name;
+            Tag = tag;
+            Number = id;
         }
 
         /// <summary>
@@ -137,7 +150,7 @@ namespace LibraryEmoji
         {
             return Name == other.Name &&
                    Tag == other.Tag &&
-                   _number.Equals(other._number);
+                   Number.Equals(other.Number);
         }
         #endregion
 
@@ -159,7 +172,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. ";
+        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {Number}";
         /* Сначала решил попробоавать просто геттайп, но печатало с библиотекой
          * это не мой Name а object*/
 
@@ -167,7 +180,7 @@ namespace LibraryEmoji
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => HashCode.Combine(Name, Tag, _number);
+        override public int GetHashCode() => HashCode.Combine(Name, Tag, Number);
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
@@ -176,7 +189,7 @@ namespace LibraryEmoji
         {
             Name = names[random.Next(0, names.Length)];
             Tag = tags[random.Next(0, tags.Length)];
-            _number = new(random.Next(0, 111));
+            Number = new(random.Next(0, 111));
         }
 
         /// <summary>
@@ -212,5 +225,24 @@ namespace LibraryEmoji
             else
                 return string.Compare(Tag, other.Tag, StringComparison.OrdinalIgnoreCase);
         }
+
+        /// <summary>
+        /// Реализация интерфейса IClonable
+        /// </summary>
+        /// <returns>Ссылка на новый объект</returns>
+        virtual public object Clone()
+        {
+            Emoji emo = (Emoji)this.MemberwiseClone();
+
+            emo.Number = new IdNumber(Number.Number);
+
+            return emo;
+        }
+
+        /// <summary>
+        /// Создаёт поверхностную копию эмодзи
+        /// </summary>
+        /// <returns>Ссылка на копию</returns>
+        public Emoji ShallowCopy() => (Emoji)MemberwiseClone();
     }
 }

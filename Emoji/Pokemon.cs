@@ -1,8 +1,4 @@
-﻿using lab_10_v5_ClassLibrary;
-using System;
-using System.Collections;
-
-namespace LibraryEmoji
+﻿namespace LibraryEmoji
 {
     public class Pokemon : IRandomInit
     {
@@ -138,8 +134,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Печатает все характеристики покемона
         /// </summary>
-        /// <param name="p">Конкретный покемон</param>
-        override public string ToString() => $"Атака: {Attack,3}, защита: {Defense,3}, выносливость: {Stamina,3}\n";
+        override public string ToString() => $"Вид: {GetType().Name}, атака: {Attack,3}, защита: {Defense,3}, выносливость: {Stamina,3}";
 
         #region Увеличение параметров
         /// <summary>
@@ -315,11 +310,6 @@ namespace LibraryEmoji
                     && pokemon.Stamina == Stamina;
         }
 
-        public void RandomInit(Random random)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Рандомная инициализация
         /// </summary>
@@ -331,13 +321,5 @@ namespace LibraryEmoji
             Defense = rn.Next(100, 200);
             Stamina = rn.Next(100, 200);
         }
-
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
-        }
-
-        // TODO: сделать GetHashCode при необходимости
-
     }
 }
