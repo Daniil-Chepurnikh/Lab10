@@ -303,9 +303,10 @@ namespace Tests
             Assert.IsTrue(isPassed);
         }
 
+        [TestMethod]
         public void TestCompare3()
         {
-            Emoji[] emojis = { null, new Emoji() };
+            Emoji[] emojis = { null, new() };
 
             bool isPassed = false;
             try
@@ -320,6 +321,7 @@ namespace Tests
             Assert.IsTrue(isPassed);
         }
 
+        [TestMethod]
         public void TestCompare4()
         {
             Emoji[] emojis = { null, null };
