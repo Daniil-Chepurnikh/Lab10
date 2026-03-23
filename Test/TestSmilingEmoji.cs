@@ -38,7 +38,7 @@ public class TestSmilingEmoji
             SmileReason = "hhhh",
             Strength = 1,
             Tag = "oooo",
-            Number = new(190)
+            IdNumber = new(190)
         };
 
         SmilingEmoji smileCopy = smile.ShallowCopy();
@@ -49,12 +49,12 @@ public class TestSmilingEmoji
         smile.Expression = "рок жив";
         smile.Strength = 9;
         smile.Tag = "Манчестер Красный";
-        smile.Number.Number = new();
+        smile.IdNumber.Number = new();
         smile.SmileReason = "ssss";
 
         Assert.AreNotEqual(smileCopy.Tag, smile.Tag);
         Assert.AreNotEqual(smileCopy.Name, smile.Name);
-        Assert.AreEqual(smileCopy.Number, smile.Number);
+        Assert.AreEqual(smileCopy.IdNumber, smile.IdNumber);
         Assert.AreNotEqual(smileCopy.Expression, smile.Expression);
         Assert.AreNotEqual(smileCopy.Strength, smile.Strength);
     }
@@ -73,11 +73,11 @@ public class TestSmilingEmoji
         emo.Expression = "*_*";
         emo.Name = "qwerty";
         emo.Tag = "zxcvb";
-        emo.Number = new(3);
+        emo.IdNumber = new(3);
 
         Assert.AreNotEqual(emoClone.Tag, emo.Tag);
         Assert.AreNotEqual(emoClone.Name, emo.Name);
-        Assert.AreNotEqual(emoClone.Number, emo.Number);
+        Assert.AreNotEqual(emoClone.IdNumber, emo.IdNumber);
         Assert.AreNotEqual(emoClone.Expression, emo.Expression);
         Assert.AreNotEqual(emoClone.Strength, emo.Strength);
     }
@@ -89,7 +89,7 @@ public class TestSmilingEmoji
 
         Assert.AreEqual(expected: "p", actual: e.Tag);
         Assert.AreEqual(expected: "q", actual: e.Name);
-        Assert.AreEqual(expected: new IdNumber(9), actual: e.Number);
+        Assert.AreEqual(expected: new IdNumber(9), actual: e.IdNumber);
         Assert.AreEqual(expected: "h", actual: e.Expression);
         Assert.AreEqual(expected: 10, actual: e.Strength);
         Assert.AreEqual(expected: "o", actual: e.SmileReason);
