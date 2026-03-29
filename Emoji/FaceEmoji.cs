@@ -45,6 +45,14 @@ namespace LibraryEmoji
             }
         }
 
+        /// <summary>
+        /// Возвращает объект базового класса
+        /// </summary>
+        public Emoji GetBase
+        {
+            get => new Emoji(Name, Tag, IdNumber);
+        }
+
         #region Конструкторы
         /// <summary>
         /// Конструктор без параметров

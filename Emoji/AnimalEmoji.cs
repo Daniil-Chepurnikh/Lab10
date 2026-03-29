@@ -1,4 +1,5 @@
 ﻿using MyDCInputOutputConsole;
+using System.Xml.Linq;
 
 namespace LibraryEmoji
 {
@@ -28,6 +29,14 @@ namespace LibraryEmoji
                  if (IsCorrectString(value))
                     _animalPart = value;
             }
+        }
+
+        /// <summary>
+        /// Возвращает объект базового класса
+        /// </summary>
+        public Emoji GetBase
+        {
+            get => new Emoji(Name, Tag, IdNumber); 
         }
 
         #region Конструкторы

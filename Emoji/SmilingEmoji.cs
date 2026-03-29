@@ -34,6 +34,14 @@ namespace LibraryEmoji
             }
         }
 
+        /// <summary>
+        /// Возвращает объект базового класса
+        /// </summary>
+        public FaceEmoji GetBase
+        {
+            get => new FaceEmoji(Name, Tag, IdNumber, Expression, Strength);
+        }
+
         #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
