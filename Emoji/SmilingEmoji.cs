@@ -118,7 +118,7 @@ namespace LibraryEmoji
         override public void RandomInit()
         {
             base.RandomInit();
-            SmileReason = smileReasons[random.Next(0, smileReasons.Length)];
+            SmileReason = smileReasons[IRandomInit.random.Next(0, smileReasons.Length)];
         }
 
         #region Show 

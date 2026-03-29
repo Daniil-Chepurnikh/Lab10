@@ -11,11 +11,6 @@ namespace LibraryEmoji
         protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
 
-        /// <summary>
-        /// Генератор случайных чисел для RandomInit
-        /// </summary>
-        protected static readonly Random random = new();
-
         private IdNumber _idNumber;
 
         public IdNumber IdNumber { get; set; }
@@ -191,9 +186,9 @@ namespace LibraryEmoji
         /// </summary>
         virtual public void RandomInit()
         {
-            Name = names[random.Next(0, names.Length)];
-            Tag = tags[random.Next(0, tags.Length)];
-            IdNumber = new(random.Next(0, 111));
+            Name = names[IRandomInit.random.Next(0, names.Length)];
+            Tag = tags[IRandomInit.random.Next(0, tags.Length)];
+            IdNumber = new(IRandomInit.random.Next(0, 111));
         }
 
         /// <summary>

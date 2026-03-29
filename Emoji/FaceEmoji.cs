@@ -153,8 +153,8 @@ namespace LibraryEmoji
         override public void RandomInit()
         {
             base.RandomInit();
-            Expression = expressions[random.Next(0, expressions.Length)];
-            Strength = (ushort)random.Next(10);
+            Expression = expressions[IRandomInit.random.Next(0, expressions.Length)];
+            Strength = (ushort)IRandomInit.random.Next(10);
         }
 
         /// <summary>
