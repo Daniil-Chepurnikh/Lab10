@@ -132,7 +132,7 @@ namespace LibraryEmoji
         override public void RandomInit()
         {
             base.RandomInit();
-            AnimalPart = animalParts[IRandomInit.random.Next(0, animalParts.Length)];
+            AnimalPart = animalParts[IRandomInit.random.Next(animalParts.Length)];
         }
 
         /// <summary>

@@ -154,7 +154,7 @@ namespace LibraryEmoji
         override public void RandomInit()
         {
             base.RandomInit();
-            Expression = expressions[IRandomInit.random.Next(0, expressions.Length)];
+            Expression = expressions[IRandomInit.random.Next(expressions.Length)];
             Strength = (ushort)IRandomInit.random.Next(10);
         }
 

@@ -186,9 +186,9 @@ namespace LibraryEmoji
         /// </summary>
         virtual public void RandomInit()
         {
-            Name = names[IRandomInit.random.Next(0, names.Length)];
-            Tag = tags[IRandomInit.random.Next(0, tags.Length)];
-            IdNumber = new(IRandomInit.random.Next(0, 111));
+            Name = names[IRandomInit.random.Next(names.Length)];
+            Tag = tags[IRandomInit.random.Next(tags.Length)];
+            IdNumber = new(IRandomInit.random.Next(111));
         }
 
         /// <summary>
