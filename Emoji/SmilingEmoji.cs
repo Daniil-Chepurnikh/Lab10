@@ -37,7 +37,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Возвращает объект базового класса
         /// </summary>
-        public FaceEmoji GetBase
+        new public FaceEmoji GetBase
         {
             get => new FaceEmoji(Name, Tag, IdNumber, Expression, Strength);
         }
