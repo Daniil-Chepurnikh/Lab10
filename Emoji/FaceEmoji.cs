@@ -12,7 +12,8 @@ namespace LibraryEmoji
         [
             ":(", ":)", "^|0_0|^", "(0 + 0(", 
             "://", ";(", ";)", "?:", ":-(", ":-)", "(~` _ ~`(",
-            "- _ -", "'_'", "|$_$|", "<|0,0|>", @"_/(0 - 0(\_"
+            "- _ -", "'_'", "|$_$|", "<|0,0|>", @"_/(0 - 0(\_",
+            ":{", ":}", "@_@", "*_*", "0_0", "($_$("
         ];
         
         string? _expression;
@@ -45,6 +46,14 @@ namespace LibraryEmoji
             }
         }
 
+        /// <summary>
+        /// Возвращает объект базового класса
+        /// </summary>
+        public Emoji GetBase
+        {
+            get => new Emoji(Name, Tag, IdNumber);
+        }
+
         #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
@@ -62,7 +71,7 @@ namespace LibraryEmoji
         public FaceEmoji(int num)
         {
             Init();
-            Number = new(num);
+            IdNumber = new(num);
         }
 
         /// <summary>
@@ -79,7 +88,7 @@ namespace LibraryEmoji
         /// <param name="expression">Выражение лица эмодзи</param>
         /// <param name="strength">Сила эмодзи</param>
         /// <param name="num">Номер эмодзи</param>
-        public FaceEmoji(string name, string tag, string expression, ushort strength, IdNumber id) : base(name, tag, id)
+        public FaceEmoji(string name, string tag, IdNumber id, string expression, ushort strength) : base(name, tag, id)
         {
             Expression = expression;
             Strength = strength;
@@ -145,8 +154,8 @@ namespace LibraryEmoji
         override public void RandomInit()
         {
             base.RandomInit();
-            Expression = expressions[random.Next(0, expressions.Length)];
-            Strength = (ushort)random.Next(10);
+            Expression = expressions[IRandomInit.random.Next(expressions.Length)];
+            Strength = (ushort)IRandomInit.random.Next(10);
         }
 
         /// <summary>

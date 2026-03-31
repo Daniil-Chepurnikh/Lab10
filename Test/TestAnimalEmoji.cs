@@ -37,41 +37,41 @@ public class TestAnimalEmoji
         emo.AnimalPart = "www";
         emo.Name = "qwerty";
         emo.Tag = "zxcvb";
-        emo.Number = new(3);
+        emo.IdNumber = new(3);
 
         Assert.AreNotEqual(emoClone.Tag, emo.Tag);
         Assert.AreNotEqual(emoClone.Name, emo.Name);
-        Assert.AreNotEqual(emoClone.Number, emo.Number);
+        Assert.AreNotEqual(emoClone.IdNumber, emo.IdNumber);
         Assert.AreNotEqual(emoClone.AnimalPart, emo.AnimalPart);
     }
 
     [TestMethod]
     public void TestCopy()
     {
-        AnimalEmoji e = new AnimalEmoji { Name = "pppp", Tag = "oooo", Number = new(190), AnimalPart = "www" };
+        AnimalEmoji e = new AnimalEmoji { Name = "pppp", Tag = "oooo", IdNumber = new(190), AnimalPart = "www" };
         AnimalEmoji copy = e.ShallowCopy();
 
         Assert.AreEqual(copy, e);
 
         copy.Name = "русский рок";
         copy.Tag = "Манчестер Красный";
-        copy.Number.Number = new();
+        copy.IdNumber.Number = new();
         copy.AnimalPart = "qqqqqqqqqqqqqqqqqqqqqqq";
 
         Assert.AreNotEqual(copy.Tag, e.Tag);
         Assert.AreNotEqual(copy.Name, e.Name);
         Assert.AreNotEqual(copy.AnimalPart, e.AnimalPart);
-        Assert.AreEqual(copy.Number, e.Number);
+        Assert.AreEqual(copy.IdNumber, e.IdNumber);
     }
 
     [TestMethod]
     public void TestWithParameters()
     {
-        AnimalEmoji e = new("q", "p", "h", new IdNumber(9));
+        AnimalEmoji e = new("q", "p", new IdNumber(9), "h");
 
         Assert.AreEqual(expected: "p", actual: e.Tag);
         Assert.AreEqual(expected: "q", actual: e.Name);
-        Assert.AreEqual(expected: new IdNumber(9), actual: e.Number);
+        Assert.AreEqual(expected: new IdNumber(9), actual: e.IdNumber);
         Assert.AreEqual(expected: "h", actual: e.AnimalPart);
     }
 

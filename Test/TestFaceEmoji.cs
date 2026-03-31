@@ -14,7 +14,7 @@ namespace Tests
                 Name = "pppp",
                 Strength = 1,
                 Tag = "oooo",
-                Number = new(190)
+                IdNumber = new(190)
             };
 
             FaceEmoji smileCopy = smile.ShallowCopy();
@@ -25,11 +25,11 @@ namespace Tests
             smile.Expression = "рок жив";
             smile.Strength = 9;
             smile.Tag = "Манчестер Красный";
-            smile.Number.Number = new();
+            smile.IdNumber.Number = new();
 
             Assert.AreNotEqual(smileCopy.Tag, smile.Tag);
             Assert.AreNotEqual(smileCopy.Name, smile.Name);
-            Assert.AreEqual(smileCopy.Number, smile.Number);
+            Assert.AreEqual(smileCopy.IdNumber, smile.IdNumber);
             Assert.AreNotEqual(smileCopy.Expression, smile.Expression);
             Assert.AreNotEqual(smileCopy.Strength, smile.Strength);
         }
@@ -37,11 +37,11 @@ namespace Tests
         [TestMethod]
         public void TestWithParameters()
         {
-            FaceEmoji e = new("q", "p", "h", 10, new IdNumber(9));
+            FaceEmoji e = new("q", "p", new IdNumber(9), "h", 10);
 
             Assert.AreEqual(expected: "p", actual: e.Tag);
             Assert.AreEqual(expected: "q", actual: e.Name);
-            Assert.AreEqual(expected: new IdNumber(9), actual: e.Number);
+            Assert.AreEqual(expected: new IdNumber(9), actual: e.IdNumber);
             Assert.AreEqual(expected: "h", actual: e.Expression);
             Assert.AreEqual(expected: 10, actual: e.Strength);
         }

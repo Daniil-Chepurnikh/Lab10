@@ -315,11 +315,9 @@
         /// </summary>
         public void RandomInit()
         {
-            Random rn = new Random();
-            
-            Attack = rn.Next(100, 200);
-            Defense = rn.Next(100, 200);
-            Stamina = rn.Next(100, 200);
+            Attack = IRandomInit.random.Next(100, 200);
+            Defense = IRandomInit.random.Next(100, 200);
+            Stamina = IRandomInit.random.Next(100, 200);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using LibraryEmoji;
-using Microsoft.VisualStudio.TestPlatform.Utilities;
 
 namespace Tests
 {
@@ -9,18 +8,18 @@ namespace Tests
         [TestMethod]
         public void TestCopy()
         {
-            Emoji e = new Emoji { Name = "pppp", Tag = "oooo", Number = new(190) };
+            Emoji e = new Emoji { Name = "pppp", Tag = "oooo", IdNumber = new(190) };
             Emoji copy = e.ShallowCopy();
 
             Assert.AreEqual(copy, e);
 
             copy.Name = "русский рок";
             copy.Tag = "Манчестер Красный";
-            copy.Number.Number = new();
+            copy.IdNumber.Number = new();
 
             Assert.AreNotEqual(copy.Tag, e.Tag);
             Assert.AreNotEqual(copy.Name, e.Name);
-            Assert.AreEqual(copy.Number, e.Number);
+            Assert.AreEqual(copy.IdNumber, e.IdNumber);
         }
 
         [TestMethod]
@@ -30,7 +29,7 @@ namespace Tests
 
             Assert.AreEqual(expected: "p", e.Tag);
             Assert.AreEqual(expected: "q", e.Name);
-            Assert.AreEqual(expected: new IdNumber(9),  e.Number);
+            Assert.AreEqual(expected: new IdNumber(9),  e.IdNumber);
         }
 
         [TestMethod]
@@ -42,7 +41,7 @@ namespace Tests
 
             e.Name = "Cristiano Ronaldo";
             e.Tag = "Manchester United";
-            e.Number = new(7);
+            e.IdNumber = new(7);
 
             int hash2 = e.GetHashCode();
 
@@ -101,7 +100,7 @@ namespace Tests
             
             Assert.AreEqual("Без названия", e.Name);
             Assert.AreEqual("Без тега", e.Tag);
-            Assert.AreEqual(num, e.Number);
+            Assert.AreEqual(num, e.IdNumber);
         }
 
         [TestMethod]
@@ -304,9 +303,10 @@ namespace Tests
             Assert.IsTrue(isPassed);
         }
 
+        [TestMethod]
         public void TestCompare3()
         {
-            Emoji[] emojis = { null, new Emoji() };
+            Emoji[] emojis = { null, new() };
 
             bool isPassed = false;
             try
@@ -321,6 +321,7 @@ namespace Tests
             Assert.IsTrue(isPassed);
         }
 
+        [TestMethod]
         public void TestCompare4()
         {
             Emoji[] emojis = { null, null };

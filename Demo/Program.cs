@@ -136,7 +136,7 @@ namespace Demo
             Output.Separator();
 
             SmilingEmoji smile = new SmilingEmoji{ Expression = "qqqq", Name = "pppp", SmileReason = "hhhh", Strength= 1,
-                                                   Tag = "oooo", Number = new(190) };
+                                                   Tag = "oooo", IdNumber = new(190) };
 
             SmilingEmoji smileCopy = smile.ShallowCopy();
 
@@ -147,7 +147,7 @@ namespace Demo
             smile.Expression = "рок жив";
             smile.Strength = 9;
             smile.Tag = "Манчестер Красный";
-            smile.Number.Number = new();
+            smile.IdNumber.Number = new();
             smile.SmileReason = "ssss";
 
             Output.Separator();

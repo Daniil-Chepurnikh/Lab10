@@ -1,5 +1,6 @@
 ﻿using MyDCInputOutputConsole;
 using System;
+using System.Linq.Expressions;
 
 namespace LibraryEmoji
 {
@@ -33,6 +34,14 @@ namespace LibraryEmoji
             }
         }
 
+        /// <summary>
+        /// Возвращает объект базового класса
+        /// </summary>
+        new public FaceEmoji GetBase
+        {
+            get => new FaceEmoji(Name, Tag, IdNumber, Expression, Strength);
+        }
+
         #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
@@ -46,7 +55,7 @@ namespace LibraryEmoji
         public SmilingEmoji(IdNumber id)
         {
             Init();
-            Number = id;
+            IdNumber = id;
         }
 
         /// <summary>
@@ -65,7 +74,7 @@ namespace LibraryEmoji
         /// <param name="strength">Сила эмодзи</param>
         /// <param name="num">Номер эмодзи</param>
         public SmilingEmoji(string name, string tag, string expression, string smileReason, ushort strength, IdNumber id)
-            : base(name, tag, expression,  strength, id)
+            : base(name, tag, id, expression,  strength)
         {
             SmileReason = smileReason;
         }
@@ -109,7 +118,7 @@ namespace LibraryEmoji
         override public void RandomInit()
         {
             base.RandomInit();
-            SmileReason = smileReasons[random.Next(0, smileReasons.Length)];
+            SmileReason = smileReasons[IRandomInit.random.Next(smileReasons.Length)];
         }
 
         #region Show 

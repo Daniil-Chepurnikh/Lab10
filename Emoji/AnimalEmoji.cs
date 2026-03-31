@@ -1,4 +1,5 @@
 ﻿using MyDCInputOutputConsole;
+using System.Xml.Linq;
 
 namespace LibraryEmoji
 {
@@ -30,6 +31,14 @@ namespace LibraryEmoji
             }
         }
 
+        /// <summary>
+        /// Возвращает объект базового класса
+        /// </summary>
+        public Emoji GetBase
+        {
+            get => new Emoji(Name, Tag, IdNumber); 
+        }
+
         #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
@@ -43,7 +52,7 @@ namespace LibraryEmoji
         public AnimalEmoji(IdNumber id)
         {
             Init();
-            Number = id;
+            IdNumber = id;
         }
 
         /// <summary>
@@ -53,7 +62,7 @@ namespace LibraryEmoji
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="animalPart">Часть животного в эмодзи</param>
         /// <param name="num">Номер эмодзи</param>
-        public AnimalEmoji(string name, string tag, string animalPart, IdNumber id) : base(name, tag, id)
+        public AnimalEmoji(string name, string tag, IdNumber id, string animalPart) : base(name, tag, id)
         {
             AnimalPart = animalPart;
         }
@@ -123,7 +132,7 @@ namespace LibraryEmoji
         override public void RandomInit()
         {
             base.RandomInit();
-            AnimalPart = animalParts[random.Next(0, animalParts.Length)];
+            AnimalPart = animalParts[IRandomInit.random.Next(animalParts.Length)];
         }
 
         /// <summary>

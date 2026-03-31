@@ -11,14 +11,9 @@ namespace LibraryEmoji
         protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
 
-        /// <summary>
-        /// Генератор случайных чисел для RandomInit
-        /// </summary>
-        protected static readonly Random random = new();
-
         private IdNumber _idNumber;
 
-        public IdNumber Number { get; set; }
+        public IdNumber IdNumber { get; set; }
 
         /// <summary>
         /// возможные названия для случайного выбора
@@ -26,7 +21,9 @@ namespace LibraryEmoji
         public static readonly string[] names =
         [
             "радость", "злость", "печаль", "гнев", "страх",
-            "ненависть", "любовь", "спокойствие"
+            "ненависть", "любовь", "спокойствие", "тревога",
+            "отчаяние", "депрессия", "страсть", "умиротворение",
+            "отвращение", "скорбь", "пошлость", "разврат"
         ];
         
         string? _name;
@@ -49,7 +46,9 @@ namespace LibraryEmoji
         public static readonly string[] tags =
         [
             "улыбка", "слёзы", "мат", "поцелуй", "салют",
-            "цветок", "деньги"
+            "цветок", "деньги", "огонь", "птичка", "алкоголь",
+            "солнце", "луна", "звёздочка", "дождь", "молния",
+            "шарик", "азарт", "смерть"
         ];
 
         string? _tag;
@@ -96,7 +95,7 @@ namespace LibraryEmoji
         {
             Name = "Без названия";
             Tag = "Без тега";
-            Number = new();
+            IdNumber = new();
         }
 
         /// <summary>
@@ -106,7 +105,7 @@ namespace LibraryEmoji
         public Emoji(IdNumber id)
         {
             Init();
-            Number = id;
+            IdNumber = id;
         }
 
         /// <summary>
@@ -119,7 +118,7 @@ namespace LibraryEmoji
         {
             Name = name;
             Tag = tag;
-            Number = id;
+            IdNumber = id;
         }
 
         /// <summary>
@@ -150,7 +149,7 @@ namespace LibraryEmoji
         {
             return Name == other.Name &&
                    Tag == other.Tag &&
-                   Number.Equals(other.Number);
+                   IdNumber.Equals(other.IdNumber);
         }
         #endregion
 
@@ -172,7 +171,7 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {Number}";
+        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {IdNumber}";
         /* Сначала решил попробоавать просто геттайп, но печатало с библиотекой
          * это не мой Name а object*/
 
@@ -180,16 +179,16 @@ namespace LibraryEmoji
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => HashCode.Combine(Name, Tag, Number);
+        override public int GetHashCode() => HashCode.Combine(Name, Tag, IdNumber);
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
         virtual public void RandomInit()
         {
-            Name = names[random.Next(0, names.Length)];
-            Tag = tags[random.Next(0, tags.Length)];
-            Number = new(random.Next(0, 111));
+            Name = names[IRandomInit.random.Next(names.Length)];
+            Tag = tags[IRandomInit.random.Next(tags.Length)];
+            IdNumber = new(IRandomInit.random.Next(111));
         }
 
         /// <summary>
@@ -234,7 +233,7 @@ namespace LibraryEmoji
         {
             Emoji emo = (Emoji)this.MemberwiseClone();
 
-            emo.Number = new IdNumber(Number.Number);
+            emo.IdNumber = new IdNumber(IdNumber.Number);
 
             return emo;
         }
