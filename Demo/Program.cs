@@ -166,18 +166,17 @@ namespace Demo
             {
                 Random rn = new();
 
-                emojis_pokemons[p] = rn.Next(5) switch
+                emojis_pokemons[p] = rn.Next(4) switch
                 {
                     0 => new Emoji(rn),
                     1 => new AnimalEmoji(rn),
                     2 => new FaceEmoji(rn),
-                    3 => new SmilingEmoji(rn),
-                    _ => new Pokemon(rn)
+                    _ => new SmilingEmoji(rn),
                 };
             }
 
-            uint emNum, smileNum, anNum, faceNum, pokNum;
-            emNum = smileNum = anNum = faceNum = pokNum = 0;
+            uint emNum, smileNum, anNum, faceNum;
+            emNum = smileNum = anNum = faceNum = 0;
             
             for (int p = 0; p < emojis_pokemons.Length; p++)
             {
@@ -189,14 +188,12 @@ namespace Demo
                     anNum++;
                 else if (typeof(FaceEmoji) == emojis_pokemons[p].GetType())
                     faceNum++;
-                else if (typeof(SmilingEmoji) == emojis_pokemons[p].GetType())
-                    smileNum++;
                 else
-                    pokNum++;
+                    smileNum++;
+
             }
             Output.Separator();
 
-            Output.Message($"Покемонов: {pokNum}\n", ConsoleColor.Magenta);
             Output.Message($"Эмодзи: {emNum}\n", ConsoleColor.Magenta);
             Output.Message($"Лиц: {faceNum} \n", ConsoleColor.Magenta);
             Output.Message($"Животных: {anNum} \n", ConsoleColor.Magenta);

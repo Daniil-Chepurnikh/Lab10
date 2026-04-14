@@ -136,8 +136,9 @@ namespace LibraryEmoji
         /// <returns>true если равны</returns>
         override public bool Equals(object? obj)
         {
-            return obj is Emoji other &&
-            SimpleEquals(other);
+            return ReferenceEquals(obj, this) ||
+                   (obj is Emoji other &&
+                   SimpleEquals(other));
         }
 
         /// <summary>
@@ -145,7 +146,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="other">Сравниваемый эмодзи</param>
         /// <returns>true, равны</returns>
-        virtual public bool SimpleEquals(Emoji other)
+        virtual protected bool SimpleEquals(Emoji other)
         {
             return Name == other.Name &&
                    Tag == other.Tag &&
