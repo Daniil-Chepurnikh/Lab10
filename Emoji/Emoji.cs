@@ -136,8 +136,9 @@ namespace LibraryEmoji
         /// <returns>true если равны</returns>
         override public bool Equals(object? obj)
         {
-            return obj is Emoji other &&
-            SimpleEquals(other);
+            return ReferenceEquals(obj, this) ||
+                   (obj is Emoji other &&
+                   SimpleEquals(other));
         }
 
         /// <summary>
