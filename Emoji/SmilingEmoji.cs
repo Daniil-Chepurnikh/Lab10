@@ -51,7 +51,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализация с клавиатуры
         /// </summary>
-        /// <param name="num">Название эмодзи</param>
+        /// <param name="id">Название эмодзи</param>
         public SmilingEmoji(IdNumber id)
         {
             Init();
@@ -72,7 +72,7 @@ namespace LibraryEmoji
         /// <param name="expression">Выражение лица эмодзи</param>
         /// <param name="smileReason">Причина улыбки эмодзи</param>
         /// <param name="strength">Сила эмодзи</param>
-        /// <param name="num">Номер эмодзи</param>
+        /// <param name="id">Номер эмодзи</param>
         public SmilingEmoji(string name, string tag, string expression, string smileReason, ushort strength, IdNumber id)
             : base(name, tag, id, expression,  strength)
         {

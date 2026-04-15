@@ -48,7 +48,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализация с клавиатуры
         /// </summary>
-        /// <param name="num">Номер эмодзи</param>
+        /// <param name="id">Номер эмодзи</param>
         public AnimalEmoji(IdNumber id)
         {
             Init();
@@ -61,7 +61,7 @@ namespace LibraryEmoji
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
         /// <param name="animalPart">Часть животного в эмодзи</param>
-        /// <param name="num">Номер эмодзи</param>
+        /// <param name="id">Номер эмодзи</param>
         public AnimalEmoji(string name, string tag, IdNumber id, string animalPart) : base(name, tag, id)
         {
             AnimalPart = animalPart;

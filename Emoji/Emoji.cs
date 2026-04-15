@@ -8,11 +8,19 @@ namespace LibraryEmoji
     /// </summary>
     public class Emoji : IRandomInit, IComparable, ICloneable
     {
+        /// <summary>
+        /// Ошибка длины строки и наличия цифр
+        /// </summary>
         protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
+        
+        /// <summary>
+        /// Ошибка нулевой или пустой/пробельной строки
+        /// </summary>
         protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
 
-        private IdNumber _idNumber;
-
+        /// <summary>
+        /// Номер эмодзи
+        /// </summary>
         public IdNumber IdNumber { get; set; }
 
         /// <summary>
@@ -68,11 +76,11 @@ namespace LibraryEmoji
         /// <summary>
         /// Проверяет строку на удовлетворение требованиям
         /// </summary>
-        /// <param name="checkString"></param>
+        /// <param name="str"></param>
         /// <returns>true если строка подходит</returns>
         /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
         /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
-        protected static bool IsCorrectString(string str)
+        protected static bool IsCorrectString(string? str)
         {
             if (string.IsNullOrWhiteSpace(str))
                 throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
@@ -101,7 +109,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор инициализации из консоли
         /// </summary>
-        /// <param name="num">Номер эмодзи</param>
+        /// <param name="id">Номер эмодзи</param>
         public Emoji(IdNumber id)
         {
             Init();
@@ -113,7 +121,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="name">Название эмодзи</param>
         /// <param name="tag">Тег эмодзи</param>
-        /// <param name="num">Номер эмодзи</param>
+        /// <param name="id">Номер эмодзи</param>
         public Emoji(string name, string tag, IdNumber id)
         {
             Name = name;
