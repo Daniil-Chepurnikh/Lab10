@@ -1,5 +1,4 @@
-﻿using MyDCInputOutputConsole;
-using System;
+﻿using MyDCInputOutput;
 
 namespace LibraryEmoji
 {

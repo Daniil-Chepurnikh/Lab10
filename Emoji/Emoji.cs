@@ -1,4 +1,4 @@
-﻿using MyDCInputOutputConsole;
+﻿using MyDCInputOutput;
 using System.Text.RegularExpressions;
 
 namespace LibraryEmoji

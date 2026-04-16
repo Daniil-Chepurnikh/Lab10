@@ -1,6 +1,5 @@
 ﻿using LibraryEmoji;
-using MyDCInputOutputConsole;
-using System;
+using MyDCInputOutput;
 
 namespace Demo
 {
