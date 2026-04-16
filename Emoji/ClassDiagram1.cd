@@ -3,7 +3,7 @@
   <Class Name="LibraryEmoji.Emoji" Collapsed="true">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAIABAAACgKAQEgAAAAAQAABAEAIgAAARCAABAAII=</HashCode>
+      <HashCode>AAAAIABAAACgKAQEgAAAAAQAABAEAIgAAABCABBAAJI=</HashCode>
       <FileName>Emoji.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,34 +11,26 @@
   <Class Name="LibraryEmoji.AnimalEmoji" Collapsed="true">
     <Position X="0.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAKAAEgAAAAAAAAAgUAIAAAAAGAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAACAKAAEgABAAAAAAAgUAIAAAAAGABAAABA=</HashCode>
       <FileName>AnimalEmoji.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LibraryEmoji.FaceEmoji" Collapsed="true">
     <Position X="2.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAKAAEgEAAAAAAAABEAIAQAAACgAAAAAI=</HashCode>
+      <HashCode>AAAAAAAAAACAKAAEgEBAAAAAAABEAIAQAAACgBAAABI=</HashCode>
       <FileName>FaceEmoji.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="LibraryEmoji.SmilingEmoji" Collapsed="true">
     <Position X="2.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAACAKAAEgAAAAAAAAAAEAIAEAAACBAAAAAA=</HashCode>
+      <HashCode>BAAAAAAAAACAKAAEgABAAAAAAAAEAIAEAAACBBAAABA=</HashCode>
       <FileName>SmilingEmoji.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="LibraryEmoji.Pokemon" Collapsed="true">
-    <Position X="6.5" Y="0.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>ACAAgAAABBCQAAQEiAKgBgSAAIAAAYKSAgCBAgAAAAY=</HashCode>
-      <FileName>Pokemon.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="LibraryEmoji.EmojiComparer" Collapsed="true">
-    <Position X="8.25" Y="0.5" Width="1.5" />
+    <Position X="6.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>EmojiComparer.cs</FileName>
@@ -53,9 +45,9 @@
     </TypeIdentifier>
   </Class>
   <Interface Name="LibraryEmoji.IRandomInit" Collapsed="true">
-    <Position X="10" Y="0.5" Width="1.5" />
+    <Position X="8" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>IRandomInit.cs</FileName>
     </TypeIdentifier>
   </Interface>
