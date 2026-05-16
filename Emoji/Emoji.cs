@@ -76,7 +76,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Проверяет строку на удовлетворение требованиям
         /// </summary>
-        /// <param name="str"></param>
+        /// <param name="str">Проверяемая строка</param>
         /// <returns>true если строка подходит</returns>
         /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
         /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
@@ -240,7 +240,7 @@ namespace LibraryEmoji
         /// <returns>Ссылка на новый объект</returns>
         virtual public object Clone()
         {
-            Emoji emo = (Emoji)this.MemberwiseClone();
+            Emoji emo = (Emoji)MemberwiseClone();
 
             emo.IdNumber = new IdNumber(IdNumber.Number);
 
@@ -252,5 +252,21 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Ссылка на копию</returns>
         public Emoji ShallowCopy() => (Emoji)MemberwiseClone();
+
+        /// <summary>
+        /// Оператор равенства
+        /// </summary>
+        /// <param name="a">Первый сравниваемый эмодзи</param>
+        /// <param name="b">Второй сравниваемый эмодзи</param>
+        /// <returns>true если равны, иначе false</returns>
+        public static bool operator ==(Emoji a, Emoji b) => a.Equals(b);
+
+        /// <summary>
+        /// Оператор равенства
+        /// </summary>
+        /// <param name="a">Первый сравниваемый эмодзи</param>
+        /// <param name="b">Второй сравниваемый эмодзи</param>
+        /// <returns>true если не равны, иначе false</returns>
+        public static bool operator !=(Emoji a, Emoji b) => !a.Equals(b);
     }
 }
