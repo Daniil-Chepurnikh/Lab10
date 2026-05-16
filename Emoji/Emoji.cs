@@ -262,7 +262,7 @@ namespace LibraryEmoji
         public static bool operator ==(Emoji a, Emoji b) => a.Equals(b);
 
         /// <summary>
-        /// Оператор равенства
+        /// Оператор неравенства
         /// </summary>
         /// <param name="a">Первый сравниваемый эмодзи</param>
         /// <param name="b">Второй сравниваемый эмодзи</param>
