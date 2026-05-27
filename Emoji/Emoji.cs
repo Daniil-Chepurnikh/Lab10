@@ -259,7 +259,12 @@ namespace LibraryEmoji
         /// <param name="a">Первый сравниваемый эмодзи</param>
         /// <param name="b">Второй сравниваемый эмодзи</param>
         /// <returns>true если равны, иначе false</returns>
-        public static bool operator ==(Emoji a, Emoji b) => a.Equals(b);
+        public static bool operator ==(Emoji a, Emoji b)
+        {
+            if (ReferenceEquals(a, b)) return true;   // оба null или один и тот же объект
+            if (a is null || b is null) return false;  // один null, второй нет
+            return a.Equals(b);
+        }
 
         /// <summary>
         /// Оператор неравенства
@@ -267,6 +272,34 @@ namespace LibraryEmoji
         /// <param name="a">Первый сравниваемый эмодзи</param>
         /// <param name="b">Второй сравниваемый эмодзи</param>
         /// <returns>true если не равны, иначе false</returns>
-        public static bool operator !=(Emoji a, Emoji b) => !a.Equals(b);
+        public static bool operator !=(Emoji a, Emoji b) => !(a == b);
+
+        /// <summary>
+        /// Оператор меньше
+        /// </summary>
+        /// <param name="a">Первый сравниваемый эмодзи</param>
+        /// <param name="b">Второй сравниваемый эмодзи</param>
+        /// <returns>true если первый меньше второго, иначе false</returns>
+        public static bool operator <(Emoji a, Emoji b)
+        {
+            if (ReferenceEquals(a, b)) return false; // два null или один объект
+            if (a is null) return true;   // null меньше любого не-null
+            if (b is null) return false;  // любой не-null не меньше null
+            return a.CompareTo(b) < 0;
+        }
+
+        /// <summary>
+        /// Оператор больше
+        /// </summary>
+        /// <param name="a">Первый сравниваемый эмодзи</param>
+        /// <param name="b">Второй сравниваемый эмодзи</param>
+        /// <returns>true если первый больше второго, иначе false</returns>
+        public static bool operator >(Emoji a, Emoji b)
+        {
+            if (ReferenceEquals(a, b)) return false;
+            if (a is null) return false;
+            if (b is null) return true;
+            return a.CompareTo(b) > 0;
+        }
     }
 }
