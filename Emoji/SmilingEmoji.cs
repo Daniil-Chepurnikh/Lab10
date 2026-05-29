@@ -1,6 +1,4 @@
-﻿using MyDCInputOutputConsole;
-using System;
-using System.Linq.Expressions;
+﻿using MyDCInputOutput;
 
 namespace LibraryEmoji
 {
@@ -39,7 +37,7 @@ namespace LibraryEmoji
         /// </summary>
         new public FaceEmoji GetBase
         {
-            get => new FaceEmoji(Name, Tag, IdNumber, Expression, Strength);
+            get => new(Name, Tag, IdNumber, Expression, Strength);
         }
 
         #region Конструкторы
@@ -158,5 +156,21 @@ namespace LibraryEmoji
         /// </summary>
         /// <returns>Ссылка на копию</returns>
         new public SmilingEmoji ShallowCopy() => (SmilingEmoji)MemberwiseClone();
+
+        /// <summary>
+        /// Оператор равенства
+        /// </summary>
+        /// <param name="a">Первый сравниваемый эмодзи</param>
+        /// <param name="b">Второй сравниваемый эмодзи</param>
+        /// <returns>true если равны, иначе false</returns>
+        public static bool operator ==(SmilingEmoji a, SmilingEmoji b) => a.Equals(b);
+
+        /// <summary>
+        /// Оператор неравенства
+        /// </summary>
+        /// <param name="a">Первый сравниваемый эмодзи</param>
+        /// <param name="b">Второй сравниваемый эмодзи</param>
+        /// <returns>true если не равны, иначе false</returns>
+        public static bool operator !=(SmilingEmoji a, SmilingEmoji b) => !a.Equals(b);
     }
 }

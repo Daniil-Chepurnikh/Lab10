@@ -1,6 +1,5 @@
 ﻿using LibraryEmoji;
-using MyDCInputOutputConsole;
-using System;
+using MyDCInputOutput;
 
 namespace Demo
 {
@@ -8,6 +7,10 @@ namespace Demo
     {
         static void Main(string[] args)
         {
+            Emoji e = null;
+
+            e.Equals(new Emoji());
+            
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
             Emoji[] emojis = new Emoji[15]; // основной
