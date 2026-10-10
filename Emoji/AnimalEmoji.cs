@@ -20,12 +20,12 @@ namespace LibraryEmoji
         /// <summary>
         /// Часть тела животного в эмодзи
         /// </summary>
-        public string? AnimalPart 
-        { 
-            get => _animalPart; 
+        public string? AnimalPart
+        {
+            get => _animalPart;
             set
             {
-                 if (IsCorrectString(value))
+                if (IsCorrectString(value))
                     _animalPart = value;
             }
         }
@@ -35,14 +35,14 @@ namespace LibraryEmoji
         /// </summary>
         public Emoji GetBase
         {
-            get => new(Name, Tag, IdNumber); 
+            get => new(Name, Tag, IdNumber);
         }
 
         #region Конструкторы
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public AnimalEmoji() :base() => AnimalPart = "Часть тела";
+        public AnimalEmoji() : base() => AnimalPart = "Часть тела";
 
         /// <summary>
         /// Инициализация с клавиатуры
@@ -116,7 +116,7 @@ namespace LibraryEmoji
         {
             base.Init();
             Output.Message("Введите часть тела животного в эмодзи: ", ConsoleColor.White);
-            AnimalPart = Input.Data();  
+            AnimalPart = Input.Data();
         }
 
         /// <summary>

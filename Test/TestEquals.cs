@@ -71,7 +71,7 @@ public class TestEquals
 
     [TestMethod]
     public void TestSimpleEquals6()
-    {        
+    {
         FaceEmoji e = new();
         FaceEmoji e1 = new();
 
