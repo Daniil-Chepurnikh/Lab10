@@ -12,7 +12,7 @@ namespace LibraryEmoji
         /// Ошибка длины строки и наличия цифр
         /// </summary>
         protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
-        
+
         /// <summary>
         /// Ошибка нулевой или пустой/пробельной строки
         /// </summary>
@@ -35,18 +35,20 @@ namespace LibraryEmoji
             "искусство", "Бог", "Дьявол", "ангел", "чёрт", "книга",
             "свобода", "семья"
         ];
-        
-        string? _name;
+
+        private string? _name;
         /// <summary>
         /// Название эмодзи
         /// </summary>
-        public string? Name 
+        public string? Name
         {
-            get => _name; 
+            get => _name;
             set
             {
                 if (IsCorrectString(value))
+                {
                     _name = value;
+                }
             }
         }
 
@@ -62,17 +64,19 @@ namespace LibraryEmoji
             "мальчик", "девочка", "дедушка", "бабушка"
         ];
 
-        string? _tag;
+        private string? _tag;
         /// <summary>
         /// Тег эмодзи
         /// </summary>
-        public string? Tag 
-        { 
+        public string? Tag
+        {
             get => _tag;
             set
             {
                 if (IsCorrectString(value))
+                {
                     _tag = value;
+                }
             }
         }
 
@@ -86,14 +90,18 @@ namespace LibraryEmoji
         protected static bool IsCorrectString(string? str)
         {
             if (string.IsNullOrWhiteSpace(str))
+            {
                 throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
+            }
 
             string checkString = str.Replace("\t", " ");
 
             string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             if (Regex.IsMatch(checkString, @"\d") || words.Length > 2)
+            {
                 throw new ArgumentException(ERROR_DIGIT_LONG_STRING);
+            }
 
             return true;
         }
@@ -133,19 +141,19 @@ namespace LibraryEmoji
         }
 
         /// <summary>
-        /// Конструктор со случайнми значениями
+        /// Конструктор со случайными значениями
         /// </summary>
-        /// <param name="rnd">Просто в виде маркера того, что нужны случайниые значения</param>
+        /// <param name="rnd">Просто в виде маркера того, что нужны случайные значения</param>
         public Emoji(Random rnd) => RandomInit();
         #endregion
 
         #region Всё для Equals
         /// <summary>
-        /// Сранивает объекты
+        /// Сравнивает объекты
         /// </summary>
         /// <param name="obj">Сравниваемый объект</param>
         /// <returns>true если равны</returns>
-        override public bool Equals(object? obj)
+        public override bool Equals(object? obj)
         {
             return ReferenceEquals(obj, this) ||
                    (obj is Emoji other &&
@@ -157,7 +165,7 @@ namespace LibraryEmoji
         /// </summary>
         /// <param name="other">Сравниваемый эмодзи</param>
         /// <returns>true, равны</returns>
-        virtual protected bool SimpleEquals(Emoji other)
+        protected virtual bool SimpleEquals(Emoji other)
         {
             return Name == other.Name &&
                    Tag == other.Tag &&
@@ -170,7 +178,7 @@ namespace LibraryEmoji
         /// Показывает данные эмодзи
         /// </summary>
         /// <returns>Строка с информацией</returns>
-        virtual public string VirtualShow() => ToString();
+        public virtual string VirtualShow() => ToString();
 
         /// <summary>
         /// Показывает данные эмодзи
@@ -183,20 +191,20 @@ namespace LibraryEmoji
         /// Возвращает общие данные всех классов(название и тег)
         /// </summary>
         /// <returns>Строка с данными</returns>
-        override public string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {IdNumber}";
-        /* Сначала решил попробоавать просто геттайп, но печатало с библиотекой
+        public override string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {IdNumber}";
+        /* Сначала решил попробовать просто геттайп, но печатало с библиотекой
          * это не мой Name а object*/
 
         /// <summary>
         /// Получает хеш-код
         /// </summary>
         /// <returns>Значение хеш-кода</returns>
-        override public int GetHashCode() => HashCode.Combine(Name, Tag, IdNumber);
+        public override int GetHashCode() => HashCode.Combine(Name, Tag, IdNumber);
 
         /// <summary>
         /// Инициализирует атрибуты случайными значениями
         /// </summary>
-        virtual public void RandomInit()
+        public virtual void RandomInit()
         {
             Name = names[IRandomInit.random.Next(names.Length)];
             Tag = tags[IRandomInit.random.Next(tags.Length)];
@@ -206,7 +214,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Инициализирует атрибуты
         /// </summary>
-        virtual protected void Init()
+        protected virtual void Init()
         {
             Output.Message("Введите название эмодзи: ", ConsoleColor.White);
             Name = Input.Data();
@@ -224,24 +232,28 @@ namespace LibraryEmoji
         /// "+число" если больше
         /// "0" если равны
         /// </returns>
-        virtual public int CompareTo(object? obj)
+        public virtual int CompareTo(object? obj)
         {
             Emoji other = obj as Emoji;
             ArgumentNullException.ThrowIfNull(other);
 
             int result = string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
-            
+
             if (result != 0)
+            {
                 return result;
+            }
             else
+            {
                 return string.Compare(Tag, other.Tag, StringComparison.OrdinalIgnoreCase);
+            }
         }
 
         /// <summary>
         /// Реализация интерфейса IClonable
         /// </summary>
         /// <returns>Ссылка на новый объект</returns>
-        virtual public object Clone()
+        public virtual object Clone()
         {
             Emoji emo = (Emoji)MemberwiseClone();
 
@@ -264,8 +276,16 @@ namespace LibraryEmoji
         /// <returns>true если равны, иначе false</returns>
         public static bool operator ==(Emoji a, Emoji b)
         {
-            if (ReferenceEquals(a, b)) return true;   // оба null или один и тот же объект
-            if (a is null || b is null) return false;  // один null, второй нет
+            if (ReferenceEquals(a, b))
+            {
+                return true;   // оба null или один и тот же объект
+            }
+
+            if (a is null || b is null)
+            {
+                return false;  // один null, второй нет
+            }
+
             return a.Equals(b);
         }
 
@@ -285,9 +305,21 @@ namespace LibraryEmoji
         /// <returns>true если первый меньше второго, иначе false</returns>
         public static bool operator <(Emoji a, Emoji b)
         {
-            if (ReferenceEquals(a, b)) return false; // два null или один объект
-            if (a is null) return true;   // null меньше любого не-null
-            if (b is null) return false;  // любой не-null не меньше null
+            if (ReferenceEquals(a, b))
+            {
+                return false; // два null или один объект
+            }
+
+            if (a is null)
+            {
+                return true;   // null меньше любого не-null
+            }
+
+            if (b is null)
+            {
+                return false;  // любой не-null не меньше null
+            }
+
             return a.CompareTo(b) < 0;
         }
 
@@ -299,9 +331,21 @@ namespace LibraryEmoji
         /// <returns>true если первый больше второго, иначе false</returns>
         public static bool operator >(Emoji a, Emoji b)
         {
-            if (ReferenceEquals(a, b)) return false;
-            if (a is null) return false;
-            if (b is null) return true;
+            if (ReferenceEquals(a, b))
+            {
+                return false;
+            }
+
+            if (a is null)
+            {
+                return false;
+            }
+
+            if (b is null)
+            {
+                return true;
+            }
+
             return a.CompareTo(b) > 0;
         }
     }

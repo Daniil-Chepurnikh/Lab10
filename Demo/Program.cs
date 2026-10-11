@@ -3,18 +3,18 @@ using MyDCInputOutput;
 
 namespace Demo
 {
-    public class Program
+    public static class Program
     {
         static void Main(string[] args)
         {
-            Emoji e = null;
+            Emoji? e = null;
 
-            e.Equals(new Emoji());
-            
+            e?.Equals(new Emoji());
+
             Output.Message(">>>>>>>>>>>>>>>>>>ЧАСТЬ 2<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n", ConsoleColor.Cyan);
 
             Emoji[] emojis = new Emoji[15]; // основной
-            Emoji[] emojis2 = { new Emoji() }; // чтобы показать как работает один из запросов
+            Emoji[] emojis2 = { new() }; // чтобы показать как работает один из запросов
 
             for (int p = 0; p < emojis.Length; p++)
             {
@@ -37,7 +37,7 @@ namespace Demo
                 Output.Message("Нет ни одной улыбающейся эмоции\n", ConsoleColor.White);
 
             Output.Separator();
-            
+
             if (CalculateAverageSmileStrength(emojis2) > 5)
                 Output.Message("Эмодзи счастливы\n", ConsoleColor.Blue);
             else if (CalculateAverageSmileStrength(emojis2) > 0)
@@ -72,7 +72,7 @@ namespace Demo
                 Output.Message("Элемент не найден\n", ConsoleColor.Blue);
             else
             {
-                Output.Message(emojis[indexComparable] +"\n", ConsoleColor.White);
+                Output.Message(emojis[indexComparable] + "\n", ConsoleColor.White);
                 Output.Message($" Номер элемента: {indexComparable + 1}\n", ConsoleColor.White);
             }
 
@@ -138,8 +138,15 @@ namespace Demo
             Output.Message(".....................Поверхностное копирование.......................\n", ConsoleColor.White);
             Output.Separator();
 
-            SmilingEmoji smile = new SmilingEmoji{ Expression = "qqqq", Name = "pppp", SmileReason = "hhhh", Strength= 1,
-                                                   Tag = "oooo", IdNumber = new(190) };
+            SmilingEmoji smile = new SmilingEmoji
+            {
+                Expression = "qqqq",
+                Name = "pppp",
+                SmileReason = "hhhh",
+                Strength = 1,
+                Tag = "oooo",
+                IdNumber = new(190)
+            };
 
             SmilingEmoji smileCopy = smile.ShallowCopy();
 
@@ -180,7 +187,7 @@ namespace Demo
 
             uint emNum, smileNum, anNum, faceNum;
             emNum = smileNum = anNum = faceNum = 0;
-            
+
             for (int p = 0; p < emojis_pokemons.Length; p++)
             {
                 Output.Message($"{emojis_pokemons[p]}\n", ConsoleColor.White);
@@ -219,13 +226,13 @@ namespace Demo
                     averageSmileStrength += smile.Strength;
                     smileCount++;
                 }
-            } 
+            }
             if (smileCount != 0)
                 averageSmileStrength /= smileCount;
 
             return averageSmileStrength;
         }
-        
+
         /// <summary>
         /// Считает сколько трёхбуквенных частей тела животных встречено
         /// </summary>
@@ -259,11 +266,11 @@ namespace Demo
             {
                 try
                 {
-                    FaceEmoji face = emo as FaceEmoji;
+                    FaceEmoji? face = emo as FaceEmoji;
                     if (str.Length < face.Expression.Length)
                         str = face.Expression;
                 }
-                catch {}
+                catch { }
             }
             return str;
         }

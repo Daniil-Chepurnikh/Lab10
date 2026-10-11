@@ -44,7 +44,7 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public SmilingEmoji() :base() => SmileReason = "Просто улыбается";
+        public SmilingEmoji() : base() => SmileReason = "Просто улыбается";
 
         /// <summary>
         /// Инициализация с клавиатуры
@@ -72,7 +72,7 @@ namespace LibraryEmoji
         /// <param name="strength">Сила эмодзи</param>
         /// <param name="id">Номер эмодзи</param>
         public SmilingEmoji(string name, string tag, string expression, string smileReason, ushort strength, IdNumber id)
-            : base(name, tag, id, expression,  strength)
+            : base(name, tag, id, expression, strength)
         {
             SmileReason = smileReason;
         }

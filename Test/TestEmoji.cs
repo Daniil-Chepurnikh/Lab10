@@ -29,7 +29,7 @@ namespace Tests
 
             Assert.AreEqual(expected: "p", e.Tag);
             Assert.AreEqual(expected: "q", e.Name);
-            Assert.AreEqual(expected: new IdNumber(9),  e.IdNumber);
+            Assert.AreEqual(expected: new IdNumber(9), e.IdNumber);
         }
 
         [TestMethod]
@@ -97,7 +97,7 @@ namespace Tests
             Emoji e = new();
 
             IdNumber num = new();
-            
+
             Assert.AreEqual("Без названия", e.Name);
             Assert.AreEqual("Без тега", e.Tag);
             Assert.AreEqual(num, e.IdNumber);
@@ -124,7 +124,7 @@ namespace Tests
         {
             IdNumber e = new(5);
             IdNumber e1 = new(1);
-            
+
             Assert.IsFalse(e.Equals(e1));
         }
 
@@ -276,20 +276,20 @@ namespace Tests
 
             emojis[0].Name = "Test";
             emojis[1].Name = "A";
-            
+
             Array.Sort(emojis, new EmojiComparer());
 
             string name = emojis[0].Name;
             Assert.AreEqual("A", name);
-            
+
         }
 
         [TestMethod]
         public void TestCompare2() // очень странно. Почему нельзя просто вернуть то же самое исключение что
-            // сгенерилось внутри, зачем делать новое под предлогом возникновения старого
+                                   // сгенерилось внутри, зачем делать новое под предлогом возникновения старого
         {
             Emoji[] emojis = { new Emoji(), null };
-            
+
             bool isPassed = false;
             try
             {
@@ -297,7 +297,7 @@ namespace Tests
             }
             catch (InvalidOperationException)
             {
-                isPassed= true;
+                isPassed = true;
             }
 
             Assert.IsTrue(isPassed);

@@ -160,7 +160,7 @@ public class TestAnimalEmoji
     public void TestShowToString()
     {
         Random rnd = new Random();
-        
+
         AnimalEmoji e = new(rnd);
 
         string toString = e.Show();

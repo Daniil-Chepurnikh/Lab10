@@ -23,8 +23,8 @@
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public IdNumber() => Number = 0; 
-        
+        public IdNumber() => Number = 0;
+
         /// <summary>
         /// Конструктор с параметрами
         /// </summary>
@@ -36,7 +36,7 @@
         /// <param name="obj">Потенциальный номер</param>
         /// <returns>true если равны</returns>
         public override bool Equals(object? obj) => obj is IdNumber num && Number == num.Number;
-        
+
         /// <summary>
         /// Получает хеш-код объекта
         /// </summary>

@@ -9,12 +9,12 @@ namespace LibraryEmoji
     {
         static readonly string[] expressions =
         [
-            ":(", ":)", "^|0_0|^", "(0 + 0(", 
+            ":(", ":)", "^|0_0|^", "(0 + 0(",
             "://", ";(", ";)", "?:", ":-(", ":-)", "(~` _ ~`(",
             "- _ -", "'_'", "|$_$|", "<|0,0|>", @"_/(0 - 0(\_",
             ":{", ":}", "@_@", "*_*", "0_0", "($_$("
         ];
-        
+
         string? _expression;
         /// <summary>
         /// Лицо эмодзи
@@ -57,10 +57,10 @@ namespace LibraryEmoji
         /// <summary>
         /// Конструктор без параметров
         /// </summary>
-        public FaceEmoji() :base()
+        public FaceEmoji() : base()
         {
-             Expression = "Нет выражения";
-             Strength = 0;
+            Expression = "Нет выражения";
+            Strength = 0;
         }
 
         /// <summary>
