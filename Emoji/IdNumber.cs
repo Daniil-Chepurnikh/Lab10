@@ -1,52 +1,69 @@
-﻿namespace LibraryEmoji
+﻿namespace LibraryEmoji;
+
+/// <summary>
+/// Идентификационный номер эмодзи
+/// </summary>
+public class IdNumber
 {
+    private int _number;
     /// <summary>
-    /// Идентификационный номер эмодзи
+    /// Номер
     /// </summary>
-    public class IdNumber
+    public int Number
     {
-        private int _number;
-        /// <summary>
-        /// Номер
-        /// </summary>
-        public int Number
+        get => _number;
+        set
         {
-            get => _number;
-            set
+            if (value < 0)
             {
-                if (value < 0)
-                    throw new ArgumentException("Номер не может быть меньше нуля");
-                _number = value;
+                throw new ArgumentException("Номер не может быть меньше нуля");
             }
+
+            _number = value;
         }
+    }
 
-        /// <summary>
-        /// Конструктор без параметров
-        /// </summary>
-        public IdNumber() => Number = 0;
+    /// <summary>
+    /// Конструктор без параметров
+    /// </summary>
+    public IdNumber()
+    {
+        Number = 0;
+    }
 
-        /// <summary>
-        /// Конструктор с параметрами
-        /// </summary>
-        public IdNumber(int number) => Number = number;
+    /// <summary>
+    /// Конструктор с параметрами
+    /// </summary>
+    public IdNumber(int number)
+    {
+        Number = number;
+    }
 
-        /// <summary>
-        /// Сравнивает два номера
-        /// </summary>
-        /// <param name="obj">Потенциальный номер</param>
-        /// <returns>true если равны</returns>
-        public override bool Equals(object? obj) => obj is IdNumber num && Number == num.Number;
+    /// <summary>
+    /// Сравнивает два номера
+    /// </summary>
+    /// <param name="obj">Потенциальный номер</param>
+    /// <returns>true если равны</returns>
+    public override bool Equals(object? obj)
+    {
+        return obj is IdNumber num && Number == num.Number;
+    }
 
-        /// <summary>
-        /// Получает хеш-код объекта
-        /// </summary>
-        /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => Number.GetHashCode();
+    /// <summary>
+    /// Получает хеш-код объекта
+    /// </summary>
+    /// <returns>Значение хеш-кода</returns>
+    public override int GetHashCode()
+    {
+        return Number.GetHashCode();
+    }
 
-        /// <summary>
-        /// Переопределён
-        /// </summary>
-        /// <returns>Соответствующая строка</returns>
-        public override string ToString() => $"Номер: {_number}";
+    /// <summary>
+    /// Переопределён
+    /// </summary>
+    /// <returns>Соответствующая строка</returns>
+    public override string ToString()
+    {
+        return $"Номер: {_number}";
     }
 }

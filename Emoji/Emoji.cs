@@ -1,352 +1,346 @@
 ﻿using MyDCInputOutput;
 using System.Text.RegularExpressions;
 
-namespace LibraryEmoji
+namespace LibraryEmoji;
+
+/// <summary>
+/// Базовый класс библиотеки
+/// </summary>
+public class Emoji : IRandomInit, IComparable, ICloneable
 {
     /// <summary>
-    /// Базовый класс библиотеки
+    /// Ошибка длины строки и наличия цифр
     /// </summary>
-    public class Emoji : IRandomInit, IComparable, ICloneable
+    protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
+
+    /// <summary>
+    /// Ошибка нулевой или пустой/пробельной строки
+    /// </summary>
+    protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
+
+    /// <summary>
+    /// Номер эмодзи
+    /// </summary>
+    public IdNumber IdNumber { get; set; }
+
+    /// <summary>
+    /// возможные названия для случайного выбора
+    /// </summary>
+    public static readonly string[] names =
+    [
+        "радость", "злость", "печаль", "гнев", "страх",
+        "ненависть", "любовь", "спокойствие", "тревога",
+        "отчаяние", "депрессия", "страсть", "умиротворение",
+        "отвращение", "скорбь", "пошлость", "разврат", "спорт",
+        "искусство", "Бог", "Дьявол", "ангел", "чёрт", "книга",
+        "свобода", "семья"
+    ];
+
+    private string? _name;
+    /// <summary>
+    /// Название эмодзи
+    /// </summary>
+    public string? Name
     {
-        /// <summary>
-        /// Ошибка длины строки и наличия цифр
-        /// </summary>
-        protected const string ERROR_DIGIT_LONG_STRING = "Строка не удовлетворяет требованиям. Не вводите цифры";
-
-        /// <summary>
-        /// Ошибка нулевой или пустой/пробельной строки
-        /// </summary>
-        protected const string ERROR_NULL_WHITESPACE_STRING = "Строка не может быть нулевой или пустой, не может состоять только из пробелов";
-
-        /// <summary>
-        /// Номер эмодзи
-        /// </summary>
-        public IdNumber IdNumber { get; set; }
-
-        /// <summary>
-        /// возможные названия для случайного выбора
-        /// </summary>
-        public static readonly string[] names =
-        [
-            "радость", "злость", "печаль", "гнев", "страх",
-            "ненависть", "любовь", "спокойствие", "тревога",
-            "отчаяние", "депрессия", "страсть", "умиротворение",
-            "отвращение", "скорбь", "пошлость", "разврат", "спорт",
-            "искусство", "Бог", "Дьявол", "ангел", "чёрт", "книга",
-            "свобода", "семья"
-        ];
-
-        private string? _name;
-        /// <summary>
-        /// Название эмодзи
-        /// </summary>
-        public string? Name
+        get => _name;
+        set
         {
-            get => _name;
-            set
+            if (IsCorrectString(value))
             {
-                if (IsCorrectString(value))
-                {
-                    _name = value;
-                }
+                _name = value;
             }
         }
+    }
 
-        /// <summary>
-        /// возможные теги для случайного выбора
-        /// </summary>
-        public static readonly string[] tags =
-        [
-            "улыбка", "слёзы", "мат", "поцелуй", "салют",
-            "цветок", "деньги", "огонь", "птичка", "алкоголь",
-            "солнце", "луна", "звёздочка", "дождь", "молния",
-            "шарик", "азарт", "смерть", "мужчина", "женщина",
-            "мальчик", "девочка", "дедушка", "бабушка"
-        ];
+    /// <summary>
+    /// возможные теги для случайного выбора
+    /// </summary>
+    public static readonly string[] tags =
+    [
+        "улыбка", "слёзы", "мат", "поцелуй", "салют",
+        "цветок", "деньги", "огонь", "птичка", "алкоголь",
+        "солнце", "луна", "звёздочка", "дождь", "молния",
+        "шарик", "азарт", "смерть", "мужчина", "женщина",
+        "мальчик", "девочка", "дедушка", "бабушка"
+    ];
 
-        private string? _tag;
-        /// <summary>
-        /// Тег эмодзи
-        /// </summary>
-        public string? Tag
+    private string? _tag;
+    /// <summary>
+    /// Тег эмодзи
+    /// </summary>
+    public string? Tag
+    {
+        get => _tag;
+        set
         {
-            get => _tag;
-            set
+            if (IsCorrectString(value))
             {
-                if (IsCorrectString(value))
-                {
-                    _tag = value;
-                }
+                _tag = value;
             }
         }
+    }
 
-        /// <summary>
-        /// Проверяет строку на удовлетворение требованиям
-        /// </summary>
-        /// <param name="str">Проверяемая строка</param>
-        /// <returns>true если строка подходит</returns>
-        /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
-        /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
-        protected static bool IsCorrectString(string? str)
+    /// <summary>
+    /// Проверяет строку на удовлетворение требованиям
+    /// </summary>
+    /// <param name="str">Проверяемая строка</param>
+    /// <returns>true если строка подходит</returns>
+    /// <exception cref="ArgumentNullException">Если строка null, пустая или стостоит только из пробелов</exception>
+    /// <exception cref="ArgumentException">Если в строке есть числа или она состоит более чем из 2 элементов</exception>
+    protected static bool IsCorrectString(string? str)
+    {
+        if (string.IsNullOrWhiteSpace(str))
         {
-            if (string.IsNullOrWhiteSpace(str))
-            {
-                throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
-            }
-
-            string checkString = str.Replace("\t", " ");
-
-            string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            if (Regex.IsMatch(checkString, @"\d") || words.Length > 2)
-            {
-                throw new ArgumentException(ERROR_DIGIT_LONG_STRING);
-            }
-
-            return true;
+            throw new ArgumentNullException(ERROR_NULL_WHITESPACE_STRING);
         }
 
-        #region Конструкторы
-        /// <summary>
-        /// Конструктор без параметров
-        /// </summary>
-        public Emoji()
+        string checkString = str.Replace("\t", " ");
+
+        string[] words = checkString.Trim().Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+        return Regex.IsMatch(checkString, @"\d") || words.Length > 2 ? throw new ArgumentException(ERROR_DIGIT_LONG_STRING) : true;
+    }
+
+    #region Конструкторы
+    /// <summary>
+    /// Конструктор без параметров
+    /// </summary>
+    public Emoji()
+    {
+        Name = "Без названия";
+        Tag = "Без тега";
+        IdNumber = new();
+    }
+
+    /// <summary>
+    /// Конструктор инициализации из консоли
+    /// </summary>
+    /// <param name="id">Номер эмодзи</param>
+    public Emoji(IdNumber id)
+    {
+        Init();
+        IdNumber = id;
+    }
+
+    /// <summary>
+    /// Конструктор с параметрами
+    /// </summary>
+    /// <param name="name">Название эмодзи</param>
+    /// <param name="tag">Тег эмодзи</param>
+    /// <param name="id">Номер эмодзи</param>
+    public Emoji(string name, string tag, IdNumber id)
+    {
+        Name = name;
+        Tag = tag;
+        IdNumber = id;
+    }
+
+    /// <summary>
+    /// Конструктор со случайными значениями
+    /// </summary>
+    /// <param name="rnd">Просто в виде маркера того, что нужны случайные значения</param>
+    public Emoji(Random rnd)
+    {
+        RandomInit();
+    }
+    #endregion
+
+    #region Всё для Equals
+    /// <summary>
+    /// Сравнивает объекты
+    /// </summary>
+    /// <param name="obj">Сравниваемый объект</param>
+    /// <returns>true если равны</returns>
+    public override bool Equals(object? obj)
+    {
+        return ReferenceEquals(obj, this) ||
+               (obj is Emoji other &&
+               SimpleEquals(other));
+    }
+
+    /// <summary>
+    /// Проверяет равенство названия, тега и номера
+    /// </summary>
+    /// <param name="other">Сравниваемый эмодзи</param>
+    /// <returns>true, равны</returns>
+    protected virtual bool SimpleEquals(Emoji other)
+    {
+        return Name == other.Name &&
+               Tag == other.Tag &&
+               IdNumber.Equals(other.IdNumber);
+    }
+    #endregion
+
+    #region Show
+    /// <summary>
+    /// Показывает данные эмодзи
+    /// </summary>
+    /// <returns>Строка с информацией</returns>
+    public virtual string VirtualShow()
+    {
+        return ToString();
+    }
+
+    /// <summary>
+    /// Показывает данные эмодзи
+    /// </summary>
+    /// <returns>Строка с информацией</returns>
+    public string Show()
+    {
+        return ToString();
+    }
+    #endregion
+
+    /// <summary>
+    /// Возвращает общие данные всех классов(название и тег)
+    /// </summary>
+    /// <returns>Строка с данными</returns>
+    public override string ToString()
+    {
+        return $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {IdNumber}";
+    }
+
+    /* Сначала решил попробовать просто геттайп, но печатало с библиотекой
+* это не мой Name а object*/
+
+    /// <summary>
+    /// Получает хеш-код
+    /// </summary>
+    /// <returns>Значение хеш-кода</returns>
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Name, Tag, IdNumber);
+    }
+
+    /// <summary>
+    /// Инициализирует атрибуты случайными значениями
+    /// </summary>
+    public virtual void RandomInit()
+    {
+        Name = names[IRandomInit.random.Next(names.Length)];
+        Tag = tags[IRandomInit.random.Next(tags.Length)];
+        IdNumber = new(IRandomInit.random.Next(111));
+    }
+
+    /// <summary>
+    /// Инициализирует атрибуты
+    /// </summary>
+    protected virtual void Init()
+    {
+        Output.Message("Введите название эмодзи: ", ConsoleColor.White);
+        Name = Input.Data();
+
+        Output.Message("Введите тег эмодзи: ", ConsoleColor.White);
+        Tag = Input.Data();
+    }
+
+    /// <summary>
+    /// Реализация интерфейса IComparable
+    /// </summary>
+    /// <param name="obj">Сравниваемый объект</param>
+    /// <returns>
+    /// "-число" если меньше
+    /// "+число" если больше
+    /// "0" если равны
+    /// </returns>
+    public virtual int CompareTo(object? obj)
+    {
+        Emoji? other = obj as Emoji;
+        ArgumentNullException.ThrowIfNull(other);
+
+        int result = string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+
+        return result != 0 ? result : string.Compare(Tag, other.Tag, StringComparison.OrdinalIgnoreCase);
+    }
+
+    /// <summary>
+    /// Реализация интерфейса IClonable
+    /// </summary>
+    /// <returns>Ссылка на новый объект</returns>
+    public virtual object Clone()
+    {
+        Emoji emo = (Emoji)MemberwiseClone();
+
+        emo.IdNumber = new IdNumber(IdNumber.Number);
+
+        return emo;
+    }
+
+    /// <summary>
+    /// Создаёт поверхностную копию эмодзи
+    /// </summary>
+    /// <returns>Ссылка на копию</returns>
+    public Emoji ShallowCopy()
+    {
+        return (Emoji)MemberwiseClone();
+    }
+
+    /// <summary>
+    /// Оператор равенства
+    /// </summary>
+    /// <param name="a">Первый сравниваемый эмодзи</param>
+    /// <param name="b">Второй сравниваемый эмодзи</param>
+    /// <returns>true если равны, иначе false</returns>
+    public static bool operator ==(Emoji a, Emoji b)
+    {
+        if (ReferenceEquals(a, b))
         {
-            Name = "Без названия";
-            Tag = "Без тега";
-            IdNumber = new();
+            return true;   // оба null или один и тот же объект
         }
 
-        /// <summary>
-        /// Конструктор инициализации из консоли
-        /// </summary>
-        /// <param name="id">Номер эмодзи</param>
-        public Emoji(IdNumber id)
+        if (a is null || b is null)
         {
-            Init();
-            IdNumber = id;
+            return false;  // один null, второй нет
         }
 
-        /// <summary>
-        /// Конструктор с параметрами
-        /// </summary>
-        /// <param name="name">Название эмодзи</param>
-        /// <param name="tag">Тег эмодзи</param>
-        /// <param name="id">Номер эмодзи</param>
-        public Emoji(string name, string tag, IdNumber id)
+        return a.Equals(b);
+    }
+
+    /// <summary>
+    /// Оператор неравенства
+    /// </summary>
+    /// <param name="a">Первый сравниваемый эмодзи</param>
+    /// <param name="b">Второй сравниваемый эмодзи</param>
+    /// <returns>true если не равны, иначе false</returns>
+    public static bool operator !=(Emoji a, Emoji b)
+    {
+        return !(a == b);
+    }
+
+    /// <summary>
+    /// Оператор меньше
+    /// </summary>
+    /// <param name="a">Первый сравниваемый эмодзи</param>
+    /// <param name="b">Второй сравниваемый эмодзи</param>
+    /// <returns>true если первый меньше второго, иначе false</returns>
+    public static bool operator <(Emoji a, Emoji b)
+    {
+        if (ReferenceEquals(a, b))
         {
-            Name = name;
-            Tag = tag;
-            IdNumber = id;
+            return false; // два null или один объект
         }
 
-        /// <summary>
-        /// Конструктор со случайными значениями
-        /// </summary>
-        /// <param name="rnd">Просто в виде маркера того, что нужны случайные значения</param>
-        public Emoji(Random rnd) => RandomInit();
-        #endregion
-
-        #region Всё для Equals
-        /// <summary>
-        /// Сравнивает объекты
-        /// </summary>
-        /// <param name="obj">Сравниваемый объект</param>
-        /// <returns>true если равны</returns>
-        public override bool Equals(object? obj)
+        if (a is null)
         {
-            return ReferenceEquals(obj, this) ||
-                   (obj is Emoji other &&
-                   SimpleEquals(other));
+            return true;   // null меньше любого не-null
         }
 
-        /// <summary>
-        /// Проверяет равенство названия, тега и номера
-        /// </summary>
-        /// <param name="other">Сравниваемый эмодзи</param>
-        /// <returns>true, равны</returns>
-        protected virtual bool SimpleEquals(Emoji other)
+        if (b is null)
         {
-            return Name == other.Name &&
-                   Tag == other.Tag &&
-                   IdNumber.Equals(other.IdNumber);
-        }
-        #endregion
-
-        #region Show
-        /// <summary>
-        /// Показывает данные эмодзи
-        /// </summary>
-        /// <returns>Строка с информацией</returns>
-        public virtual string VirtualShow() => ToString();
-
-        /// <summary>
-        /// Показывает данные эмодзи
-        /// </summary>
-        /// <returns>Строка с информацией</returns>
-        public string Show() => ToString();
-        #endregion
-
-        /// <summary>
-        /// Возвращает общие данные всех классов(название и тег)
-        /// </summary>
-        /// <returns>Строка с данными</returns>
-        public override string ToString() => $"Вид: {GetType().Name}. Название: {Name}, тег: {Tag}. {IdNumber}";
-        /* Сначала решил попробовать просто геттайп, но печатало с библиотекой
-         * это не мой Name а object*/
-
-        /// <summary>
-        /// Получает хеш-код
-        /// </summary>
-        /// <returns>Значение хеш-кода</returns>
-        public override int GetHashCode() => HashCode.Combine(Name, Tag, IdNumber);
-
-        /// <summary>
-        /// Инициализирует атрибуты случайными значениями
-        /// </summary>
-        public virtual void RandomInit()
-        {
-            Name = names[IRandomInit.random.Next(names.Length)];
-            Tag = tags[IRandomInit.random.Next(tags.Length)];
-            IdNumber = new(IRandomInit.random.Next(111));
+            return false;  // любой не-null не меньше null
         }
 
-        /// <summary>
-        /// Инициализирует атрибуты
-        /// </summary>
-        protected virtual void Init()
-        {
-            Output.Message("Введите название эмодзи: ", ConsoleColor.White);
-            Name = Input.Data();
+        return a.CompareTo(b) < 0;
+    }
 
-            Output.Message("Введите тег эмодзи: ", ConsoleColor.White);
-            Tag = Input.Data();
-        }
-
-        /// <summary>
-        /// Реализация интерфейса IComparable
-        /// </summary>
-        /// <param name="obj">Сравниваемый объект</param>
-        /// <returns>
-        /// "-число" если меньше
-        /// "+число" если больше
-        /// "0" если равны
-        /// </returns>
-        public virtual int CompareTo(object? obj)
-        {
-            Emoji other = obj as Emoji;
-            ArgumentNullException.ThrowIfNull(other);
-
-            int result = string.Compare(Name, other.Name, StringComparison.OrdinalIgnoreCase);
-
-            if (result != 0)
-            {
-                return result;
-            }
-            else
-            {
-                return string.Compare(Tag, other.Tag, StringComparison.OrdinalIgnoreCase);
-            }
-        }
-
-        /// <summary>
-        /// Реализация интерфейса IClonable
-        /// </summary>
-        /// <returns>Ссылка на новый объект</returns>
-        public virtual object Clone()
-        {
-            Emoji emo = (Emoji)MemberwiseClone();
-
-            emo.IdNumber = new IdNumber(IdNumber.Number);
-
-            return emo;
-        }
-
-        /// <summary>
-        /// Создаёт поверхностную копию эмодзи
-        /// </summary>
-        /// <returns>Ссылка на копию</returns>
-        public Emoji ShallowCopy() => (Emoji)MemberwiseClone();
-
-        /// <summary>
-        /// Оператор равенства
-        /// </summary>
-        /// <param name="a">Первый сравниваемый эмодзи</param>
-        /// <param name="b">Второй сравниваемый эмодзи</param>
-        /// <returns>true если равны, иначе false</returns>
-        public static bool operator ==(Emoji a, Emoji b)
-        {
-            if (ReferenceEquals(a, b))
-            {
-                return true;   // оба null или один и тот же объект
-            }
-
-            if (a is null || b is null)
-            {
-                return false;  // один null, второй нет
-            }
-
-            return a.Equals(b);
-        }
-
-        /// <summary>
-        /// Оператор неравенства
-        /// </summary>
-        /// <param name="a">Первый сравниваемый эмодзи</param>
-        /// <param name="b">Второй сравниваемый эмодзи</param>
-        /// <returns>true если не равны, иначе false</returns>
-        public static bool operator !=(Emoji a, Emoji b) => !(a == b);
-
-        /// <summary>
-        /// Оператор меньше
-        /// </summary>
-        /// <param name="a">Первый сравниваемый эмодзи</param>
-        /// <param name="b">Второй сравниваемый эмодзи</param>
-        /// <returns>true если первый меньше второго, иначе false</returns>
-        public static bool operator <(Emoji a, Emoji b)
-        {
-            if (ReferenceEquals(a, b))
-            {
-                return false; // два null или один объект
-            }
-
-            if (a is null)
-            {
-                return true;   // null меньше любого не-null
-            }
-
-            if (b is null)
-            {
-                return false;  // любой не-null не меньше null
-            }
-
-            return a.CompareTo(b) < 0;
-        }
-
-        /// <summary>
-        /// Оператор больше
-        /// </summary>
-        /// <param name="a">Первый сравниваемый эмодзи</param>
-        /// <param name="b">Второй сравниваемый эмодзи</param>
-        /// <returns>true если первый больше второго, иначе false</returns>
-        public static bool operator >(Emoji a, Emoji b)
-        {
-            if (ReferenceEquals(a, b))
-            {
-                return false;
-            }
-
-            if (a is null)
-            {
-                return false;
-            }
-
-            if (b is null)
-            {
-                return true;
-            }
-
-            return a.CompareTo(b) > 0;
-        }
+    /// <summary>
+    /// Оператор больше
+    /// </summary>
+    /// <param name="a">Первый сравниваемый эмодзи</param>
+    /// <param name="b">Второй сравниваемый эмодзи</param>
+    /// <returns>true если первый больше второго, иначе false</returns>
+    public static bool operator >(Emoji a, Emoji b)
+    {
+        return !ReferenceEquals(a, b) && a is not null && (b is null || a.CompareTo(b) > 0);
     }
 }

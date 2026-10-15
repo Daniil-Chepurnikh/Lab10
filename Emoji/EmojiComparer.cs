@@ -1,30 +1,31 @@
 ﻿using System.Collections;
 
-namespace LibraryEmoji
+namespace LibraryEmoji;
+
+/// <summary>
+/// Сравнивает эмодзи по названиям
+/// </summary>
+public class EmojiComparer : IComparer
 {
     /// <summary>
-    /// Сравнивает эмодзи по названиям
+    /// Реализация интерфейса IComparer
     /// </summary>
-    public class EmojiComparer : IComparer
+    /// <param name="x">Первый объект для сравнения</param>
+    /// <param name="y">Второй объект для сравнения</param>
+    /// <returns>Результат сравнения</returns>
+    /// <exception cref="ArgumentNullException">В случае если хотя бы 1 из аргументов null</exception>
+    public int Compare(object? x, object? y)
     {
-        /// <summary>
-        /// Реализация интерфейса IComparer
-        /// </summary>
-        /// <param name="x">Первый объект для сравнения</param>
-        /// <param name="y">Второй объект для сравнения</param>
-        /// <returns>Результат сравнения</returns>
-        /// <exception cref="ArgumentNullException">В случае если хотя бы 1 из аргументов null</exception>
-        public int Compare(object? x, object? y)
+        if (x != null && y != null)
         {
-            if (x != null && y != null)
-            {
-                Emoji em1 = (Emoji)x;
-                Emoji em2 = (Emoji)y;
+            Emoji em1 = (Emoji)x;
+            Emoji em2 = (Emoji)y;
 
-                return string.Compare(em1.Name, em2.Name);
-            }
-            else
-                throw new ArgumentNullException();
+            return string.Compare(em1.Name, em2.Name);
+        }
+        else
+        {
+            throw new ArgumentNullException();
         }
     }
 }
